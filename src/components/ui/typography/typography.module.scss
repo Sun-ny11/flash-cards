@@ -1,0 +1,59 @@
+@mixin typogaphy($lineHeights, $fontSize, $fontWeights) {
+  font-weight: $fontWeights;
+  line-height: $lineHeights;
+  font-size: $fontSize;
+}
+
+.h1 {
+  @include typogaphy(var(--line-height-l), var(--font-size-xxl), var(--font-weight-bold));
+}
+
+.h2 {
+  @include typogaphy(var(--line-height-l), var(--font-size-xl), var(--font-weight-bold));
+}
+
+.h3 {
+  @include typogaphy(var(--line-height-m), var(--font-size-l), var(--font-weight-bold));
+}
+
+.h4 {
+  @include typogaphy(var(--line-height-m), var(--font-size-m), var(--font-weight-bold));
+}
+
+.body1 {
+  @include typogaphy(var(--line-height-m), var(--font-size-m), var(--font-weight-regular));
+}
+
+.body2 {
+  @include typogaphy(var(--line-height-m), var(--font-size-s), var(--font-weight-regular));
+}
+
+.subtitle1 {
+  @include typogaphy(var(--line-height-m), var(--font-size-m), var(--font-weight-bold));
+}
+
+.subtitle2 {
+  @include typogaphy(var(--line-height-m), var(--font-size-s), var(--font-weight-bold));
+}
+
+.caption {
+  @include typogaphy(var(--line-height-s), var(--font-size-xs), var(--font-weight-regular));
+}
+
+.overline {
+  @include typogaphy(var(--line-height-s), var(--font-size-xs), var(--font-weight-bold));
+}
+
+.link1 {
+  @include typogaphy(var(--line-height-m), var(--font-size-s), var(--font-weight-regular));
+  color: #397df6;
+}
+
+.link2 {
+  @include typogaphy(var(--line-height-s), var(--font-size-xs), var(--font-weight-regular));
+  color: #397df6;
+}
+
+.large {
+  @include typogaphy(var(--line-height-l), var(--font-size-xxxl), var(--font-weight-bold));
+}
