@@ -1,0 +1,84 @@
+button {
+  all: unset;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 10px;
+}
+
+.CheckboxRoot {
+  position: relative;
+  background-color: transparent;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--color-light-900);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:before {
+    position: absolute;
+    content: '';
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-dark-100);
+    z-index: -5555;
+    display: none;
+  }
+
+  &[data-state='checked'] {
+    background-color: var(--color-light-100);
+    border: none;
+  }
+
+  &[data-disabled][data-state='checked'] {
+    background-color: var(--color-dark-100);
+    border: none;
+  }
+  &[data-disabled][data-state='unchecked'] {
+    border: 1px solid var(--color-dark-100);
+  }
+
+  &:hover::before {
+    display: block;
+    background-color: var(--color-dark-500);
+  }
+  &[data-disabled]:hover::before {
+    cursor: not-allowed;
+    display: none;
+  }
+  &[data-disabled] {
+    cursor: not-allowed;
+    & + .label {
+      color: var(--color-dark-100);
+    }
+  }
+  &:active::before {
+    background-color: var(--color-dark-100);
+  }
+
+  &:focus-visible::before {
+    display: block;
+    background-color: var(--color-dark-100);
+  }
+}
+
+.checkboxIndicator[data-disabled] {
+  svg {
+    path {
+      stroke: white;
+    }
+  }
+}
+
+.label {
+  color: white;
+  font-size: 15px;
+  line-height: 1;
+}
