@@ -1,0 +1,26 @@
+.dropdownContent {
+  min-width: 80px;
+  min-height: 123px;
+  border: 1px solid #333333;
+  padding: 16px 12px 12px 12px;
+  background-color: var(--color-dark-700);
+  border-radius: 4px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+.separator {
+  margin: 12px 0;
+  height: 1px;
+  background-color: #333333;
+}
+
+.trigger {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
