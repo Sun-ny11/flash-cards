@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Check } from '@/assets/checboxIcon/svgChecbox'
+import { Check } from '@/assets/icons/svgChecbox'
 import { Typography } from '@/components/ui/typography'
 import * as CheckboxRadix from '@radix-ui/react-checkbox'
 
