@@ -22,8 +22,9 @@ export const Select = (props: Props) => {
             <SelectRadix.Group>
               <SelectRadix.Label />
               <SelectRadix.Item>
-                <SelectRadix.ItemText />
-                <SelectRadix.ItemIndicator />
+                '1'
+                {/*<SelectRadix.ItemText/>*/}
+                {/*<SelectRadix.ItemIndicator />*/}
               </SelectRadix.Item>
             </SelectRadix.Group>
 
