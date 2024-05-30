@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { UserDropdown } from '@/features/header/ui/user-dropdown'
+import { UserDropdown } from '@/features/header/ui/user-dropdown/user-dropdown'
 
 import { Button } from './components/ui/button'
 
