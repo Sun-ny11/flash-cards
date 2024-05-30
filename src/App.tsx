@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { SelectRadix } from '@/components/ui/select'
 import { UserDropdown } from '@/features/header/ui/user-dropdown'
 
 import { Button } from './components/ui/button'
@@ -20,6 +21,7 @@ export function App() {
         Hello
       </Button>
       <UserDropdown avatar={testUser.avatar} email={testUser.email} name={testUser.name} />
+      <SelectRadix label={'123'} />
     </>
   )
 }
