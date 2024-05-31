@@ -39,6 +39,10 @@
   }
   &[data-state='open'] .selectIcon {
     transform: rotate(180deg);
+    transition: 0.3s;
+  }
+  &[data-state='closed'] .selectIcon {
+    transition: 0.3s;
   }
 }
 
