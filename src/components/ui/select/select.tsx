@@ -25,7 +25,9 @@ export const Select = (props: Props) => {
         <SelectRadix.Trigger className={s.selectTrigger} disabled={disabled}>
           <SelectRadix.Value style={{ color: 'black' }} />
           {/*<ChevronUp />*/}
-          <ChevronDown />
+          <SelectRadix.Icon className={s.selectIcon}>
+            <ChevronDown />
+          </SelectRadix.Icon>
         </SelectRadix.Trigger>
 
         <SelectRadix.Portal>
