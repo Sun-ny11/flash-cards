@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { UserDropdown } from '@/features/header/ui/user-dropdown'
 
+import { Search } from './assets/icons/Search'
 import { Button } from './components/ui/button'
 import { DecksList } from './features/decks/ui/decksList/decksList'
 
@@ -18,6 +19,10 @@ export function App() {
   return (
     <>
       <Button as={Link} target={'_blank'} to={'https://www.google.com/'}>
+        Hello
+      </Button>
+      <Button disabled>
+        <Search />
         Hello
       </Button>
       <UserDropdown avatar={testUser.avatar} email={testUser.email} name={testUser.name} />
