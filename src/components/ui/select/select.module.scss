@@ -12,11 +12,11 @@
   box-sizing: border-box;
   align-items: center;
   background-color: inherit;
-  outline: 1px solid var(--color-dark-100);
+  border: 1px solid var(--color-dark-100);
   color: var(--color-light-100);
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 12px 10px;
   width: 100%;
   border-radius: 2px;
 
@@ -32,17 +32,17 @@
 
   &:focus-visible {
     outline: 2px solid var(--color-info-700);
+    border-color: transparent;
   }
-  .selectIcon {
-    display: flex;
-    justify-self: center;
-  }
-  &[data-state='open'] .selectIcon {
+}
+
+.selectIcon {
+  display: flex;
+  justify-self: center;
+  transition: 0.3s;
+
+  [data-state='open'] & {
     transform: rotate(180deg);
-    transition: 0.3s;
-  }
-  &[data-state='closed'] .selectIcon {
-    transition: 0.3s;
   }
 }
 

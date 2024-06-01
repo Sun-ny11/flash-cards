@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import { ChevronDown } from '@/assets/icons/iconForSelect/chevronDown'
-// import { ChevronUp } from '@/assets/icons/iconForSelect/chevronUp'
 import { Typography } from '@/components/ui/typography'
 import * as SelectRadix from '@radix-ui/react-select'
 
@@ -13,7 +12,7 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof SelectRadix.Root>
 
 export const Select = (props: Props) => {
-  const { children, disabled = false, label, ...restProps } = props
+  const { children, disabled, label, ...restProps } = props
 
   return (
     <div className={s.selectWrapper}>
@@ -21,10 +20,9 @@ export const Select = (props: Props) => {
         {label}
       </Typography>
 
-      <SelectRadix.Root defaultValue={'0'} {...restProps}>
+      <SelectRadix.Root {...restProps}>
         <SelectRadix.Trigger className={s.selectTrigger} disabled={disabled}>
           <SelectRadix.Value style={{ color: 'black' }} />
-          {/*<ChevronUp />*/}
           <SelectRadix.Icon className={s.selectIcon}>
             <ChevronDown />
           </SelectRadix.Icon>
@@ -40,7 +38,6 @@ export const Select = (props: Props) => {
             {/*<ChevronUp />*/}
             <SelectRadix.Viewport style={{ background: 'inherit' }}>
               <SelectRadix.Group className={s.selectGroup}>{children}</SelectRadix.Group>
-
               <SelectRadix.Separator />
             </SelectRadix.Viewport>
             <SelectRadix.ScrollDownButton />
