@@ -22,9 +22,7 @@ export const DecksRow = ({ card }: Props) => {
       <Table.Cell>
         <Button as={'a'} className={s.linkCard}>
           <img alt={'CardImage'} className={s.cardImage} src={card.cover ?? defaultCard} />
-          <Typography as={'h3'} className={s.cardName}>
-            {card.name}
-          </Typography>
+          <Typography as={'h3'}>{card.name}</Typography>
         </Button>
       </Table.Cell>
       <Table.Cell>{card.cardsCount}</Table.Cell>

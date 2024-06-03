@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Search } from '@/assets/icons/Search'
-import { Trash } from '@/assets/icons/Trash'
 
 import { Button } from './'
 
@@ -48,7 +47,7 @@ export const AsLink: Story = {
     variant: 'primary',
   },
 }
-export const withIcone: Story = {
+export const WithIcone: Story = {
   args: {
     children: (
       <>
