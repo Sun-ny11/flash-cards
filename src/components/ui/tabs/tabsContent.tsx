@@ -4,9 +4,12 @@ import * as TabsRadixUI from '@radix-ui/react-tabs'
 
 type Props = {
   children?: ReactNode
+  className?: string
   value: string
 }
 
-export const TabsContent = ({ children, value }: Props) => (
-  <TabsRadixUI.Content value={value}>{children}</TabsRadixUI.Content>
+export const TabsContent = ({ children, className, value }: Props) => (
+  <TabsRadixUI.Content className={className} value={value}>
+    {children}
+  </TabsRadixUI.Content>
 )

@@ -11,7 +11,10 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "sb": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "rename-icons": "node scripts/rename-icons.cjs",
+    "replace-colors": "node scripts/replace-colors.cjs",
+    "generate-icons": "pnpm run rename-icons && npx @svgr/cli --out-dir src/assets/components --jsx-runtime automatic --typescript --ref --memo --icon -- src/assets/svg && pnpm run replace-colors && pnpm run format && pnpm run lint"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.0.13",

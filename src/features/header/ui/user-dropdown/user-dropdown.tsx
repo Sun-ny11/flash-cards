@@ -1,3 +1,4 @@
+import { LogOutOutline, PersonOutline } from '@/assets/components'
 import { DropDown, DropDownItem, DropDownSeparator } from '@/components/ui/dropdown'
 import { Typography } from '@/components/ui/typography'
 
@@ -30,7 +31,7 @@ export const UserDropdown = ({ avatar, email, name }: Props) => {
         <DropDownSeparator></DropDownSeparator>
         <DropDownItem asChild className={s.dropdownItem}>
           <a href={'https://google.com'}>
-            <img alt={'person'} src={'public/img/icons/icon-person.svg'} />
+            <PersonOutline />
             <Typography as={'div'} variant={'caption'}>
               My Profile
             </Typography>
@@ -38,7 +39,7 @@ export const UserDropdown = ({ avatar, email, name }: Props) => {
         </DropDownItem>
         <DropDownSeparator></DropDownSeparator>
         <DropDownItem className={s.dropdownItem}>
-          <img alt={'avatar'} src={'public/img/icons/icon-exit.svg'} />
+          <LogOutOutline />
           <Typography as={'div'} variant={'caption'}>
             Sign Out
           </Typography>
