@@ -1,0 +1,69 @@
+.cardImage {
+  width: 120px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.cardName {
+  // перебьет стили кнопки
+  color: var(--color-light-100);
+  text-decoration: none;
+}
+
+.linkCard {
+  display: flex;
+  gap: 20px;
+  background-color: transparent;
+}
+
+.buttonCell {
+  & .controlBtn {
+    position: relative;
+    z-index: 2;
+
+    display: inline-block;
+
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+
+    background-color: transparent;
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+
+      display: block;
+
+      width: 25px;
+      height: 25px;
+
+      opacity: 0;
+      background-color: var(--color-dark-500);
+      border-radius: 50%;
+
+      transition:
+        transform 0.3s,
+        opacity 0.3s;
+    }
+
+    & svg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+      height: 100%;
+    }
+
+    &:hover::before {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+}
