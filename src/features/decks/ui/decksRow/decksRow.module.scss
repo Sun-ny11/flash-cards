@@ -4,16 +4,15 @@
   object-fit: cover;
 }
 
-.cardName {
-  // перебьет стили кнопки
-  color: var(--color-light-100);
-  text-decoration: none;
-}
-
 .linkCard {
   display: flex;
   gap: 20px;
+  justify-content: flex-start;
   background-color: transparent;
+
+  &:hover {
+    background-color: transparent;
+  }
 }
 
 .buttonCell {

@@ -4,7 +4,6 @@ import clsx from 'clsx'
 
 import s from './table.module.scss'
 
-import { Button } from '../button'
 import { Typography } from '../typography'
 
 /**
