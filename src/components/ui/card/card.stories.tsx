@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta> // Тип истории
 export const asDiv: Story = {
   // args - пропсы
   args: {
-    children: 'Card example div',
+    children: 'Tabs example div',
   },
 }
 
@@ -30,7 +30,7 @@ export const asArticle: Story = {
   // args - пропсы
   args: {
     as: 'article',
-    children: 'Card example article',
+    children: 'Tabs example article',
   },
 }
 
@@ -38,6 +38,6 @@ export const asSection: Story = {
   // args - пропсы
   args: {
     as: 'section',
-    children: 'Card example section',
+    children: 'Tabs example section',
   },
 }
