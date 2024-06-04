@@ -70,3 +70,10 @@
     fill: var(--color-light-900);
   }
 }
+
+a.link {
+  padding: 0;
+  color: var(--color-light-100);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+}
