@@ -19,25 +19,25 @@ export default meta
 type Story = StoryObj<typeof meta> // Тип истории
 
 // История
-export const asDiv: Story = {
+export const AsDiv: Story = {
   // args - пропсы
   args: {
-    children: 'Card example div',
+    children: 'Tabs example div',
   },
 }
 
-export const asArticle: Story = {
+export const AsArticle: Story = {
   // args - пропсы
   args: {
     as: 'article',
-    children: 'Card example article',
+    children: 'Tabs example article',
   },
 }
 
-export const asSection: Story = {
+export const AsSection: Story = {
   // args - пропсы
   args: {
     as: 'section',
-    children: 'Card example section',
+    children: 'Tabs example section',
   },
 }

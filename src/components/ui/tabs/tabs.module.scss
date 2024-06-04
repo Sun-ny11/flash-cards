@@ -1,0 +1,26 @@
+.tabs {
+}
+
+.trigger {
+  margin: 0;
+  border: 1px solid var(--color-light-100);
+  color: var(--color-light-100);
+  border-radius: 2px 0 0 2px;
+  padding: 6px 24px;
+  cursor: pointer;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.trigger:hover {
+  background-color: var(--color-dark-100);
+  color: var(--color-light-900);
+  border-color: var(--color-light-900);
+}
+
+.trigger:active {
+  background-color: var(--color-accent-500);
+  color: var(--color-light-100);
+  border-color: transparent;
+}

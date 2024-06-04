@@ -1,22 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Search } from '@/assets/icons/Search'
+
 import { Button } from './'
 
 const meta = {
-  //   argTypes: {
-  //     variant: {
-  //       control: { type: 'radio' },
-  //       options: ['primary', 'secondary'],
-  //     },
-  //   }, Нужна для кастомизации управления истории
-
-  component: Button, // Компонент для истории
-  tags: ['autodocs'], // Автогенерация документации
-  title: 'Components/Button', // Имена папок в истории
+  component: Button,
+  tags: ['autodocs'],
+  title: 'Components/Button',
 } satisfies Meta<typeof Button>
 
 export default meta
-type Story = StoryObj<typeof meta> // Тип истории
+type Story = StoryObj<typeof meta>
 
 // История
 export const Primary: Story = {
@@ -49,6 +44,17 @@ export const AsLink: Story = {
     as: 'a',
     children: 'Link that looks like a button',
     href: 'https://www.google.com/',
+    variant: 'primary',
+  },
+}
+export const WithIcone: Story = {
+  args: {
+    children: (
+      <>
+        <Search /> Delete
+      </>
+    ),
+    disabled: false,
     variant: 'primary',
   },
 }
