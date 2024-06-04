@@ -43,3 +43,19 @@ export const SelectStoryDisabled: Story = {
     )
   },
 }
+
+export const SelectStoryPagination: Story = {
+  args: {},
+  render: () => {
+    return (
+      <div style={{ width: '60px' }}>
+        <Select defaultValue={'10'} label={'Select-box-Pagination'} pagination>
+          <SelectItem value={'10'}>10</SelectItem>
+          <SelectItem value={'20'}>20</SelectItem>
+          <SelectItem value={'50'}>50</SelectItem>
+          <SelectItem value={'100'}>100</SelectItem>
+        </Select>
+      </div>
+    )
+  },
+}

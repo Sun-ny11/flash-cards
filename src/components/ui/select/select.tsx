@@ -3,16 +3,18 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { ChevronDown } from '@/assets/icons/iconForSelect/chevronDown'
 import { Typography } from '@/components/ui/typography'
 import * as SelectRadix from '@radix-ui/react-select'
+import clsx from 'clsx'
 
 import s from './select.module.scss'
 
 type Props = {
   className?: string
   label?: string
+  pagination?: boolean
 } & ComponentPropsWithoutRef<typeof SelectRadix.Root>
 
 export const Select = (props: Props) => {
-  const { children, disabled, label, ...restProps } = props
+  const { children, disabled, label, pagination, ...restProps } = props
 
   return (
     <div className={s.selectWrapper}>
@@ -21,8 +23,11 @@ export const Select = (props: Props) => {
       </Typography>
 
       <SelectRadix.Root {...restProps}>
-        <SelectRadix.Trigger className={s.selectTrigger} disabled={disabled}>
-          <SelectRadix.Value style={{ color: 'black' }} />
+        <SelectRadix.Trigger
+          className={clsx(s.selectTrigger, pagination && s.paginationSelect)}
+          disabled={disabled}
+        >
+          <SelectRadix.Value />
           <SelectRadix.Icon className={s.selectIcon}>
             <ChevronDown />
           </SelectRadix.Icon>
@@ -36,7 +41,7 @@ export const Select = (props: Props) => {
             sideOffset={-6}
           >
             {/*<ChevronUp />*/}
-            <SelectRadix.Viewport style={{ background: 'inherit' }}>
+            <SelectRadix.Viewport>
               <SelectRadix.Group className={s.selectGroup}>{children}</SelectRadix.Group>
               <SelectRadix.Separator />
             </SelectRadix.Viewport>
