@@ -25,6 +25,7 @@ export const Input = ({
   value,
   ...restProps
 }: Props) => {
+  console.log('error', error)
   const [showPassword, setShowPassword] = useState(false)
 
   const changeShowPasswordHandler = () => {

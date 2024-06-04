@@ -101,7 +101,9 @@
 }
 
 .label {
+  display: block;
   color: var(--color-dark-100);
+  padding-bottom: 24px;
 
   &.disabled {
     color: var(--color-dark-300);
