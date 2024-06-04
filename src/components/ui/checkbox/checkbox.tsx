@@ -6,11 +6,11 @@ import * as CheckboxRadix from '@radix-ui/react-checkbox'
 
 import s from './checkbox.module.scss'
 
-type Props = {
+export type CheckboxProps = {
   label?: string
 } & ComponentPropsWithoutRef<typeof CheckboxRadix.Root>
 
-export const Checkbox = ({ checked, id, label, onCheckedChange, ...restProps }: Props) => {
+export const Checkbox = ({ checked, id, label, onCheckedChange, ...restProps }: CheckboxProps) => {
   return (
     <div className={s.container}>
       <CheckboxRadix.Root
