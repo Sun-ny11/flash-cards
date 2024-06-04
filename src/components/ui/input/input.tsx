@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FocusEvent, useState } from 'react'
+import { ComponentPropsWithoutRef, FocusEvent, forwardRef, useState } from 'react'
 
 import { Cross } from '@/assets/icons/Cross'
 import { Eye } from '@/assets/icons/Eye'
@@ -9,7 +9,7 @@ import s from './input.module.scss'
 
 import { Typography } from '../typography'
 
-export type Props = {
+export type InputProps = {
   error?: string
   label?: string
   onClickClear?: () => void
@@ -17,74 +17,71 @@ export type Props = {
   value?: string
 } & ComponentPropsWithoutRef<'input'>
 
-export const Input = ({
-  error,
-  label,
-  onClickClear,
-  type = 'text',
-  value,
-  ...restProps
-}: Props) => {
-  console.log('error', error)
-  const [showPassword, setShowPassword] = useState(false)
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ error, label, onClickClear, type = 'text', ...restProps }: InputProps, ref) => {
+    const [showPassword, setShowPassword] = useState(false)
 
-  const changeShowPasswordHandler = () => {
-    setShowPassword(!showPassword)
-  }
-  const isShow = showPassword ? 'text' : 'password'
+    const changeShowPasswordHandler = () => {
+      setShowPassword(!showPassword)
+    }
+    const isShow = showPassword ? 'text' : 'password'
 
-  const focusHandler = (event: FocusEvent<HTMLInputElement, Element>) => {
-    // Устанавливает каретку в конец текста
-    const length = event.target.value.length
+    const focusHandler = (event: FocusEvent<HTMLInputElement, Element>) => {
+      // Устанавливает каретку в конец текста
+      const length = event.target.value.length
 
-    event.target.setSelectionRange(length, length)
-  }
+      event.target.setSelectionRange(length, length)
+    }
 
-  const classes = {
-    button: clsx(s.button, restProps.disabled && s.disabled),
-    input: clsx(
-      s.input,
-      error && s.error,
-      restProps.disabled && s.disabled,
-      type === 'search' && s.search
-    ),
-    label: clsx(s.label, restProps.disabled && s.disabled),
-    searchIcon: clsx(s.searchIcon, restProps.disabled && s.disabled),
-  }
+    const classes = {
+      button: clsx(s.button, restProps.disabled && s.disabled),
+      input: clsx(
+        s.input,
+        error && s.error,
+        restProps.disabled && s.disabled,
+        type === 'search' && s.search
+      ),
+      label: clsx(s.label, restProps.disabled && s.disabled),
+      searchIcon: clsx(s.searchIcon, restProps.disabled && s.disabled),
+    }
 
-  return (
-    <Typography as={'label'} className={classes.label} variant={'body2'}>
-      {label}
-      <div className={s.wrapper}>
-        {type === 'search' && (
-          <>
-            <Search className={classes.searchIcon} />
-            <button className={classes.button} disabled={restProps.disabled} onClick={onClickClear}>
-              <Cross />
+    return (
+      <Typography as={'label'} className={classes.label} variant={'body2'}>
+        {label}
+        <div className={s.wrapper}>
+          {type === 'search' && (
+            <>
+              <Search className={classes.searchIcon} />
+              <button
+                className={classes.button}
+                disabled={restProps.disabled}
+                onClick={onClickClear}
+              >
+                <Cross />
+              </button>
+            </>
+          )}
+
+          {type === 'password' && (
+            <button
+              className={classes.button}
+              disabled={restProps.disabled}
+              onClick={changeShowPasswordHandler}
+            >
+              <Eye view={showPassword ? 'eyeOff' : 'eyeOn'} />
             </button>
-          </>
-        )}
+          )}
 
-        {type === 'password' && (
-          <button
-            className={classes.button}
-            disabled={restProps.disabled}
-            onClick={changeShowPasswordHandler}
-          >
-            <Eye view={showPassword ? 'eyeOff' : 'eyeOn'} />
-          </button>
-        )}
-
-        <input
-          {...restProps}
-          className={classes.input}
-          onFocus={focusHandler}
-          type={type === 'password' ? isShow : type}
-          value={value}
-          {...restProps}
-        />
-        {error && <div className={s.errorText}>{error}</div>}
-      </div>
-    </Typography>
-  )
-}
+          <input
+            className={classes.input}
+            onFocus={focusHandler}
+            ref={ref}
+            type={type === 'password' ? isShow : type}
+            {...restProps}
+          />
+          {error && <div className={s.errorText}>{error}</div>}
+        </div>
+      </Typography>
+    )
+  }
+)

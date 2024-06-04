@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, Card, ControlledCheckbox, Input, Typography } from '@/components/ui'
+import { Button, Card, ControlledCheckbox, Typography } from '@/components/ui'
+import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -19,7 +20,6 @@ export const SignIn = () => {
     control,
     formState: { errors },
     handleSubmit,
-    register,
   } = useForm<FormValues>({
     resolver: zodResolver(signInSchema),
   })
@@ -34,12 +34,17 @@ export const SignIn = () => {
         <Typography as={'h1'} className={s.title} variant={'h1'}>
           Sign In
         </Typography>
-        <Input {...register('email')} error={errors.email?.message} label={'Email'} />
-        <Input
-          {...register('password')}
+        <ControlledTextField
+          control={control}
+          error={errors.email?.message}
+          label={'Email'}
+          name={'email'}
+        />
+        <ControlledTextField
+          control={control}
           error={errors.password?.message}
           label={'Password'}
-          type={'password'}
+          name={'password'}
         />
         <div className={s.checkoxContainer}>
           <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />

@@ -7,7 +7,7 @@ import { ControlledCheckbox } from '@/components/ui'
 const meta = {
   component: ControlledCheckbox,
   tags: ['autodocs'],
-  title: 'Components/ControlledCheckbox',
+  title: 'Components/ControlledTextField',
 } satisfies Meta<typeof ControlledCheckbox>
 
 export default meta
