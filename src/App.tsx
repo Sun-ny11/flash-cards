@@ -1,22 +1,9 @@
 import { Link } from 'react-router-dom'
 
-
-import { UserDropdown } from '@/features/header/ui/user-dropdown'
-import { UserDropdown } from '@/features/header/ui/user-dropdown/user-dropdown'
-
+import { Button } from '@/components/ui'
 
 import { Search } from './assets/icons/Search'
-import { Button } from './components/ui/button'
 import { DecksList } from './features/decks/ui/decksList/decksList'
-
-const testUser = {
-  avatar: {
-    alt: 'avatar',
-    src: 'public/img/avatar.png',
-  },
-  email: 'j&johnson@gmail.com',
-  name: 'Ivan',
-}
 
 export function App() {
   return (
@@ -28,11 +15,8 @@ export function App() {
         <Search />
         Hello
       </Button>
-      <UserDropdown avatar={testUser.avatar} email={testUser.email} name={testUser.name} />
-
 
       <DecksList items={resp.items} />
-
     </>
   )
 }
