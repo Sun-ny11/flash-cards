@@ -42,7 +42,11 @@ export const Select = (props: Props) => {
           >
             {/*<ChevronUp />*/}
             <SelectRadix.Viewport>
-              <SelectRadix.Group className={s.selectGroup}>{children}</SelectRadix.Group>
+              <SelectRadix.Group
+                className={clsx(s.selectGroup, pagination && s.selectForPagination)}
+              >
+                {children}
+              </SelectRadix.Group>
               <SelectRadix.Separator />
             </SelectRadix.Viewport>
             <SelectRadix.ScrollDownButton />
@@ -54,12 +58,19 @@ export const Select = (props: Props) => {
   )
 }
 
-type ItemProps = ComponentPropsWithoutRef<typeof SelectRadix.Item>
+type ItemProps = ComponentPropsWithoutRef<typeof SelectRadix.Item> & {
+  pagination?: boolean
+}
 
 export const SelectItem = forwardRef<ElementRef<typeof SelectRadix.Item>, ItemProps>(
-  ({ children, ...props }, forwardedRef) => {
+  ({ children, pagination, ...props }, forwardedRef) => {
+    debugger
     return (
-      <SelectRadix.Item {...props} className={s.selectItem} ref={forwardedRef}>
+      <SelectRadix.Item
+        {...props}
+        className={clsx(s.selectItem, pagination && s.selectItemForPagination)}
+        ref={forwardedRef}
+      >
         <SelectRadix.ItemText>{children}</SelectRadix.ItemText>
       </SelectRadix.Item>
     )

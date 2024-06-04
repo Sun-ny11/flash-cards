@@ -9,7 +9,7 @@ type Props = {
   totalCount: number
 }
 
-const DOTS = '...'
+export const DOTS = '...'
 
 const range = (start: number, end: number) => {
   const length = end - start + 1
