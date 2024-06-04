@@ -6,6 +6,7 @@ export const Play = ({ ...rest }: Props) => {
   return (
     <>
       <svg
+        {...rest}
         fill={'none'}
         height={'17'}
         viewBox={'0 0 16 17'}

@@ -1,0 +1,75 @@
+.selectWrapper {
+  position: relative;
+}
+
+.selectGroup {
+}
+
+.selectTrigger {
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  background-color: inherit;
+  border: 1px solid var(--color-dark-100);
+  color: var(--color-light-100);
+  display: flex;
+  padding: 6px 12px;
+  width: 100%;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &.paginationSelect {
+    padding: 0 6px;
+  }
+
+  &[data-disabled] {
+    border-color: var(--color-dark-300);
+    color: var(--color-dark-300);
+    pointer-events: none;
+  }
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-info-700);
+    border-color: transparent;
+  }
+}
+
+.selectIcon {
+  display: flex;
+  justify-self: center;
+  transition: 0.3s;
+
+  [data-state='open'] & {
+    transform: rotate(180deg);
+  }
+}
+
+.selectContent {
+  width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-dark-100);
+  border-radius: 0 0 2px 2px;
+}
+
+.selectItem {
+  color: var(--color-light-100);
+  padding-left: 10px;
+
+  &:hover {
+    background-color: var(--color-accent-900);
+  }
+
+  &:focus-visible {
+    outline: none;
+    background-color: var(--color-accent-900);
+  }
+}
+
+.selectLabel {
+  color: var(--color-dark-100);
+}
