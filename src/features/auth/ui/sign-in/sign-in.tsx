@@ -56,7 +56,7 @@ export const SignIn = () => {
           Sign in
         </Button>
         <Typography className={s.subtitle} variant={'body2'}>
-          Don't have an account?
+          Don&apos;t have an account?
         </Typography>
         <Button as={'a'} className={s.signUp} href={'/'} variant={'link'}>
           Sign Up
