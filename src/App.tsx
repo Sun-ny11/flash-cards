@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 
+
+import { UserDropdown } from '@/features/header/ui/user-dropdown'
 import { UserDropdown } from '@/features/header/ui/user-dropdown/user-dropdown'
+
 
 import { Search } from './assets/icons/Search'
 import { Button } from './components/ui/button'
@@ -27,7 +30,9 @@ export function App() {
       </Button>
       <UserDropdown avatar={testUser.avatar} email={testUser.email} name={testUser.name} />
 
+
       <DecksList items={resp.items} />
+
     </>
   )
 }
