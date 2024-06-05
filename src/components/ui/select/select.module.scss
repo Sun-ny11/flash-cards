@@ -4,6 +4,9 @@
 
 .selectGroup {
 }
+.selectForPagination {
+  background-color: var(--color-dark-700);
+}
 
 .selectTrigger {
   box-sizing: border-box;
@@ -20,6 +23,8 @@
 
   &.paginationSelect {
     padding: 0 6px;
+    gap: 2px;
+    background-color: var(--color-dark-700);
   }
 
   &[data-disabled] {
@@ -54,6 +59,10 @@
   background-color: var(--color-dark-900);
   border: 1px solid var(--color-dark-100);
   border-radius: 0 0 2px 2px;
+}
+
+.selectItemForPagination {
+  padding-left: 5px;
 }
 
 .selectItem {
