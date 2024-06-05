@@ -1,10 +1,12 @@
 .wrapContainer {
   display: flex;
+  gap: 10px;
 }
 
 .paginationContainer {
   display: flex;
   list-style-type: none;
+  padding: 0;
 
   .paginationItem {
     padding: 0 12px;
@@ -19,8 +21,7 @@
     border-radius: 2px;
     line-height: 1.43;
     font-size: 13px;
-    min-width: 32px;
-    tab-index: 0;
+    min-width: 24px;
 
     &.dots:hover {
       background-color: var(--color-dark-500);
@@ -32,37 +33,14 @@
       background-color: var(--color-dark-500);
       cursor: pointer;
       color: var(--color-light-100);
-
-      &:focus-visible {
-        outline: 2px solid var(--color-info-900);
-      }
+    }
+    &:focus-visible {
+      outline: 2px solid var(--color-info-900);
     }
 
     &.selected {
       background-color: var(--color-light-700);
-      color: var(--color-accent-700);
-    }
-
-    .arrow {
-      &::before {
-        position: relative;
-        /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
-        content: '';
-        /* By using an em scale, the arrows will size with the font */
-        display: inline-block;
-        width: 0.4em;
-        height: 0.4em;
-        border-right: 0.12em solid white;
-        border-top: 0.12em solid white;
-      }
-
-      &.left {
-        transform: rotate(-135deg) translate(-50%);
-      }
-
-      &.right {
-        transform: rotate(45deg);
-      }
+      color: var(--color-dark-900);
     }
 
     &.disabled {
@@ -83,7 +61,23 @@
 
 .selectContainer {
   display: flex;
+  margin-left: 20px;
   gap: 10px;
   align-items: center;
-  //white-space: nowrap;
+  white-space: nowrap;
+}
+
+.buttonRight,
+.buttonLeft {
+  display: flex;
+  align-items: center;
+
+  &:disabled {
+    color: var(--color-light-900);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-info-900);
+    border-radius: 2px;
+  }
 }

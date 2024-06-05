@@ -58,13 +58,12 @@ export const Select = (props: Props) => {
   )
 }
 
-type ItemProps = ComponentPropsWithoutRef<typeof SelectRadix.Item> & {
+type ItemProps = {
   pagination?: boolean
-}
+} & ComponentPropsWithoutRef<typeof SelectRadix.Item>
 
 export const SelectItem = forwardRef<ElementRef<typeof SelectRadix.Item>, ItemProps>(
   ({ children, pagination, ...props }, forwardedRef) => {
-    debugger
     return (
       <SelectRadix.Item
         {...props}

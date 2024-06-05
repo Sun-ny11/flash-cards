@@ -1,27 +1,27 @@
-import { DOTS, usePagination } from '@/components/ui/pagination/hooks/usePagination'
-
-import s from './pagination.module.scss'
-import clsx from 'clsx'
 import { ArrowIosBack, ArrowIosForward } from '@/assets/components'
 import { Typography } from '@/components/ui'
+import { DOTS, usePagination } from '@/components/ui/pagination/hooks/usePagination'
 import { Select, SelectItem } from '@/components/ui/select'
+import clsx from 'clsx'
+
+import s from './pagination.module.scss'
 
 type Props = {
+  className?: string
   currentPage: number
   onPageChange: (page: number) => void
   pageSize: number
   siblingCount?: number // колличество отображаемых эллементов между точек с каждой стороны от выбранной страницы
   totalCount: number
-  className?: string
 }
 export const Pagination = (props: Props) => {
   const { currentPage, onPageChange, pageSize, siblingCount = 1, totalCount, ...rest } = props
 
   const paginationRange = usePagination({
     currentPage,
-    totalCount,
-    siblingCount,
     pageSize,
+    siblingCount,
+    totalCount,
   })
 
   // If there are less than 2 times in pagination range we shall not render the component
@@ -37,51 +37,43 @@ export const Pagination = (props: Props) => {
     onPageChange(currentPage - 1)
   }
 
-  let lastPage = paginationRange![paginationRange!.length - 1]
+  const lastPage = paginationRange![paginationRange!.length - 1]
 
   return (
     <div className={s.wrapContainer}>
-      <ul className={clsx(s.paginationContainer)}>
-        {/* Left navigation arrow */}
-        <li
-          className={clsx(s.paginationItem, {
-            disabled: currentPage === 1,
-          })}
-          onClick={onPrevious}
-        >
-          <ArrowIosBack />
-        </li>
+      <button className={clsx(s.buttonLeft)} disabled={currentPage === 1} onClick={onPrevious}>
+        <ArrowIosBack />
+      </button>
+      <div className={clsx(s.paginationContainer)}>
         {paginationRange?.map((pageNumber, i) => {
           // If the pageItem is a DOT, render the DOTS unicode character
           if (pageNumber === DOTS) {
             return (
-              <li key={i} className={clsx(s.paginationItem, s.dots)}>
+              <span className={clsx(s.paginationItem, s.dots)} key={i}>
                 &#8230;
-              </li>
+              </span>
             )
           }
 
           // Render our Page Pills
           return (
-            <li
+            <Typography
+              as={'button'}
               className={clsx(s.paginationItem, pageNumber === currentPage && s.selected)}
+              key={i}
               onClick={() => onPageChange(+pageNumber)}
+              variant={'body2'}
             >
               {pageNumber}
-            </li>
+            </Typography>
           )
         })}
-        {/*  Right Navigation arrow */}
-        <li
-          className={clsx(s.paginationItem, {
-            disabled: currentPage === lastPage,
-          })}
-          onClick={onNext}
-        >
-          <ArrowIosForward />
-        </li>
-      </ul>
-      <Typography as={'div'} variant={'body2'} className={s.selectContainer}>
+      </div>
+      <button className={clsx(s.buttonRight)} disabled={currentPage === lastPage} onClick={onNext}>
+        <ArrowIosForward />
+      </button>
+
+      <Typography as={'div'} className={s.selectContainer} variant={'body2'}>
         Показать
         <Select defaultValue={'10'} {...rest} pagination>
           <SelectItem value={'10'}>10</SelectItem>
