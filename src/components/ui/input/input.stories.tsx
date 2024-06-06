@@ -15,6 +15,6 @@ export const Inputs: Story = {
   args: {
     disabled: false,
     type: 'search',
-    value: 'any any',
+    value: '',
   },
 }

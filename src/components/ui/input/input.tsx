@@ -1,8 +1,6 @@
-import { ComponentPropsWithoutRef, FocusEvent, forwardRef, useState } from 'react'
+import { ComponentPropsWithoutRef, FocusEvent, MouseEvent, forwardRef, useState } from 'react'
 
-import { Cross } from '@/assets/icons/Cross'
-import { Eye } from '@/assets/icons/Eye'
-import { Search } from '@/assets/icons/Search'
+import { Close, Eye, EyeOff, Search } from '@/assets/components'
 import clsx from 'clsx'
 
 import s from './input.module.scss'
@@ -18,10 +16,11 @@ export type InputProps = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ error, label, onClickClear, type = 'text', ...restProps }: InputProps, ref) => {
+  ({ error, label, onClickClear, type = 'text', value, ...restProps }: InputProps, ref) => {
     const [showPassword, setShowPassword] = useState(false)
 
-    const changeShowPasswordHandler = () => {
+    const changeShowPasswordHandler = (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault() // отменит отправку формы
       setShowPassword(!showPassword)
     }
     const isShow = showPassword ? 'text' : 'password'
@@ -48,7 +47,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <Typography as={'label'} className={classes.label} variant={'body2'}>
         {label}
+
         <div className={s.wrapper}>
+          <input
+            className={classes.input}
+            onFocus={focusHandler}
+            ref={ref}
+            type={type === 'password' ? isShow : type}
+            value={value}
+            {...restProps}
+          />
           {type === 'search' && (
             <>
               <Search className={classes.searchIcon} />
@@ -57,7 +65,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 disabled={restProps.disabled}
                 onClick={onClickClear}
               >
-                <Cross />
+                {value?.length ? <Close /> : ''}
               </button>
             </>
           )}
@@ -68,17 +76,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               disabled={restProps.disabled}
               onClick={changeShowPasswordHandler}
             >
-              <Eye view={showPassword ? 'eyeOff' : 'eyeOn'} />
+              {showPassword ? <Eye /> : <EyeOff />}
             </button>
           )}
 
-          <input
-            className={classes.input}
-            onFocus={focusHandler}
-            ref={ref}
-            type={type === 'password' ? isShow : type}
-            {...restProps}
-          />
           {error && <div className={s.errorText}>{error}</div>}
         </div>
       </Typography>

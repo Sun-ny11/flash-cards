@@ -7,7 +7,7 @@ import { ControlledTextField } from '@/components/ui/controlled/controlled-text-
 const meta = {
   component: ControlledTextField,
   tags: ['autodocs'],
-  title: 'Components/ControlledTextField',
+  title: 'Controlled/ControlledTextField',
 } satisfies Meta<typeof ControlledTextField>
 
 export default meta

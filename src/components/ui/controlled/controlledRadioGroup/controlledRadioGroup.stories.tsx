@@ -8,7 +8,7 @@ import { Button } from '../../button'
 const meta = {
   component: ControlledRadioGroup,
   tags: ['autodocs'],
-  title: 'Components/controlled/controlledRadioGroup',
+  title: 'Controlled/controlledRadioGroup',
 } satisfies Meta<typeof ControlledRadioGroup>
 
 export default meta

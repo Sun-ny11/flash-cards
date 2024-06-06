@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui'
 
 import { Search } from './assets/icons/Search'
+import { SignUp } from './features/auth/ui/sign-up'
 import { DecksList } from './features/decks/ui/decksList/decksList'
 
 export function App() {
@@ -17,6 +18,7 @@ export function App() {
       </Button>
 
       <DecksList items={resp.items} />
+      <SignUp />
     </>
   )
 }

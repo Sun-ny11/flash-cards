@@ -1,0 +1,43 @@
+.signIn {
+  max-width: 420px;
+  margin: 36px auto 0;
+  padding: 33px 36px 25px 27px;
+}
+
+.title {
+  margin-bottom: 27px;
+  color: var(--color-light-100);
+  text-align: center;
+}
+
+.checkoxContainer {
+  margin-bottom: 15px;
+}
+
+.forgotPassword {
+  display: block;
+
+  width: fit-content;
+  margin-bottom: 60px;
+  margin-left: auto;
+
+  background-color: transparent;
+}
+
+.submitBtn {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  font-size: var(--font-size-s);
+  color: var(--color-light-100);
+}
+
+.subtitle {
+  margin: 0 0 7px;
+  color: var(--color-light-900);
+  text-align: center;
+}
+
+a.signUp {
+  color: var(--color-accent-500);
+  text-decoration: underline;
+}

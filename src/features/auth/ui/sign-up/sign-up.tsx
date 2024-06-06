@@ -1,31 +1,37 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, Card, ControlledCheckbox, Typography } from '@/components/ui'
+import { Button, Card, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-import s from './signin.module.scss'
+import s from './signup.module.scss'
 
-const signInSchema = z.object({
-  email: z.string({ message: 'This field is required' }).email({ message: 'Not valid email' }),
-  password: z.string().min(3),
-  rememberMe: z.boolean().default(false),
-})
+const signUpSchema = z
+  .object({
+    confirmPassword: z.string().min(3),
+    email: z.string({ message: 'This field is required' }).email({ message: 'Not valid email' }),
+    password: z.string().min(3),
+  })
+  .refine(data => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  })
 
-type FormValues = z.infer<typeof signInSchema>
+type FormValues = z.infer<typeof signUpSchema>
 
-export const SignIn = () => {
+export const SignUp = () => {
   const {
     control,
     formState: { errors },
     handleSubmit,
   } = useForm<FormValues>({
     defaultValues: {
+      confirmPassword: '',
       email: '',
       password: '',
     },
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(signUpSchema),
   })
 
   const onSubmit = handleSubmit(data => {
@@ -36,7 +42,7 @@ export const SignIn = () => {
     <Card className={s.signIn}>
       <form onSubmit={onSubmit}>
         <Typography as={'h1'} className={s.title} variant={'h1'}>
-          Sign In
+          Sign Up
         </Typography>
         <ControlledTextField
           control={control}
@@ -51,17 +57,18 @@ export const SignIn = () => {
           name={'password'}
           type={'password'}
         />
-        <div className={s.checkoxContainer}>
-          <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-        </div>
-        <Button as={'a'} className={s.forgotPassword} href={'/'} variant={'link'}>
-          Forgot password
-        </Button>
+        <ControlledTextField
+          control={control}
+          error={errors.confirmPassword?.message}
+          label={'Confirm Password'}
+          name={'confirmPassword'}
+          type={'password'}
+        />
         <Button className={s.submitBtn} fullWidth type={'submit'}>
-          Sign in
+          Sign Up
         </Button>
         <Typography className={s.subtitle} variant={'body2'}>
-          Don&apos;t have an account?
+          Already have an account?
         </Typography>
         <Button as={'a'} className={s.signUp} href={'/'} variant={'link'}>
           Sign Up
