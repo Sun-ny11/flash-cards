@@ -1,5 +1,6 @@
 .wrapper {
   position: relative;
+  color: var(--color-light-100);
 }
 
 .button {
@@ -15,14 +16,15 @@
   display: flex;
   align-items: center;
 
-  fill: var(--color-light-100);
+  color: var(--color-light-100);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 
   &.disabled {
     cursor: auto;
-
-    svg {
-      fill: var(--color-dark-300);
-    }
   }
 }
 
@@ -93,17 +95,15 @@
   position: absolute;
   top: 8px;
   left: 8px;
-  fill: var(--color-dark-100);
 
-  &.disabled {
-    fill: var(--color-dark-300);
-  }
+  width: 20px;
+  height: 20px;
 }
 
 .label {
   display: block;
+  margin-bottom: 24px;
   color: var(--color-dark-100);
-  padding-bottom: 24px;
 
   &.disabled {
     color: var(--color-dark-300);
