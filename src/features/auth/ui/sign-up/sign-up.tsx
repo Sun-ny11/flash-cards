@@ -71,7 +71,7 @@ export const SignUp = () => {
           Already have an account?
         </Typography>
         <Button as={'a'} className={s.signUp} href={'/'} variant={'link'}>
-          Sign Up
+          Sign In
         </Button>
       </form>
     </Card>
