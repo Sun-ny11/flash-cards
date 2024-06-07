@@ -1,0 +1,26 @@
+.cardForgotPassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 45px;
+  background-color: var(--color-dark-700);
+}
+
+.message {
+  text-align: center;
+  //;
+  > p {
+    margin: 20px 0 65px 0;
+  }
+}
+
+.linkForgotPassword {
+}
+
+.iconEmail {
+  width: 96px;
+  height: 96px;
+  text-align: center;
+  margin-top: 27px;
+}
