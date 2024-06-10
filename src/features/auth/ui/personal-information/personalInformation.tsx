@@ -38,7 +38,7 @@ export const PersonalInformation = ({ avatar, email, name }: UserProps) => {
     setShow(false)
   }
 
-  const logoutHandler = (e: MouseEvent<HTMLButtonElement>) => {
+  const logoutHandler = () => {
     console.log('Запрос на логаут')
   }
 
