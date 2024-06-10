@@ -4,14 +4,14 @@ import { Trash } from '@/assets/icons/Trash'
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
+import { Deck } from '@/services/decks/decks.types'
 
 import s from './decksRow.module.scss'
 
 import defaultCard from '../../../../assets/images/defaultCard.webp'
-import { Card } from '../decksList/decksList'
 
 type Props = {
-  card: Card
+  card: Deck
 }
 
 export const DecksRow = ({ card }: Props) => {

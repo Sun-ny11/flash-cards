@@ -1,41 +1,13 @@
 import { Table } from '@/components/ui/table'
+import { Deck } from '@/services/decks/decks.types'
 
 import { DecksRow } from '../decksRow/decksRow'
 
-export type Author = {
-  id: string
-  name: string
-}
-
-export type Pagination = {
-  currentPage: number
-  itemsPerPage: number
-  totalItems: number
-  totalPages: number
-}
-// Тип для карточки
-export type Card = {
-  author: Author
-  cardsCount: number
-  cover: null | string
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
-// Тип для ответа от сервера
-export type Response = {
-  items: Card[]
-  pagination: Pagination
-}
-
 type Props = {
-  items: Card[]
+  items: Deck[] | undefined
 }
 export const DecksList = ({ items }: Props) => {
-  if (items.length === 0) {
+  if (items?.length === 0) {
     return <Table.Empty>Вы кто такие? Здесь колод нет. Идите ....</Table.Empty>
   }
 
@@ -52,11 +24,7 @@ export const DecksList = ({ items }: Props) => {
           <Table.HeaderCell></Table.HeaderCell>
         </Table.Row>
       </Table.Head>
-      <Table.Body>
-        {items.map(el => (
-          <DecksRow card={el} key={el.id} />
-        ))}
-      </Table.Body>
+      <Table.Body>{items?.map(el => <DecksRow card={el} key={el.id} />)}</Table.Body>
     </Table.Root>
   )
 }
