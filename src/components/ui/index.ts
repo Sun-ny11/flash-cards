@@ -1,3 +1,4 @@
+export * from './slider'
 export * from '../../features/auth/ui/sign-in'
 export * from './button'
 export * from './card'
