@@ -13,16 +13,14 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const CheckboxWithForm = () => {
-  const { control } = useForm<any>()
-
-  return <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-}
-
 export const Default: Story = {
   args: {
     label: 'Remember me',
     name: 'rememberMe',
   },
-  render: () => <CheckboxWithForm />,
+  render: args => {
+    const { control } = useForm<any>()
+
+    return <ControlledCheckbox control={control} label={args.label} name={args.name} />
+  },
 }
