@@ -1,6 +1,6 @@
 import { Control, FieldPath, FieldValues, useController } from 'react-hook-form'
 
-import { Options, RadioGroup } from '../../radioGroup'
+import { Options, RadioGroup } from '@/components/ui'
 type Props<T extends FieldValues> = {
   control?: Control<T>
   items: Options[]
