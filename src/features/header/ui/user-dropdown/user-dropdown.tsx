@@ -4,7 +4,7 @@ import { Typography } from '@/components/ui/typography'
 
 import s from './user-dropdown.module.scss'
 
-type Props = {
+export type UserProps = {
   avatar: {
     alt: string
     src: string
@@ -13,7 +13,7 @@ type Props = {
   name: string
 }
 
-export const UserDropdown = ({ avatar, email, name }: Props) => {
+export const UserDropdown = ({ avatar, email, name }: UserProps) => {
   return (
     <>
       <DropDown trigger={<img alt={avatar.alt} src={avatar.src} />}>
