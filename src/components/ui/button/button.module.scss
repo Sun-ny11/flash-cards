@@ -73,7 +73,50 @@
 
 a.link {
   padding: 0;
-  color: var(--color-light-100);
   font-size: var(--font-size-s);
   line-height: var(--line-height-m);
+  color: var(--color-light-100);
+}
+
+.withSVG {
+  position: relative;
+  z-index: 2;
+
+  display: inline-block;
+
+  width: 18px;
+  height: 18px;
+  padding: 0;
+
+  text-align: center;
+
+  background-color: transparent;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+
+    display: block;
+
+    width: 25px;
+    height: 25px;
+
+    opacity: 0;
+    background-color: var(--color-dark-500);
+    border-radius: 50%;
+
+    transition:
+      transform 0.3s,
+      opacity 0.3s;
+  }
+
+  &:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
 }
