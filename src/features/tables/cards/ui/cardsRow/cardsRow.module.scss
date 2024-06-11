@@ -1,0 +1,21 @@
+.cardImg {
+  width: 120px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.rating {
+  color: var(--color-warning-300);
+}
+
+.controls {
+  > button {
+    margin-left: 10px;
+  }
+}
