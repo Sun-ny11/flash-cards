@@ -1,15 +1,17 @@
+import { Edit2Outline } from '@/assets/components'
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { DeleteCell } from '@/features/tables/deleteCard/deleteCell'
+import { LearnCard } from '@/features/tables/learnCard/learnCard'
+import { Deck } from '@/services/decks/decks.types'
 
 import s from './decksRow.module.scss'
 
 import defaultCard from '../../../../../assets/images/defaultCard.webp'
-import { DeckItem } from '../decksList/decksList'
 
 type Props = {
-  deck: DeckItem
+  deck: Deck
   isMy: boolean
 }
 
@@ -32,14 +34,19 @@ export const DecksRow = ({ deck, isMy }: Props) => {
       <Table.Cell className={s.buttonCell}>
         {isMy ? (
           <>
+            <LearnCard className={s.option} deck={deck} />
+            <div className={s.option}>
+              <Edit2Outline className={s.option} />
+            </div>
             <DeleteCell
+              className={s.option}
               deleteThat={'deck'}
               name={deck.name}
               onDeleteCallback={onDeleteCallbackHandler}
             />
           </>
         ) : (
-          'тут будет learn-card'
+          <LearnCard deck={deck} />
         )}
       </Table.Cell>
     </Table.Row>

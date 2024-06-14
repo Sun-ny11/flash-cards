@@ -24,7 +24,7 @@ const DecksPage = () => {
         </Typography>
         <Button>Add New Deck</Button>
       </div>
-      <DecksList isMy={false} items={data?.items} />
+      <DecksList isMy items={data?.items} />
       {data && (
         <Pagination
           className={s.pagination}

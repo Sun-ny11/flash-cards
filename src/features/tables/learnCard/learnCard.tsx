@@ -1,21 +1,22 @@
 import { useState } from 'react'
 
-import { TrashOutline } from '@/assets/components'
+import { PlayCircleOutline } from '@/assets/components'
 import { Button, Typography } from '@/components/ui'
 import { Modal } from '@/components/ui/modal'
+import { Deck } from '@/services/decks/decks.types'
 import clsx from 'clsx'
 
-import s from './deleteCell.module.scss'
+import s from './learnCard.module.scss'
 
 type Props = {
   className?: string
-  deleteThat: 'card' | 'deck'
-  name?: string
-  onDeleteCallback: () => void
+  deck: Deck
 }
 
-export const DeleteCell = ({ className, deleteThat, name, onDeleteCallback }: Props) => {
+export const LearnCard = ({ className, deck }: Props) => {
   const [open, setOpen] = useState(false)
+
+  console.log('deck', deck)
 
   return (
     <>
@@ -24,26 +25,21 @@ export const DeleteCell = ({ className, deleteThat, name, onDeleteCallback }: Pr
         onClick={() => setOpen(true)}
         variant={'withSVG'}
       >
-        <TrashOutline />
+        <PlayCircleOutline />
       </Button>
       <Modal
         onOpenChange={() => {
           setOpen(false)
         }}
         open={open}
-        title={`Delete ${deleteThat}`}
+        title={`Learn "${deck.name}"`}
       >
         <div className={s.content}>
-          <Typography>
-            Do you really want to remove {deleteThat === 'deck' ? name : 'this card'}?
-            <br />
-            {deleteThat === 'deck' && 'All cards will be deleted.'}
-          </Typography>
+          <Typography>Question</Typography>
           <div className={s.buttons}>
             <Button onClick={() => setOpen(false)} variant={'secondary'}>
-              Cancel
+              Show Answer
             </Button>
-            <Button onClick={onDeleteCallback}>Delete Card</Button>
           </div>
         </div>
       </Modal>
