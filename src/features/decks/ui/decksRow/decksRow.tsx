@@ -1,5 +1,5 @@
+import { PlayCircleOutline } from '@/assets/components'
 import { Edit } from '@/assets/icons/Edit'
-import { Play } from '@/assets/icons/Play'
 import { Trash } from '@/assets/icons/Trash'
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
@@ -32,10 +32,10 @@ export const DecksRow = ({ card }: Props) => {
         {isMyCard ? (
           <>
             <Button as={'a'} className={s.controlBtn}>
-              <Edit />
+              <PlayCircleOutline />
             </Button>
             <Button as={'a'} className={s.controlBtn}>
-              <Play />
+              <Edit />
             </Button>
             <Button as={'a'} className={s.controlBtn}>
               <Trash />
@@ -43,7 +43,7 @@ export const DecksRow = ({ card }: Props) => {
           </>
         ) : (
           <Button as={'a'} className={s.controlBtn}>
-            <Play />
+            <PlayCircleOutline />
           </Button>
         )}
       </Table.Cell>
