@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Button, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
-import { DecksList } from '@/features/decks/ui/decksList/decksList'
+import { DecksList } from '@/features/tables/decks/ui/decksList/decksList'
 import { useGetDecksQuery } from '@/services/flashCardsApi'
 
 import s from './decksPage.module.scss'
@@ -24,7 +24,7 @@ const DecksPage = () => {
         </Typography>
         <Button>Add New Deck</Button>
       </div>
-      <DecksList items={data?.items} />
+      <DecksList isMy={false} items={data?.items} />
       {data && (
         <Pagination
           className={s.pagination}
