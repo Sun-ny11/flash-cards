@@ -10,12 +10,22 @@ type Props = {
   className?: string
   currentPage: number
   onPageChange: (page: number) => void
+  onPageSizeChange: (size: number) => void
   pageSize: number
   siblingCount?: number // колличество отображаемых эллементов между точек с каждой стороны от выбранной страницы
   totalCount: number
 }
 export const Pagination = (props: Props) => {
-  const { currentPage, onPageChange, pageSize, siblingCount = 1, totalCount, ...rest } = props
+  const {
+    className,
+    currentPage,
+    onPageChange,
+    onPageSizeChange,
+    pageSize,
+    siblingCount = 1,
+    totalCount,
+    ...rest
+  } = props
 
   const paginationRange = usePagination({
     currentPage,
@@ -37,10 +47,14 @@ export const Pagination = (props: Props) => {
     onPageChange(currentPage - 1)
   }
 
+  const onPageSizeChangeHandler = (newValue: string) => {
+    onPageSizeChange(parseInt(newValue))
+  }
+
   const lastPage = paginationRange![paginationRange!.length - 1]
 
   return (
-    <div className={s.wrapContainer}>
+    <div className={clsx(s.wrapContainer, className)}>
       <button className={clsx(s.buttonLeft)} disabled={currentPage === 1} onClick={onPrevious}>
         <ArrowIosBack />
       </button>
@@ -75,7 +89,7 @@ export const Pagination = (props: Props) => {
 
       <Typography as={'div'} className={s.selectContainer} variant={'body2'}>
         Показать
-        <Select defaultValue={'10'} {...rest} pagination>
+        <Select defaultValue={'10'} onValueChange={onPageSizeChangeHandler} {...rest} pagination>
           <SelectItem value={'10'}>10</SelectItem>
           <SelectItem value={'20'}>20</SelectItem>
           <SelectItem value={'30'}>30</SelectItem>
