@@ -61,7 +61,7 @@ export const PersonalInformation = ({ avatar, email, name }: UserProps) => {
         <div className={s.avatar}>
           <img alt={avatar.alt} src={avatar.src || defaultAvatar} />
           {show && (
-            <FileUploader accept={'image/*'} onChange={changeImageHandler}>
+            <FileUploader accept={'image/*'} name={''} onChange={changeImageHandler}>
               <Edit2Outline />
             </FileUploader>
           )}

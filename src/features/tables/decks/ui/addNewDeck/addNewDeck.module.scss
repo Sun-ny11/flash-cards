@@ -1,0 +1,19 @@
+.wrapper {
+  width: 480px;
+
+  & label {
+    margin: 0;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+  }
+}
