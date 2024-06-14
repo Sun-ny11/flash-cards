@@ -21,6 +21,7 @@ export const Inputs: Story = {
         <Edit2 /> upload
       </>
     ),
+    name: 'aaa',
     onChange: e => {
       if (e.target.files) {
         const formData = new FormData()
