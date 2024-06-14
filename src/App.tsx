@@ -1,4 +1,4 @@
-import DecksPage from '@/features/decksPage/ui/decksPage'
+import DecksPage from '@/features/decks/ui/decksPage/decksPage'
 
 export function App() {
   return (

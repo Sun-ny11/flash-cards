@@ -1,11 +1,16 @@
+import { useState } from 'react'
+
 import { Button, Typography } from '@/components/ui'
+import { Pagination } from '@/components/ui/pagination'
 import { DecksList } from '@/features/decks/ui/decksList/decksList'
 import { useGetDecksQuery } from '@/services/flashCardsApi'
 
 import s from './decksPage.module.scss'
 
 const DecksPage = () => {
-  const { data, isLoading } = useGetDecksQuery()
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+  const { data, isLoading } = useGetDecksQuery({ currentPage, itemsPerPage: pageSize })
 
   if (isLoading) {
     return <h2>Loading...</h2>
@@ -20,6 +25,16 @@ const DecksPage = () => {
         <Button>Add New Deck</Button>
       </div>
       <DecksList items={data?.items} />
+      {data && (
+        <Pagination
+          className={s.pagination}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+          onPageSizeChange={setPageSize}
+          pageSize={pageSize}
+          totalCount={data.pagination?.totalItems}
+        />
+      )}
     </>
   )
 }
