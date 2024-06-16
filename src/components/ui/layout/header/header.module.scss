@@ -1,0 +1,21 @@
+.header {
+  position: fixed;
+
+  width: 100vw;
+  height: 60px;
+  background-color: var(--color-dark-500);
+
+  padding: 12px 136px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & .nameAuthor {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    text-decoration: underline dashed;
+    text-underline-offset: 5px;
+    text-align: center;
+  }
+}
