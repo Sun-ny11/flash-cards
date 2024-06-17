@@ -16,8 +16,6 @@ type Props = {
 export const LearnCard = ({ className, deck }: Props) => {
   const [open, setOpen] = useState(false)
 
-  console.log('deck', deck)
-
   return (
     <>
       <Button

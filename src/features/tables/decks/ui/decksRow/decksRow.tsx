@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Edit2Outline } from '@/assets/components'
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
@@ -23,7 +25,7 @@ export const DecksRow = ({ deck, isMy }: Props) => {
   return (
     <Table.Row>
       <Table.Cell>
-        <Button as={'a'} className={s.linkCard}>
+        <Button as={Link} className={s.linkCard} to={`/decks/${deck.id}`}>
           <img alt={'CardImage'} className={s.cardImage} src={deck.cover ?? defaultCard} />
           <Typography as={'h3'}>{deck.name}</Typography>
         </Button>
