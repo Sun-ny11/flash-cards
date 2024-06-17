@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
-import { Edit2Outline } from '@/assets/components'
+import { Edit2Outline, PlayCircleOutline } from '@/assets/components'
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { DeleteCell } from '@/features/tables/deleteCard/deleteCell'
-import { LearnCard } from '@/features/tables/learnCard/learnCard'
 import { Deck } from '@/services/decks/decks.types'
 
 import s from './decksRow.module.scss'
@@ -36,7 +35,9 @@ export const DecksRow = ({ deck, isMy }: Props) => {
       <Table.Cell className={s.buttonCell}>
         {isMy ? (
           <>
-            <LearnCard className={s.option} deck={deck} />
+            <NavLink className={s.option} to={`/decks/${deck.id}/learn`}>
+              <PlayCircleOutline />
+            </NavLink>
             <div className={s.option}>
               <Edit2Outline className={s.option} />
             </div>
@@ -48,7 +49,9 @@ export const DecksRow = ({ deck, isMy }: Props) => {
             />
           </>
         ) : (
-          <LearnCard deck={deck} />
+          <NavLink className={s.option} to={`/decks/${deck.id}/learn`}>
+            <PlayCircleOutline />
+          </NavLink>
         )}
       </Table.Cell>
     </Table.Row>

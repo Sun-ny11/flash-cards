@@ -1,13 +1,13 @@
 import { Typography } from '@/components/ui'
 import { Table } from '@/components/ui/table'
+import { Card } from '@/services/decks/decks.types'
 
 import s from './cardsRow.module.scss'
 
 import { DeleteCell } from '../../../deleteCard/deleteCell'
-import { CardItem } from '../cardsList/cardsList'
 import { Rating } from '../rating'
 type Props = {
-  card: CardItem
+  card: Card
   isMy: boolean
 }
 export const CardsRow = ({ card, isMy }: Props) => {

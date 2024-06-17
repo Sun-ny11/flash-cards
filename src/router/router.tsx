@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { CardPage } from '@/features/tables/cards/ui/cardPage/cardPage'
 import { DeckPage } from '@/features/tables/decks/ui/deckPage/deckPage'
 import DecksPage from '@/features/tables/decks/ui/decksPage/decksPage'
 
@@ -28,6 +29,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <DeckPage />,
     path: '/decks/:deckId',
+  },
+  {
+    element: <CardPage />,
+    path: '/decks/:deckId/learn',
   },
 ]
 
