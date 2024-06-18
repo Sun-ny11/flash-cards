@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 
+import { ArrowBackOutline } from '@/assets/components'
 import { Button, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { CardsList } from '@/features/tables/cards/ui/cardsList/cardsList'
@@ -26,6 +27,7 @@ export const DeckPage = () => {
     <div className={s.wrapper}>
       <NavLink className={s.back} to={'/decks'}>
         <Typography as={'div'} variant={'body2'}>
+          <ArrowBackOutline />
           Back to Decks List
         </Typography>
       </NavLink>

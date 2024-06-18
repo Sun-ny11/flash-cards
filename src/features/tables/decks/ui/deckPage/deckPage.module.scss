@@ -10,6 +10,9 @@
 
 .back {
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   div {
     margin: 0 0 33px 0;
   }

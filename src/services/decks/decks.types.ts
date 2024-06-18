@@ -56,6 +56,11 @@ export type DecksListResponse = {
   pagination: Pagination
 }
 
+export type CardsInDeckResponse = {
+  items: Card[]
+  pagination: Pagination
+}
+
 export type GetDeckArgs = {
   answer?: string
   currentPage?: number
@@ -75,7 +80,7 @@ export type GetDecksArgs = {
   orderBy?: string
 }
 
-export type CardsInDeckResponse = {
-  items: Card[]
-  pagination: Pagination
+export type GetRandomCardArgs = {
+  id: string
+  previousCardId?: string
 }
