@@ -16,16 +16,25 @@
 
 .title {
   text-align: center;
+  margin: 0 0 45px 0;
 }
 
+.answerContainer,
 .questionContainer {
   display: flex;
-  align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 12px;
   gap: 5px;
 }
 
 .shots {
   margin: 0 0 40px 0;
   color: var(--color-dark-100);
+}
+
+.rate {
+  margin: 0 0 12px 0;
+}
+
+.radio {
+  margin: 0 0 30px 0;
 }
