@@ -1,28 +1,18 @@
 import { Table } from '@/components/ui/table'
 import { cardTableName } from '@/features/tables/tableHeaderName'
+import { Card } from '@/services/decks/decks.types'
 
 import { CardsRow } from '../cardsRow/cardsRow'
-export type CardItem = {
-  answer: string
-  answerImg: null | string
-  answerVideo: null | string
-  created: string
-  deckId: string
-  grade: number
-  id: string
-  question: string
-  questionImg: null | string
-  questionVideo: null | string
-  shots: number
-  updated: string
-  userId: string
-}
 
 type Props = {
   isMy: boolean
-  items: CardItem[]
+  items: Card[] | undefined
 }
 export const CardsList = ({ isMy, items }: Props) => {
+  if (!items) {
+    return <Table.Empty>There is no any cards</Table.Empty>
+  }
+
   const filteredCardTableName = isMy ? cardTableName : cardTableName.filter(el => el.flag !== false)
 
   return (

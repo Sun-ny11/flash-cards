@@ -12,16 +12,17 @@ export type Options = {
   value: string
 }
 type Props = {
+  className?: string
   items: Options[]
   onValueChange: (value: string) => void
 } & ComponentPropsWithoutRef<typeof RadioGroupUI.Root>
 
 export const RadioGroup = forwardRef<ElementRef<typeof RadioGroupUI.Root>, Props>(
-  ({ items, onValueChange, ...restProps }: Props, ref) => {
+  ({ className, items, onValueChange, ...restProps }: Props, ref) => {
     return (
       <>
         <RadioGroupUI.Root
-          className={s.root}
+          className={clsx(s.root, className)}
           onValueChange={onValueChange}
           {...restProps}
           ref={ref}
