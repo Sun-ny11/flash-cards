@@ -54,7 +54,7 @@ export const SignIn = () => {
         <div className={s.checkoxContainer}>
           <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
         </div>
-        <Button as={'a'} className={s.forgotPassword} href={'/'} variant={'link'}>
+        <Button as={'a'} className={s.forgotPassword} href={'/forgot-password'} variant={'link'}>
           Forgot password
         </Button>
         <Button className={s.submitBtn} fullWidth type={'submit'}>
@@ -63,7 +63,7 @@ export const SignIn = () => {
         <Typography className={s.subtitle} variant={'body2'}>
           Don&apos;t have an account?
         </Typography>
-        <Button as={'a'} className={s.signUp} href={'/'} variant={'link'}>
+        <Button as={'a'} className={s.signUp} href={'/sign-up'} variant={'link'}>
           Sign Up
         </Button>
       </form>

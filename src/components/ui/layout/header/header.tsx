@@ -9,10 +9,10 @@ type Props = {
     alt: string
     src: string
   }
-  email: string
+  email?: string
   isAuth: boolean
-  logout: () => void
-  name: string
+  logout?: () => void
+  name?: string
 }
 
 export const Header = (props: Props) => {
@@ -23,14 +23,14 @@ export const Header = (props: Props) => {
       <a href={'/'}>
         <Logo />
       </a>
-      {isAuth && (
+      {isAuth && email && name && logout && (
         <div className={s.nameAuthor}>
           <Typography>{name}</Typography>
           <UserDropdown avatar={avatar} email={name} logout={logout} name={email} />
         </div>
       )}
       {!isAuth && (
-        <Button as={'button'} variant={'secondary'}>
+        <Button as={'a'} href={'/login'} variant={'secondary'}>
           Sign in
         </Button>
       )}

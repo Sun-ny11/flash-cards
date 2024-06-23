@@ -11,6 +11,7 @@ html {
   margin: 0;
   border: none;
 }
+
 *,
 *::before,
 *::after {
@@ -32,7 +33,9 @@ option {
 
 a:visited {
   color: inherit;
-} // ?
+}
+
+// ?
 
 body {
   margin: 0;
@@ -47,6 +50,10 @@ body {
 
 .container {
   max-width: 1086px;
+  width: 100%;
   padding: 33px 40px 36px 40px;
-  margin: 0 auto;
+  margin: 16px auto;
+  display: flex;
+  //justify-content: center;
+  //align-items: center;
 }

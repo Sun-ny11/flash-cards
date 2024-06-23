@@ -6,14 +6,25 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { ForgotPassword } from '@/features/auth/ui/forgotPassword'
+import { SignIn } from '@/features/auth/ui/sign-in'
+import { SignUp } from '@/features/auth/ui/sign-up'
 import { CardPage } from '@/features/tables/cards/ui/cardPage/cardPage'
 import { DeckPage } from '@/features/tables/decks/ui/deckPage/deckPage'
 import DecksPage from '@/features/tables/decks/ui/decksPage/decksPage'
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <div>login</div>,
+    element: <SignIn />,
     path: '/login',
+  },
+  {
+    element: <SignUp />,
+    path: '/sign-up',
+  },
+  {
+    element: <ForgotPassword />,
+    path: '/forgot-password',
   },
 ]
 
@@ -45,7 +56,7 @@ const router = createBrowserRouter([
 ])
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const isAuthenticated = false
 
   return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
 }
