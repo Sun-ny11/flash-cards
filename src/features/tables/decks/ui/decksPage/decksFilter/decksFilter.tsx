@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Slider, Tabs, TabsList, TabsTrigger } from '@/components/ui'
+import { Button, Slider, Tabs, TabsList, TabsTrigger } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 
 import s from './decksFilter.module.scss'
@@ -24,6 +24,7 @@ const DecksFilter = ({
   handleTabChange,
   maxRange,
   minRange,
+  resetAllFilters,
   setCardsRange,
   setSearchValue,
 }: Props) => {
@@ -32,6 +33,10 @@ const DecksFilter = ({
       search: '',
     },
   })
+
+  const reset = () => {
+    resetAllFilters()
+  }
 
   return (
     <div className={s.container}>
@@ -48,6 +53,9 @@ const DecksFilter = ({
         </TabsList>
       </Tabs>
       <Slider max={maxRange} min={minRange} onValueChange={setCardsRange} value={cardsRange} />
+      <Button onClick={reset} variant={'secondary'}>
+        Clear filter
+      </Button>
     </div>
   )
 }

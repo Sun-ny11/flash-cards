@@ -35,6 +35,8 @@ const DecksPage = () => {
     if (minMaxCardsData) {
       setCardsRange([minMaxCardsData.min, minMaxCardsData.max])
     }
+    setSearchValue('')
+    handleTabChange('all')
   }
 
   useEffect(() => {
