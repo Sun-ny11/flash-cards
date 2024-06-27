@@ -1,4 +1,11 @@
-import { ComponentPropsWithoutRef, FocusEvent, MouseEvent, forwardRef, useState } from 'react'
+import {
+  ChangeEvent,
+  ComponentPropsWithoutRef,
+  FocusEvent,
+  MouseEvent,
+  forwardRef,
+  useState,
+} from 'react'
 
 import { Close, Eye, EyeOff, Search } from '@/assets/components'
 import clsx from 'clsx'
@@ -11,12 +18,25 @@ export type InputProps = {
   error?: string
   label?: string
   onClickClear?: () => void
+  onValueChange?: (value: string) => void
   type?: 'password' | 'search' | 'text'
   value?: string
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ error, label, onClickClear, type = 'text', value, ...restProps }: InputProps, ref) => {
+  (
+    {
+      error,
+      label,
+      onChange,
+      onClickClear,
+      onValueChange,
+      type = 'text',
+      value,
+      ...restProps
+    }: InputProps,
+    ref
+  ) => {
     const [showPassword, setShowPassword] = useState(false)
 
     const changeShowPasswordHandler = (e: MouseEvent<HTMLButtonElement>) => {
@@ -24,6 +44,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       setShowPassword(!showPassword)
     }
     const isShow = showPassword ? 'text' : 'password'
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e)
+      onValueChange?.(e.target.value)
+    }
 
     const focusHandler = (event: FocusEvent<HTMLInputElement, Element>) => {
       // Устанавливает каретку в конец текста
@@ -51,6 +76,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <div className={s.wrapper}>
           <input
             className={classes.input}
+            onChange={handleChange}
             onFocus={focusHandler}
             ref={ref}
             type={type === 'password' ? isShow : type}

@@ -12,7 +12,10 @@ type Props = {
   handleTabChange: (value: string) => void
   maxRange: number
   minRange: number
+  resetAllFilters: () => void
+  searchValue: string
   setCardsRange: Dispatch<SetStateAction<number[]>>
+  setSearchValue: Dispatch<SetStateAction<string>>
 }
 
 const DecksFilter = ({
@@ -22,6 +25,7 @@ const DecksFilter = ({
   maxRange,
   minRange,
   setCardsRange,
+  setSearchValue,
 }: Props) => {
   const { control } = useForm({
     defaultValues: {
@@ -31,7 +35,12 @@ const DecksFilter = ({
 
   return (
     <div className={s.container}>
-      <ControlledTextField control={control} name={'search'} placeholder={'Search...'} />
+      <ControlledTextField
+        control={control}
+        name={'search'}
+        onValueChange={setSearchValue}
+        placeholder={'Search...'}
+      />
       <Tabs asChild onValueChange={handleTabChange} value={currentTab}>
         <TabsList>
           <TabsTrigger value={'my'}>My decks</TabsTrigger>

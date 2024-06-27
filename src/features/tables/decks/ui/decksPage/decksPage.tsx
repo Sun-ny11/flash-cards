@@ -13,9 +13,8 @@ const DecksPage = () => {
   const [pageSize, setPageSize] = useState(10)
   const [currentTab, setCurrentTab] = useState<string>('all')
   const authorId = currentTab === 'my' ? 'c8a7805b-8d56-467d-9bd1-9380ea8cf583' : undefined
-
   const { data: minMaxCardsData, isLoading: minMaxCardsDataIsLoading } = useGetMinMaxCardsQuery()
-
+  const [searchValue, setSearchValue] = useState<string>('')
   const [cardsRange, setCardsRange] = useState<number[]>([0, 10])
 
   const { data: decksData, isLoading: decksAreLoading } = useGetDecksQuery({
@@ -24,11 +23,18 @@ const DecksPage = () => {
     itemsPerPage: pageSize,
     maxCardsCount: cardsRange[1],
     minCardsCount: cardsRange[0],
+    name: searchValue,
   })
 
   const handleTabChange = (tab: string) => {
     setCurrentPage(1)
     setCurrentTab(tab)
+  }
+
+  const resetAllFilters = () => {
+    if (minMaxCardsData) {
+      setCardsRange([minMaxCardsData.min, minMaxCardsData.max])
+    }
   }
 
   useEffect(() => {
@@ -55,7 +61,10 @@ const DecksPage = () => {
         handleTabChange={handleTabChange}
         maxRange={minMaxCardsData?.max || 0}
         minRange={minMaxCardsData?.min || 0}
+        resetAllFilters={resetAllFilters}
+        searchValue={searchValue}
         setCardsRange={setCardsRange}
+        setSearchValue={setSearchValue}
       />
       <DecksList isMy items={decksData?.items} />
       {decksData && (
