@@ -46,19 +46,20 @@ export const Primary: Story = {
         </TabsContent>
       </>
     ),
-    tabs: [
-      {
-        title: 'First tab',
-        value: 'tab1',
-      },
-      {
-        title: 'Second tab',
-        value: 'tab2',
-      },
-      {
-        title: 'Third tab',
-        value: 'tab3',
-      },
-    ],
   },
 }
+
+// tabs: [
+//   {
+//     title: 'First tab',
+//     value: 'tab1',
+//   },
+//   {
+//     title: 'Second tab',
+//     value: 'tab2',
+//   },
+//   {
+//     title: 'Third tab',
+//     value: 'tab3',
+//   },
+// ],
