@@ -46,6 +46,7 @@ export const Primary: Story = {
         </TabsContent>
       </>
     ),
+    value: 'tab1',
   },
 }
 
