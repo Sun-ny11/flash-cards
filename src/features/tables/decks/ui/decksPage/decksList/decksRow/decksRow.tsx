@@ -9,7 +9,7 @@ import { Deck } from '@/services/decks/decks.types'
 
 import s from './decksRow.module.scss'
 
-import defaultCard from '../../../../../assets/images/defaultCard.webp'
+import defaultCard from '../../../../../../../assets/images/defaultCard.webp'
 
 type Props = {
   deck: Deck
