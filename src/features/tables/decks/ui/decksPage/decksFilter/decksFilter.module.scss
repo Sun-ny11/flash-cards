@@ -1,6 +1,44 @@
 .container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-end;
   margin-bottom: 36px;
+  flex-wrap: wrap;
+  @media (min-width: 1024px) {
+    flex-wrap: nowrap;
+  }
+}
+
+.label {
+  margin: 0 0 5px 0;
+}
+
+.search {
+  flex: 0 0 100%;
+  margin-bottom: 15px;
+
+  @media (min-width: 1024px) {
+    margin-bottom: 0;
+    flex: 0 0 299px;
+  }
+}
+
+.tabsContainer,
+.sliderContainer {
+  flex: 0 0 100%;
+  margin-bottom: 15px;
+}
+
+.tabsContainer {
+  @media (min-width: 768px) {
+    flex: 0 0 235px;
+    margin-bottom: 0;
+  }
+}
+
+.sliderContainer {
+  @media (min-width: 768px) {
+    flex: 0 0 251px;
+    margin-bottom: 0;
+  }
 }

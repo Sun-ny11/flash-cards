@@ -15,6 +15,7 @@ import s from './input.module.scss'
 import { Typography } from '../typography'
 
 export type InputProps = {
+  className?: string
   error?: string
   label?: string
   onClickClear?: () => void
@@ -26,6 +27,7 @@ export type InputProps = {
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
+      className,
       error,
       label,
       onChange,
@@ -60,6 +62,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const classes = {
       button: clsx(s.button, restProps.disabled && s.disabled),
       input: clsx(
+        className,
         s.input,
         error && s.error,
         restProps.disabled && s.disabled,

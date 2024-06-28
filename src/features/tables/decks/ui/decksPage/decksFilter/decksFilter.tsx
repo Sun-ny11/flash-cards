@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Button, Slider, Tabs, TabsList, TabsTrigger } from '@/components/ui'
+import { TrashOutline } from '@/assets/components'
+import { Button, Slider, Tabs, TabsList, TabsTrigger, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 
 import s from './decksFilter.module.scss'
@@ -28,7 +29,7 @@ const DecksFilter = ({
   setCardsRange,
   setSearchValue,
 }: Props) => {
-  const { control } = useForm({
+  const { control, setValue } = useForm({
     defaultValues: {
       search: '',
     },
@@ -36,25 +37,42 @@ const DecksFilter = ({
 
   const reset = () => {
     resetAllFilters()
+    setValue('search', '')
   }
 
   return (
     <div className={s.container}>
-      <ControlledTextField
-        control={control}
-        name={'search'}
-        onValueChange={setSearchValue}
-        placeholder={'Search...'}
-      />
-      <Tabs asChild onValueChange={handleTabChange} value={currentTab}>
-        <TabsList>
-          <TabsTrigger value={'my'}>My decks</TabsTrigger>
-          <TabsTrigger value={'all'}>All decks</TabsTrigger>
-        </TabsList>
-      </Tabs>
-      <Slider max={maxRange} min={minRange} onValueChange={setCardsRange} value={cardsRange} />
+      <div className={s.search}>
+        <Typography className={s.label} variant={'body2'}>
+          Search by name
+        </Typography>
+        <ControlledTextField
+          control={control}
+          name={'search'}
+          onValueChange={setSearchValue}
+          placeholder={'Search...'}
+        />
+      </div>
+      <div className={s.tabsContainer}>
+        <Typography className={s.label} variant={'body2'}>
+          Show decks cards
+        </Typography>
+        <Tabs asChild onValueChange={handleTabChange} value={currentTab}>
+          <TabsList>
+            <TabsTrigger value={'my'}>My decks</TabsTrigger>
+            <TabsTrigger value={'all'}>All decks</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+      <div className={s.sliderContainer}>
+        <Typography className={s.label} variant={'body2'}>
+          Number of cards
+        </Typography>
+        <Slider max={maxRange} min={minRange} onValueChange={setCardsRange} value={cardsRange} />
+      </div>
       <Button onClick={reset} variant={'secondary'}>
-        Clear filter
+        <TrashOutline />
+        <Typography variant={'subtitle2'}>Clear filter</Typography>
       </Button>
     </div>
   )
