@@ -1,8 +1,7 @@
 import { Table } from '@/components/ui/table'
+import { DecksRow } from '@/features/tables/decks/ui/decksPage/decksList/decksRow/decksRow'
 import { deckTableName } from '@/features/tables/tableHeaderName'
 import { Deck } from '@/services/decks/decks.types'
-
-import { DecksRow } from '../decksRow/decksRow'
 
 type Props = {
   isMy: boolean

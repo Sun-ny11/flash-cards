@@ -6,6 +6,7 @@ import {
   GetDeckArgs,
   GetDecksArgs,
   GetRandomCardArgs,
+  MinMaxCardsResponse,
 } from '@/services/decks/decks.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
@@ -36,6 +37,11 @@ export const flashcardsApi = createApi({
           url: `v2/decks`,
         }),
       }),
+      getMinMaxCards: builder.query<MinMaxCardsResponse, void>({
+        query: () => ({
+          url: `/v2/decks/min-max-cards`,
+        }),
+      }),
       getRandomCard: builder.query<Card, GetRandomCardArgs>({
         query: ({ id, ...args }) => ({
           params: args ?? undefined,
@@ -47,5 +53,10 @@ export const flashcardsApi = createApi({
   reducerPath: 'flashcardsApi',
 })
 
-export const { useGetCardsQuery, useGetDeckQuery, useGetDecksQuery, useGetRandomCardQuery } =
-  flashcardsApi
+export const {
+  useGetCardsQuery,
+  useGetDeckQuery,
+  useGetDecksQuery,
+  useGetMinMaxCardsQuery,
+  useGetRandomCardQuery,
+} = flashcardsApi

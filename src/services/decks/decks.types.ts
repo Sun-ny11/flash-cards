@@ -51,6 +51,11 @@ export type DeckResponse = {
   userId: string
 }
 
+export type MinMaxCardsResponse = {
+  max: 1
+  min: 1
+}
+
 export type DecksListResponse = {
   items: Deck[]
   pagination: Pagination

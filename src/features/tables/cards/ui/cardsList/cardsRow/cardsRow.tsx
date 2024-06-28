@@ -4,8 +4,8 @@ import { Card } from '@/services/decks/decks.types'
 
 import s from './cardsRow.module.scss'
 
-import { DeleteCell } from '../../../deleteCard/deleteCell'
-import { Rating } from '../rating'
+import { DeleteCell } from '../../../../deleteCard/deleteCell'
+import { Rating } from '../../rating'
 type Props = {
   card: Card
   isMy: boolean

@@ -1,18 +1,51 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
-import { DecksList } from '@/features/tables/decks/ui/decksList/decksList'
-import { useGetDecksQuery } from '@/services/flashCardsApi'
+import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
+import { DecksList } from '@/features/tables/decks/ui/decksPage/decksList/decksList'
+import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashCardsApi'
 
 import s from './decksPage.module.scss'
 
 const DecksPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
-  const { data, isLoading } = useGetDecksQuery({ currentPage, itemsPerPage: pageSize })
+  const [currentTab, setCurrentTab] = useState<string>('all')
+  const authorId = currentTab === 'my' ? 'c8a7805b-8d56-467d-9bd1-9380ea8cf583' : undefined
+  const { data: minMaxCardsData, isLoading: minMaxCardsDataIsLoading } = useGetMinMaxCardsQuery()
+  const [searchValue, setSearchValue] = useState<string>('')
+  const [cardsRange, setCardsRange] = useState<number[]>([0, 10])
 
-  if (isLoading) {
+  const { data: decksData, isLoading: decksAreLoading } = useGetDecksQuery({
+    authorId,
+    currentPage,
+    itemsPerPage: pageSize,
+    maxCardsCount: cardsRange[1],
+    minCardsCount: cardsRange[0],
+    name: searchValue,
+  })
+
+  const handleTabChange = (tab: string) => {
+    setCurrentPage(1)
+    setCurrentTab(tab)
+  }
+
+  const resetAllFilters = () => {
+    if (minMaxCardsData) {
+      setCardsRange([minMaxCardsData.min, minMaxCardsData.max])
+    }
+    setSearchValue('')
+    handleTabChange('all')
+  }
+
+  useEffect(() => {
+    if (minMaxCardsData) {
+      setCardsRange([minMaxCardsData.min, minMaxCardsData.max])
+    }
+  }, [minMaxCardsData])
+
+  if (minMaxCardsDataIsLoading || decksAreLoading) {
     return <h2>Loading...</h2>
   }
 
@@ -24,15 +57,26 @@ const DecksPage = () => {
         </Typography>
         <Button>Add New Deck</Button>
       </div>
-      <DecksList isMy items={data?.items} />
-      {data && (
+      <DecksFilter
+        cardsRange={cardsRange}
+        currentTab={currentTab}
+        handleTabChange={handleTabChange}
+        maxRange={minMaxCardsData?.max || 0}
+        minRange={minMaxCardsData?.min || 0}
+        resetAllFilters={resetAllFilters}
+        searchValue={searchValue}
+        setCardsRange={setCardsRange}
+        setSearchValue={setSearchValue}
+      />
+      <DecksList isMy items={decksData?.items} />
+      {decksData && (
         <Pagination
           className={s.pagination}
           currentPage={currentPage}
           onPageChange={setCurrentPage}
           onPageSizeChange={setPageSize}
           pageSize={pageSize}
-          totalCount={data.pagination?.totalItems}
+          totalCount={decksData.pagination?.totalItems}
         />
       )}
     </>
