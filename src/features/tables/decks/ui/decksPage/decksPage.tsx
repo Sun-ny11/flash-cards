@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { Button, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
+import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
 import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
 import { DecksList } from '@/features/tables/decks/ui/decksPage/decksList/decksList'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashCardsApi'
@@ -9,13 +10,13 @@ import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashCardsA
 import s from './decksPage.module.scss'
 
 const DecksPage = () => {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
   const [currentTab, setCurrentTab] = useState<string>('all')
   const authorId = currentTab === 'my' ? 'c8a7805b-8d56-467d-9bd1-9380ea8cf583' : undefined
   const { data: minMaxCardsData, isLoading: minMaxCardsDataIsLoading } = useGetMinMaxCardsQuery()
-  const [searchValue, setSearchValue] = useState<string>('')
   const [cardsRange, setCardsRange] = useState<number[]>([0, 10])
+
+  const { currentPage, pageSize, searchValue, setCurrentPage, setPageSize, setSearchValue } =
+    useDecksSearchParams()
 
   const { data: decksData, isLoading: decksAreLoading } = useGetDecksQuery({
     authorId,
@@ -44,6 +45,11 @@ const DecksPage = () => {
       setCardsRange([minMaxCardsData.min, minMaxCardsData.max])
     }
   }, [minMaxCardsData])
+
+  useEffect(() => {
+    setCurrentPage(1)
+    setPageSize(10)
+  }, [searchValue, currentTab, cardsRange])
 
   if (minMaxCardsDataIsLoading || decksAreLoading) {
     return <h2>Loading...</h2>

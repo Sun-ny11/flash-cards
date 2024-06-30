@@ -14,9 +14,9 @@ type Props = {
   maxRange: number
   minRange: number
   resetAllFilters: () => void
-  searchValue: string
+  searchValue: null | string
   setCardsRange: Dispatch<SetStateAction<number[]>>
-  setSearchValue: Dispatch<SetStateAction<string>>
+  setSearchValue: (value: null | string) => void
 }
 
 const DecksFilter = ({
