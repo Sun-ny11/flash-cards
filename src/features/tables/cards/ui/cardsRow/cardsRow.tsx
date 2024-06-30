@@ -3,7 +3,8 @@ import { Table } from '@/components/ui/table'
 
 import s from './cardsRow.module.scss'
 
-import { DeleteCell } from '../../../deleteCard/deleteCell'
+import { DeleteCell } from '../../../deleteCell/deleteCell'
+import { AddNewCard } from '../addNewCard/addNewCard'
 import { CardItem } from '../cardsList/cardsList'
 import { Rating } from '../rating'
 type Props = {
@@ -41,7 +42,7 @@ export const CardsRow = ({ card, isMy }: Props) => {
       <Table.Cell className={s.rating}>{<Rating rating={card.grade} />}</Table.Cell>
       {isMy ? (
         <Table.Cell className={s.controls}>
-          {/* тут будет Edit Card */}
+          <AddNewCard card={card} isMy />
           <DeleteCell deleteThat={'card'} onDeleteCallback={onDeleteCallbackHandler} />
         </Table.Cell>
       ) : (

@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
-import { DeleteCell } from '@/features/tables/deleteCard/deleteCell'
+import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
 
 import s from './decksRow.module.scss'
 
