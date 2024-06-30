@@ -59,13 +59,15 @@ export const AddNewDeck = () => {
               />
               <ControlledFileUploader accept={'image/*'} control={control} name={'cover'}>
                 <ImageOutline /> Upload Image
-              </ControlledFileUploader>{' '}
+              </ControlledFileUploader>
               <ControlledCheckbox control={control} label={'Private pack'} name={'isPrivate'} />
             </div>
 
             <div className={s.button}>
-              <Button onClick={cancelHandler}>Cancel</Button>
-              <Button onClick={onSubmit}>Add New Pack</Button>
+              <Button onClick={cancelHandler} variant={'secondary'}>
+                Cancel
+              </Button>
+              <Button>Add New Pack</Button>
             </div>
           </form>
         </div>

@@ -10,6 +10,7 @@ export type ControlledFileUploaderProps<T extends FieldValues> = {
   accept: string
   children: ReactNode
   control: Control<T>
+  imgFromCard?: null | string
   name: Path<T>
 }
 
@@ -17,6 +18,7 @@ export const ControlledFileUploader = <T extends FieldValues>({
   accept,
   children,
   control,
+  imgFromCard,
   name,
 }: ControlledFileUploaderProps<T>) => {
   const {
@@ -33,7 +35,8 @@ export const ControlledFileUploader = <T extends FieldValues>({
     if (e.target.files) {
       const file = e.target.files[0]
 
-      formData.append('avatar', file)
+      formData.append('cover', file)
+
       onChange(formData)
 
       setFileURL(URL.createObjectURL(file))
@@ -48,7 +51,7 @@ export const ControlledFileUploader = <T extends FieldValues>({
 
   return (
     <>
-      <img alt={'img'} className={s.image} src={fileURL || defaultImage} />
+      <img alt={'img'} className={s.image} src={fileURL || imgFromCard || defaultImage} />
 
       <div className={s.buttons}>
         {fileURL ? (

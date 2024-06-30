@@ -5,11 +5,11 @@ type PropsRating = {
 export const Rating = ({ rating }: PropsRating) => {
   return (
     <>
-      <Stars selected={rating > 1} />
-      <Stars selected={rating > 2} />
-      <Stars selected={rating > 3} />
-      <Stars selected={rating > 4} />
-      <Stars selected={rating > 5} />
+      <Stars selected={rating >= 1} />
+      <Stars selected={rating >= 2} />
+      <Stars selected={rating >= 3} />
+      <Stars selected={rating >= 4} />
+      <Stars selected={rating >= 5} />
     </>
   )
 }
