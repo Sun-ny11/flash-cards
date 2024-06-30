@@ -1,10 +1,11 @@
+import { useForm } from 'react-hook-form'
+
 import { Button, Card, Typography } from '@/components/ui'
+import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 import s from './createNewPassword.module.scss'
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 
 const createNewPasswordSchema = z.object({
   password: z.string().min(3, 'Enter your password'),
@@ -32,7 +33,7 @@ export const CreateNewPassword = ({ onSubmit }: Props) => {
 
   return (
     <Card className={s.card}>
-      <Typography as={'h1'} variant={'h1'} className={s.title}>
+      <Typography as={'h1'} className={s.title} variant={'h1'}>
         Create new password
       </Typography>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -44,10 +45,10 @@ export const CreateNewPassword = ({ onSubmit }: Props) => {
           name={'password'}
           type={'password'}
         />
-        <Typography as={'p'} variant={'body2'} className={s.desc}>
+        <Typography as={'p'} className={s.desc} variant={'body2'}>
           Create new password and we will send you further instructions to email
         </Typography>
-        <Button as={'button'} variant={'primary'} type={'submit'} fullWidth>
+        <Button as={'button'} fullWidth type={'submit'} variant={'primary'}>
           Create New Password
         </Button>
       </form>
