@@ -8,15 +8,15 @@ import s from './pagination.module.scss'
 
 type Props = {
   className?: string
-  currentPage: number
+  currentPage: null | number
   onPageChange: (page: number) => void
   onPageSizeChange: (size: number) => void
-  pageSize: number
+  pageSize: null | number
   siblingCount?: number // колличество отображаемых эллементов между точек с каждой стороны от выбранной страницы
   totalCount: number
 }
 export const Pagination = (props: Props) => {
-  const {
+  let {
     className,
     currentPage,
     onPageChange,
@@ -38,7 +38,9 @@ export const Pagination = (props: Props) => {
   if (currentPage === 0 || paginationRange!.length < 2) {
     return null
   }
-
+  if (currentPage === null) {
+    currentPage = 1
+  }
   const onNext = () => {
     onPageChange(currentPage + 1)
   }
