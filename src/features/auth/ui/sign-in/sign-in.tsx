@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Card, ControlledCheckbox, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
+import { LoginArgs, useLoginMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -28,8 +30,16 @@ export const SignIn = () => {
     resolver: zodResolver(signInSchema),
   })
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
+  const [login] = useLoginMutation()
+  const navigate = useNavigate()
+
+  const onSubmit = handleSubmit(async (data: LoginArgs) => {
+    try {
+      await login(data).unwrap()
+      navigate('/decks')
+    } catch (error: any) {
+      error?.data?.message ?? 'Could not sign in'
+    }
   })
 
   return (

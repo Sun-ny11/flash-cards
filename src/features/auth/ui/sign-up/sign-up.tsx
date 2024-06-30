@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Card, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
+import { SignUpArgs, useSignUpMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -33,8 +35,22 @@ export const SignUp = () => {
     },
     resolver: zodResolver(signUpSchema),
   })
+  const [signUp] = useSignUpMutation()
+  const navigate = useNavigate()
+
+  const handleSignUp = async (data: SignUpArgs) => {
+    const { email, name, password } = data
+
+    try {
+      await signUp({ email, name, password }).unwrap()
+      navigate('/login')
+    } catch (error: any) {
+      console.log(error?.data?.message ?? 'Could not sign up')
+    }
+  }
 
   const onSubmit = handleSubmit(data => {
+    handleSignUp(data)
     console.log(data)
   })
 
