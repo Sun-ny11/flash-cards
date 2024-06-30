@@ -1,25 +1,21 @@
 import { LogOutOutline, PersonOutline } from '@/assets/components'
 import { DropDown, DropDownItem, DropDownSeparator } from '@/components/ui/dropdown'
+import { ProfileData } from '@/components/ui/layout/header'
 import { Typography } from '@/components/ui/typography'
 
 import s from './user-dropdown.module.scss'
 
-export type UserProps = {
-  avatar?: {
-    alt: string
-    src: string
-  }
-  email: string
+export type HeaderDropDownProps = {
   logout: () => void
-  name: string
+  profile: ProfileData
 }
 
-export const UserDropdown = ({ avatar, email, logout, name }: UserProps) => {
+export const UserDropdown = ({ logout, profile: { avatar, email, name } }: HeaderDropDownProps) => {
   return (
     <>
-      <DropDown trigger={<img alt={avatar?.alt} src={avatar?.src} />}>
+      <DropDown trigger={<img alt={avatar} />}>
         <DropDownItem className={s.dropdownItem}>
-          <img alt={avatar?.alt} src={avatar?.src} />
+          <img alt={'photo'} src={avatar} />
           <div>
             <Typography as={'div'} variant={'body2'}>
               {name}

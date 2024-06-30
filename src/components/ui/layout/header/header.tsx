@@ -4,29 +4,40 @@ import { UserDropdown } from '@/features/header/ui/user-dropdown/user-dropdown'
 
 import s from './header.module.scss'
 
-type Props = {
-  avatar?: {
-    alt: string
-    src: string
-  }
-  email?: string
-  isAuth: boolean
-  logout?: () => void
-  name?: string
+// export type HeaderProps = {
+//   avatar?: {
+//     alt: string
+//     src: string
+//   }
+//   email?: string
+//   isAuth: boolean
+//   logout?: () => void
+//   name?: string
+// }
+export type ProfileData = {
+  avatar?: string
+  email: string
+  name: string
 }
 
-export const Header = (props: Props) => {
-  const { avatar, email, isAuth, logout, name } = props
+export type HeaderProps = {
+  isAuth: boolean
+  logout: () => void
+  profile?: ProfileData
+}
+
+export const Header = (props: HeaderProps) => {
+  const { isAuth, logout, profile } = props
 
   return (
     <header className={s.header}>
       <a href={'/'}>
         <Logo />
       </a>
-      {isAuth && email && name && logout && (
+      {isAuth && profile?.email && profile.name && logout && (
         <div className={s.nameAuthor}>
-          <Typography>{name}</Typography>
-          <UserDropdown avatar={avatar} email={name} logout={logout} name={email} />
+          <Typography>{profile?.name}</Typography>
+          <UserDropdown logout={logout} profile={profile} />
         </div>
       )}
       {!isAuth && (

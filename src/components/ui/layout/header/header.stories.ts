@@ -1,13 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Header } from '@/components/ui/layout/header/header'
-import { fn } from '@storybook/test'
+import { action } from '@storybook/addon-actions'
+import { withRouter } from 'storybook-addon-react-router-v6'
 
-import ava from '../../../../assets/images/defaultAvatar.webp'
+import { Header } from './'
 
 const meta = {
-  argTypes: {},
   component: Header,
+  decorators: [withRouter],
+  parameters: {
+    docs: {
+      story: {
+        height: '60px',
+      },
+    },
+  },
   tags: ['autodocs'],
   title: 'Components/Header',
 } satisfies Meta<typeof Header>
@@ -15,21 +22,17 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const HeaderStory: Story = {
-  args: {
-    avatar: { alt: 'photo', src: ava },
-    email: 'test@test.com',
-    isAuth: true,
-    logout: fn(),
-    name: 'ivan',
-  },
+export const Unlogged: Story = {
+  args: { isAuth: false },
 }
-export const HeaderIsNotAuth: Story = {
+
+export const Logged: Story = {
   args: {
-    avatar: { alt: 'photo', src: ava },
-    email: 'test@test.com',
-    isAuth: false,
-    logout: fn(),
-    name: 'ivan',
+    isAuth: true,
+    logout: action('onLogout'),
+    profile: {
+      email: 'johnsmith@it-incubator.io',
+      name: 'John Smith',
+    },
   },
 }
