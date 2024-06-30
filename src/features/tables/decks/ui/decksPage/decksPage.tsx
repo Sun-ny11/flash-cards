@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { Button, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
 import { DecksList } from '@/features/tables/decks/ui/decksPage/decksList/decksList'
+import { useQueryParam } from '@/hooks/useQueryParam/useQueryParam'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashCardsApi'
 
 import s from './decksPage.module.scss'
@@ -14,8 +16,10 @@ const DecksPage = () => {
   const [currentTab, setCurrentTab] = useState<string>('all')
   const authorId = currentTab === 'my' ? 'c8a7805b-8d56-467d-9bd1-9380ea8cf583' : undefined
   const { data: minMaxCardsData, isLoading: minMaxCardsDataIsLoading } = useGetMinMaxCardsQuery()
-  const [searchValue, setSearchValue] = useState<string>('')
   const [cardsRange, setCardsRange] = useState<number[]>([0, 10])
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchValue, setSearchValue] = useQueryParam(searchParams, setSearchParams, 'search', '')
 
   const { data: decksData, isLoading: decksAreLoading } = useGetDecksQuery({
     authorId,
