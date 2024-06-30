@@ -27,6 +27,7 @@ export const Primary: Story = {
       src: 'public/img/avatar.png',
     },
     email: 'j&johnson@gmail.com',
+    logout: () => {},
     name: 'Ivan',
   },
 }

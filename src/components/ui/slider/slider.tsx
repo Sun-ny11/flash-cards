@@ -8,11 +8,11 @@ import s from './slider.module.scss'
 const Slider = forwardRef<
   ElementRef<typeof SliderRadix.Root>,
   {
-    value: (null | number)[]
+    value: (number | undefined)[]
   } & Omit<ComponentPropsWithoutRef<typeof SliderRadix.Root>, 'value'>
 >(({ className, max, onValueChange, value, ...props }, ref) => {
   useEffect(() => {
-    if (value?.[1] === undefined || value?.[1] === null) {
+    if (value?.[1] === undefined || value?.[1] === undefined) {
       onValueChange?.([value?.[0] ?? 0, max ?? 0])
     }
   }, [max, value, onValueChange])

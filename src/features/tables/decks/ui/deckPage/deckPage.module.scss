@@ -1,0 +1,30 @@
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.title {
+  margin: 0;
+}
+
+.back {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  div {
+    margin: 0 0 33px 0;
+  }
+}
+
+.image {
+  width: 170px;
+  height: 107px;
+  object-fit: contain;
+  margin-bottom: 25px;
+}
+
+.pagination {
+  margin-top: 24px;
+}

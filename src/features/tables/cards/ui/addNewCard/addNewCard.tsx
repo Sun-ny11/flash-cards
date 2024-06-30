@@ -11,7 +11,7 @@ import { z } from 'zod'
 
 import s from './addNewCard.module.scss'
 
-import { CardItem } from '../cardsList/cardsList'
+import { Card as CardItem } from '../../../../../services/decks/decks.types'
 
 type Props = {
   card?: CardItem

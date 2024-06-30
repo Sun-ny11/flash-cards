@@ -6,6 +6,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
 *,
 *::before,
 *::after {
@@ -38,4 +43,10 @@ body {
   color: var(--color-light-100);
 
   background-color: var(--color-dark-900);
+}
+
+.container {
+  max-width: 1086px;
+  padding: 33px 40px 36px 40px;
+  margin: 0 auto;
 }

@@ -28,6 +28,7 @@ const PaginationStory = () => {
     <Pagination
       currentPage={current}
       onPageChange={setCurrent}
+      onPageSizeChange={() => {}}
       pageSize={5}
       siblingCount={1}
       totalCount={100}

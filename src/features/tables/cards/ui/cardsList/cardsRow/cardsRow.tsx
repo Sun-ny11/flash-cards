@@ -1,14 +1,14 @@
 import { Typography } from '@/components/ui'
 import { Table } from '@/components/ui/table'
+import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
+import { Card } from '@/services/decks/decks.types'
 
 import s from './cardsRow.module.scss'
 
-import { DeleteCell } from '../../../deleteCell/deleteCell'
-import { AddNewCard } from '../addNewCard/addNewCard'
-import { CardItem } from '../cardsList/cardsList'
-import { Rating } from '../rating'
+import { AddNewCard } from '../../addNewCard/addNewCard'
+import { Rating } from '../../rating'
 type Props = {
-  card: CardItem
+  card: Card
   isMy: boolean
 }
 export const CardsRow = ({ card, isMy }: Props) => {

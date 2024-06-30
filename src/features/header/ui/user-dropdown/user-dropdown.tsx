@@ -5,20 +5,21 @@ import { Typography } from '@/components/ui/typography'
 import s from './user-dropdown.module.scss'
 
 export type UserProps = {
-  avatar: {
+  avatar?: {
     alt: string
     src: string
   }
   email: string
+  logout: () => void
   name: string
 }
 
-export const UserDropdown = ({ avatar, email, name }: UserProps) => {
+export const UserDropdown = ({ avatar, email, logout, name }: UserProps) => {
   return (
     <>
-      <DropDown trigger={<img alt={avatar.alt} src={avatar.src} />}>
+      <DropDown trigger={<img alt={avatar?.alt} src={avatar?.src} />}>
         <DropDownItem className={s.dropdownItem}>
-          <img alt={avatar.alt} src={avatar.src} />
+          <img alt={avatar?.alt} src={avatar?.src} />
           <div>
             <Typography as={'div'} variant={'body2'}>
               {name}
@@ -38,7 +39,7 @@ export const UserDropdown = ({ avatar, email, name }: UserProps) => {
           </a>
         </DropDownItem>
         <DropDownSeparator></DropDownSeparator>
-        <DropDownItem className={s.dropdownItem}>
+        <DropDownItem className={s.dropdownItem} onSelect={logout}>
           <LogOutOutline />
           <Typography as={'div'} variant={'caption'}>
             Sign Out

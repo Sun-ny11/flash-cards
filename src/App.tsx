@@ -1,3 +1,9 @@
+import { Router } from '@/router'
+
 export function App() {
-  return <></>
+  return (
+    <div className={'container'}>
+      <Router />
+    </div>
+  )
 }
