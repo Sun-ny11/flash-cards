@@ -6,6 +6,7 @@ import { Button, ControlledCheckbox } from '@/components/ui'
 import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
+import { useCreateDeckMutation } from '@/services/flashCardsApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -13,7 +14,7 @@ import s from './addNewDeck.module.scss'
 
 export const AddNewDeck = () => {
   const [open, setOpen] = useState(false)
-
+  const [createDeck, { isLoading }] = useCreateDeckMutation()
   const newDeckSchema = z.object({
     cover: z.any(),
     isPrivate: z.boolean().default(false),
@@ -36,7 +37,7 @@ export const AddNewDeck = () => {
   })
   const onSubmit = handleSubmit(data => {
     setOpen(false)
-    console.log(data)
+    createDeck(data)
   })
 
   const cancelHandler = (e: MouseEvent<HTMLButtonElement>) => {
@@ -46,7 +47,7 @@ export const AddNewDeck = () => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>qqq</Button>
+      <Button onClick={() => setOpen(true)}>Add new deck</Button>
       <Modal onOpenChange={() => setOpen(false)} open={open} title={'Add New Deck'}>
         <div className={s.wrapper}>
           <form onSubmit={onSubmit}>
@@ -67,7 +68,7 @@ export const AddNewDeck = () => {
               <Button onClick={cancelHandler} variant={'secondary'}>
                 Cancel
               </Button>
-              <Button>Add New Pack</Button>
+              <Button disabled={isLoading}>Add New Pack</Button>
             </div>
           </form>
         </div>

@@ -6,6 +6,7 @@ import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
 import { Deck } from '@/services/decks/decks.types'
+import { useDeleteDeckMutation } from '@/services/flashCardsApi'
 
 import s from './decksRow.module.scss'
 
@@ -17,8 +18,9 @@ type Props = {
 }
 
 export const DecksRow = ({ deck, isMy }: Props) => {
+  const [deleteCard, { isLoading }] = useDeleteDeckMutation()
   const onDeleteCallbackHandler = () => {
-    // удалить по ID
+    deleteCard(deck.id)
   }
 
   return (
@@ -44,6 +46,7 @@ export const DecksRow = ({ deck, isMy }: Props) => {
             <DeleteCell
               className={s.option}
               deleteThat={'deck'}
+              isDisabled={isLoading}
               name={deck.name}
               onDeleteCallback={onDeleteCallbackHandler}
             />

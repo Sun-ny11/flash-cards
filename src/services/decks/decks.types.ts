@@ -51,6 +51,8 @@ export type DeckResponse = {
   userId: string
 }
 
+export type CreateDeckResponse = Omit<DeckResponse, 'isFavorite'>
+
 export type MinMaxCardsResponse = {
   max: 1
   min: 1
@@ -88,6 +90,12 @@ export type GetDecksArgs = {
 export type GetRandomCardArgs = {
   id: string
   previousCardId?: string
+}
+
+export type createDeckArgs = {
+  cover?: string
+  isPrivate: boolean
+  name: string
 }
 
 export type SaveCardGradeArgs = {
