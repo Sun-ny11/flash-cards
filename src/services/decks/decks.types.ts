@@ -98,6 +98,16 @@ export type createDeckArgs = {
   name: string
 }
 
+export type createCardArgs = {
+  answer: string
+  answerImg?: string
+  answerVideo?: string
+  id: string
+  question: string
+  questionImg?: string
+  questionVideo?: string
+}
+
 export type SaveCardGradeArgs = {
   cardId: string
   deckId: string

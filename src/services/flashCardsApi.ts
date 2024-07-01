@@ -10,6 +10,7 @@ import {
   GetRandomCardArgs,
   MinMaxCardsResponse,
   SaveCardGradeArgs,
+  createCardArgs,
   createDeckArgs,
 } from '@/services/decks/decks.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
@@ -24,6 +25,14 @@ export const flashcardsApi = createApi({
   }),
   endpoints: builder => {
     return {
+      createCard: builder.mutation<Card, createCardArgs>({
+        invalidatesTags: ['Cards'],
+        query: ({ answer, answerImg, answerVideo, id, question, questionImg, questionVideo }) => ({
+          body: { answer, answerImg, answerVideo, question, questionImg, questionVideo },
+          method: 'POST',
+          url: `/v1/decks/${id}/cards`,
+        }),
+      }),
       createDeck: builder.mutation<CreateDeckResponse, createDeckArgs>({
         invalidatesTags: ['Decks'],
         query: ({ cover, isPrivate, name }) => ({
@@ -40,6 +49,7 @@ export const flashcardsApi = createApi({
         }),
       }),
       getCards: builder.query<CardsInDeckResponse, GetDeckArgs>({
+        providesTags: ['Cards'],
         query: ({ id, ...args }) => ({
           params: args ?? undefined,
           url: `/v1/decks/${id}/cards`,
@@ -78,10 +88,11 @@ export const flashcardsApi = createApi({
     }
   },
   reducerPath: 'flashcardsApi',
-  tagTypes: ['Decks'],
+  tagTypes: ['Decks', 'Cards'],
 })
 
 export const {
+  useCreateCardMutation,
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetCardsQuery,
