@@ -1,9 +1,10 @@
 import { Link, NavLink } from 'react-router-dom'
 
-import { Edit2Outline, PlayCircleOutline } from '@/assets/components'
+import { PlayCircleOutline } from '@/assets/components'
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
+import { AddNewDeck } from '@/features/tables/decks/ui/decksPage/addNewDeck/addNewDeck'
 import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
 import { Deck } from '@/services/decks/decks.types'
 import { useDeleteDeckMutation } from '@/services/flashCardsApi'
@@ -41,7 +42,7 @@ export const DecksRow = ({ deck, isMy }: Props) => {
               <PlayCircleOutline />
             </NavLink>
             <div className={s.option}>
-              <Edit2Outline className={s.option} />
+              <AddNewDeck deckId={deck.id} defaultValues={deck} isEditMode />
             </div>
             <DeleteCell
               className={s.option}

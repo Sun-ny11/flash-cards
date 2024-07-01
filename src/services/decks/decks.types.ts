@@ -98,6 +98,8 @@ export type createDeckArgs = {
   name: string
 }
 
+export type updateDeckArgs = { id: string } & createDeckArgs
+
 export type createCardArgs = {
   answer: string
   answerImg?: string

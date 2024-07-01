@@ -62,7 +62,7 @@ const DecksPage = () => {
         <Typography as={'h1'} variant={'h1'}>
           Decks list
         </Typography>
-        <AddNewDeck></AddNewDeck>
+        <AddNewDeck />
       </div>
       <DecksFilter
         cardsRange={cardsRange}

@@ -12,6 +12,7 @@ import {
   SaveCardGradeArgs,
   createCardArgs,
   createDeckArgs,
+  updateDeckArgs,
 } from '@/services/decks/decks.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
@@ -92,6 +93,14 @@ export const flashcardsApi = createApi({
           url: `/v1/decks/${id}/learn`,
         }),
       }),
+      updateDeck: builder.mutation<Deck, updateDeckArgs>({
+        invalidatesTags: ['Decks'],
+        query: ({ cover, id, isPrivate, name }) => ({
+          body: { cover, isPrivate, name },
+          method: 'PATCH',
+          url: `/v1/decks/${id}`,
+        }),
+      }),
     }
   },
   reducerPath: 'flashcardsApi',
@@ -109,4 +118,5 @@ export const {
   useGetMinMaxCardsQuery,
   useGetRandomCardQuery,
   useSaveCardGradeMutation,
+  useUpdateDeckMutation,
 } = flashcardsApi
