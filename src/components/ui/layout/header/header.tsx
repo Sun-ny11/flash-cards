@@ -4,16 +4,6 @@ import { UserDropdown } from '@/features/header/ui/user-dropdown/user-dropdown'
 
 import s from './header.module.scss'
 
-// export type HeaderProps = {
-//   avatar?: {
-//     alt: string
-//     src: string
-//   }
-//   email?: string
-//   isAuth: boolean
-//   logout?: () => void
-//   name?: string
-// }
 export type ProfileData = {
   avatar?: string
   email: string

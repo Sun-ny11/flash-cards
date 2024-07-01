@@ -17,6 +17,4 @@ const config: StorybookConfig = {
     autodocs: 'tag',
   },
 }
-export default {
-  addons: ['storybook-addon-remix-react-router'],
-} satisfies StorybookConfig
+export default config

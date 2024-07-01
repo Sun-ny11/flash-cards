@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { action } from '@storybook/addon-actions'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 import { Header } from './'
 
@@ -23,7 +23,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Unlogged: Story = {
-  args: { isAuth: false },
+  args: { isAuth: true },
 }
 
 export const Logged: Story = {

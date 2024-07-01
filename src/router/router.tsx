@@ -6,6 +6,8 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { useAppOutletContext } from '@/common/hooks/useOutletContext'
+import { Layout } from '@/components/ui/layout/layout'
 import { ForgotPassword } from '@/features/auth/ui/forgotPassword'
 import { SignIn } from '@/features/auth/ui/sign-in'
 import { SignUp } from '@/features/auth/ui/sign-up'
@@ -47,19 +49,39 @@ const privateRoutes: RouteObject[] = [
   },
 ]
 
+function PrivateRoutes() {
+  const { isAuth } = useAppOutletContext()
+
+  debugger
+
+  return isAuth ? <Outlet /> : <Navigate to={'/login'} />
+}
+
+function PublicRoutes() {
+  const { isAuth } = useAppOutletContext()
+
+  debugger
+
+  return isAuth ? <Navigate to={'/decks'} /> : <Outlet />
+}
+
 const router = createBrowserRouter([
   {
-    children: privateRoutes,
-    element: <PrivateRoutes />,
+    children: [
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+      {
+        children: publicRoutes,
+        element: <PublicRoutes />,
+      },
+    ],
+    element: <Layout />,
+    errorElement: <div>Error!!!</div>,
+    path: '/',
   },
-  ...publicRoutes,
 ])
-
-function PrivateRoutes() {
-  const isAuthenticated = false
-
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
-}
 
 export function Router() {
   return <RouterProvider router={router} />
