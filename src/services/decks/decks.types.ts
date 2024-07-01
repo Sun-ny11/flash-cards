@@ -89,3 +89,9 @@ export type GetRandomCardArgs = {
   id: string
   previousCardId?: string
 }
+
+export type SaveCardGradeArgs = {
+  cardId: string
+  deckId: string
+  grade: number
+}

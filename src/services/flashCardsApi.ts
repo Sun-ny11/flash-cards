@@ -7,6 +7,7 @@ import {
   GetDecksArgs,
   GetRandomCardArgs,
   MinMaxCardsResponse,
+  SaveCardGradeArgs,
 } from '@/services/decks/decks.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
@@ -48,6 +49,13 @@ export const flashcardsApi = createApi({
           url: `/v1/decks/${id}/learn`,
         }),
       }),
+      saveCardGrade: builder.mutation<Card, SaveCardGradeArgs>({
+        query: ({ cardId, deckId: id, grade }) => ({
+          body: { cardId, grade },
+          method: 'POST',
+          url: `/v1/decks/${id}/learn`,
+        }),
+      }),
     }
   },
   reducerPath: 'flashcardsApi',
@@ -59,4 +67,5 @@ export const {
   useGetDecksQuery,
   useGetMinMaxCardsQuery,
   useGetRandomCardQuery,
+  useSaveCardGradeMutation,
 } = flashcardsApi

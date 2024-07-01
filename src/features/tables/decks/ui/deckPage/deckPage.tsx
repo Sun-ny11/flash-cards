@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { NavLink, useParams } from 'react-router-dom'
+import { Link, NavLink, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/components'
 import { Button, Typography } from '@/components/ui'
@@ -10,6 +10,7 @@ import { CardsList } from '@/features/tables/cards/ui/cardsList/cardsList'
 import { useGetCardsQuery, useGetDeckQuery } from '@/services/flashCardsApi'
 
 import s from './deckPage.module.scss'
+
 export const DeckPage = () => {
   const { deckId } = useParams()
   const [currentPage, setCurrentPage] = useState(1)
@@ -21,6 +22,7 @@ export const DeckPage = () => {
     id: deckId || '',
     itemsPerPage: pageSize,
   })
+  const isMyDeck = deckData?.userId === 'c8a7805b-8d56-467d-9bd1-9380ea8cf583'
 
   const { control } = useForm({
     defaultValues: {
@@ -51,7 +53,13 @@ export const DeckPage = () => {
         <Typography as={'h1'} className={s.title} variant={'h1'}>
           {deckData?.name}
         </Typography>
-        <Button variant={'primary'}>Add new card</Button>
+        {isMyDeck ? (
+          <Button variant={'primary'}>Add new card</Button>
+        ) : (
+          <Button as={Link} className={s.linkCard} to={`/decks/${deckData?.id}/learn`}>
+            <Typography as={'h3'}>Learn deck</Typography>
+          </Button>
+        )}
       </div>
       <img alt={'deck cover'} className={s.image} src={deckData?.cover} />
       <div className={s.search}>
