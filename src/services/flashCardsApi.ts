@@ -41,6 +41,13 @@ export const flashcardsApi = createApi({
           url: `/v1/decks`,
         }),
       }),
+      deleteCard: builder.mutation<undefined, string>({
+        invalidatesTags: ['Cards'],
+        query: id => ({
+          method: 'DELETE',
+          url: `/v1/cards/${id}`,
+        }),
+      }),
       deleteDeck: builder.mutation<Deck, string>({
         invalidatesTags: ['Decks'],
         query: id => ({
@@ -94,6 +101,7 @@ export const flashcardsApi = createApi({
 export const {
   useCreateCardMutation,
   useCreateDeckMutation,
+  useDeleteCardMutation,
   useDeleteDeckMutation,
   useGetCardsQuery,
   useGetDeckQuery,

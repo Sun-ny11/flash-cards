@@ -74,7 +74,7 @@ export const DeckPage = () => {
         />
       </div>
       {filteredCards ? (
-        <CardsList isMy={false} items={filteredCards} />
+        <CardsList isMy={isMyDeck} items={filteredCards} />
       ) : (
         <Typography>There is no cards in this deck!</Typography>
       )}
