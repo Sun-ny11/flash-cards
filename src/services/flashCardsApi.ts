@@ -1,9 +1,7 @@
 import {
   Card,
   CardsInDeckResponse,
-  CreateDeckResponse,
   Deck,
-  DeckResponse,
   DecksListResponse,
   GetDeckArgs,
   GetDecksArgs,
@@ -34,8 +32,32 @@ export const flashcardsApi = createApi({
           url: `/v1/decks/${id}/cards`,
         }),
       }),
-      createDeck: builder.mutation<CreateDeckResponse, createDeckArgs>({
+      createDeck: builder.mutation<Deck, createDeckArgs>({
         invalidatesTags: ['Decks'],
+        async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+          const cachedArgsForQuery = flashcardsApi.util.selectCachedArgsForQuery(
+            getState(),
+            'getDecks'
+          ) as GetDecksArgs[]
+
+          try {
+            const { data } = await queryFulfilled
+
+            cachedArgsForQuery.forEach(cachedArgs => {
+              dispatch(
+                flashcardsApi.util.updateQueryData('getDecks', cachedArgs, draft => {
+                  if (cachedArgs.currentPage !== 1) {
+                    return
+                  }
+                  draft.items.unshift(data)
+                  // draft.items.pop()
+                })
+              )
+            })
+          } catch (e) {
+            console.log(e)
+          }
+        },
         query: ({ cover, isPrivate, name }) => ({
           body: { cover, isPrivate, name },
           method: 'POST',
@@ -63,7 +85,7 @@ export const flashcardsApi = createApi({
           url: `/v1/decks/${id}/cards`,
         }),
       }),
-      getDeck: builder.query<DeckResponse, string>({
+      getDeck: builder.query<Deck, string>({
         query: id => ({
           url: `v1/decks/${id}`,
         }),
@@ -93,7 +115,7 @@ export const flashcardsApi = createApi({
           url: `/v1/decks/${id}/learn`,
         }),
       }),
-      updateDeck: builder.mutation<DeckResponse, updateDeckArgs>({
+      updateDeck: builder.mutation<Deck, updateDeckArgs>({
         invalidatesTags: ['Decks'],
         async onQueryStarted({ cover, id, ...args }, { dispatch, getState, queryFulfilled }) {
           const cachedArgsForQuery = flashcardsApi.util.selectCachedArgsForQuery(

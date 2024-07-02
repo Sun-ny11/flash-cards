@@ -39,20 +39,6 @@ export type Pagination = {
   totalPages: number
 }
 
-export type DeckResponse = {
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isFavorite: boolean
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
-
-export type CreateDeckResponse = Omit<DeckResponse, 'isFavorite'>
-
 export type MinMaxCardsResponse = {
   max: 1
   min: 1

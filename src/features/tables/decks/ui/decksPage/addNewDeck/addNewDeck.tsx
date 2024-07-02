@@ -6,6 +6,7 @@ import { Button, ControlledCheckbox } from '@/components/ui'
 import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
+import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
 import { useCreateDeckMutation, useUpdateDeckMutation } from '@/services/flashCardsApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -35,6 +36,8 @@ export const AddNewDeck = ({
   const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
   const [updateDeck, { isLoading: updateDeckIsLoading }] = useUpdateDeckMutation()
 
+  const { setCurrentPage } = useDecksSearchParams()
+
   const {
     control,
     formState: { errors },
@@ -49,9 +52,13 @@ export const AddNewDeck = ({
     if (isEditMode && deckId) {
       const updateData = { id: deckId, ...data }
 
-      updateDeck(updateData)
+      updateDeck(updateData).then(() => {
+        setCurrentPage(1)
+      })
     } else {
-      createDeck(data)
+      createDeck(data).then(() => {
+        setCurrentPage(1)
+      })
     }
   })
 
