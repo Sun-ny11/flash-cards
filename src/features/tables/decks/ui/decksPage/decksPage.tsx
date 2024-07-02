@@ -75,7 +75,7 @@ const DecksPage = () => {
         setCardsRange={setCardsRange}
         setSearchValue={setSearchValue}
       />
-      <DecksList isMy items={decksData?.items} />
+      <DecksList items={decksData?.items} />
       {decksData && (
         <Pagination
           className={s.pagination}

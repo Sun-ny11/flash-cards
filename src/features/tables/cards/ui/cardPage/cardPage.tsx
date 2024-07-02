@@ -29,7 +29,6 @@ const rateItems = [
 export const CardPage = () => {
   const { deckId } = useParams()
 
-  const [firstLoad, setFirstLoad] = useState(true)
   const [currentQuestion, setCurrentQuestion] = useState<CardType>()
   const [answerIsShown, setAnswerIsShown] = useState(false)
   const { data: deckData, isLoading: deckDataIsLoading } = useGetDeckQuery(deckId || '')
@@ -50,12 +49,11 @@ export const CardPage = () => {
   useEffect(() => {
     if (newCardData) {
       setCurrentQuestion(newCardData)
-    } else if (firstLoad) {
+    } else if (!saveCardGradeIsLoading) {
       setCurrentQuestion(randomCardData)
-      setFirstLoad(false)
     }
     setAnswerIsShown(false)
-  }, [firstLoad, randomCardData, newCardData])
+  }, [randomCardData, newCardData])
 
   if (deckDataIsLoading || randomCardIsLoading) {
     return <h2>Loading...</h2>
@@ -73,6 +71,11 @@ export const CardPage = () => {
         <Typography as={'h1'} className={s.title} variant={'h1'}>
           Learn {deckData?.name}
         </Typography>
+        <div className={s.imageContainer}>
+          {currentQuestion?.questionImg && (
+            <img alt={'question image'} src={currentQuestion?.questionImg} />
+          )}
+        </div>
         <div className={s.questionContainer}>
           <Typography as={'div'} variant={'subtitle1'}>
             Question:
@@ -91,6 +94,11 @@ export const CardPage = () => {
         )}
         {answerIsShown && (
           <>
+            <div className={s.imageContainer}>
+              {currentQuestion?.answerImg && (
+                <img alt={'question image'} src={currentQuestion?.answerImg} />
+              )}
+            </div>
             <div className={s.answerContainer}>
               <Typography as={'div'} variant={'subtitle1'}>
                 Answer:

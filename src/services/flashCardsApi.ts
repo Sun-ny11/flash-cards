@@ -93,8 +93,40 @@ export const flashcardsApi = createApi({
           url: `/v1/decks/${id}/learn`,
         }),
       }),
-      updateDeck: builder.mutation<Deck, updateDeckArgs>({
+      updateDeck: builder.mutation<DeckResponse, updateDeckArgs>({
         invalidatesTags: ['Decks'],
+        async onQueryStarted({ cover, id, ...args }, { dispatch, getState, queryFulfilled }) {
+          const cachedArgsForQuery = flashcardsApi.util.selectCachedArgsForQuery(
+            getState(),
+            'getDecks'
+          )
+          const patchResults: any[] = []
+
+          cachedArgsForQuery.forEach(cachedArgs => {
+            patchResults.push(
+              dispatch(
+                flashcardsApi.util.updateQueryData('getDecks', cachedArgs, draft => {
+                  const itemToUpdateIndex = draft.items.findIndex(deck => deck.id === id)
+
+                  if (itemToUpdateIndex === -1) {
+                    return
+                  }
+
+                  draft.items[itemToUpdateIndex] = { ...draft.items[itemToUpdateIndex], ...args }
+                })
+              )
+            )
+          })
+
+          try {
+            await queryFulfilled
+          } catch (e) {
+            patchResults.forEach(patchResult => {
+              // в случае ошибки вернет предыдущее значение
+              patchResult.undo()
+            })
+          }
+        },
         query: ({ cover, id, isPrivate, name }) => ({
           body: { cover, isPrivate, name },
           method: 'PATCH',
