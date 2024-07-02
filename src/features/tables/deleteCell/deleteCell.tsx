@@ -51,7 +51,7 @@ export const DeleteCell = ({
               Cancel
             </Button>
             <Button disabled={isDisabled} onClick={onDeleteCallback}>
-              Delete Card
+              Delete {deleteThat}
             </Button>
           </div>
         </div>
