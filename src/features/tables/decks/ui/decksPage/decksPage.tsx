@@ -10,6 +10,8 @@ import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashCardsA
 import s from './decksPage.module.scss'
 
 const DecksPage = () => {
+  const [sortingStatus, setSortingStatus] = useState<null | string>()
+
   const [currentTab, setCurrentTab] = useState<string>('all')
   const authorId = currentTab === 'my' ? 'c8a7805b-8d56-467d-9bd1-9380ea8cf583' : undefined
   const { data: minMaxCardsData, isLoading: minMaxCardsDataIsLoading } = useGetMinMaxCardsQuery()
@@ -25,6 +27,7 @@ const DecksPage = () => {
     maxCardsCount: cardsRange[1],
     minCardsCount: cardsRange[0],
     name: searchValue,
+    orderBy: sortingStatus,
   })
 
   const handleTabChange = (tab: string) => {
@@ -74,7 +77,7 @@ const DecksPage = () => {
         setCardsRange={setCardsRange}
         setSearchValue={setSearchValue}
       />
-      <DecksList isMy items={decksData?.items} />
+      <DecksList isMy items={decksData?.items} sortingStatus={setSortingStatus} />
       {decksData && (
         <Pagination
           className={s.pagination}
