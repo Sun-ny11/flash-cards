@@ -13,6 +13,8 @@ import { useGetCardsQuery, useGetDeckQuery } from '@/services/flashCardsApi'
 import s from './deckPage.module.scss'
 
 export const DeckPage = () => {
+  const [sortingStatus, setSortingStatus] = useState<null | string>()
+
   const { deckId } = useParams()
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
@@ -22,6 +24,7 @@ export const DeckPage = () => {
     currentPage,
     id: deckId || '',
     itemsPerPage: pageSize,
+    orderBy: sortingStatus,
   })
   const isMyDeck = true
   // deckData?.userId === 'c8a7805b-8d56-467d-9bd1-9380ea8cf583'
@@ -74,7 +77,7 @@ export const DeckPage = () => {
         />
       </div>
       {filteredCards ? (
-        <CardsList isMy={isMyDeck} items={filteredCards} />
+        <CardsList isMy={isMyDeck} items={filteredCards} sortingStatus={setSortingStatus} />
       ) : (
         <Typography>There is no cards in this deck!</Typography>
       )}

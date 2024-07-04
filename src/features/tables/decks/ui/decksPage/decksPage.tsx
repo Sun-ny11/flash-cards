@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { Typography } from '@/components/ui'
+import { Button, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
-import { AddNewDeck } from '@/features/tables/decks/ui/decksPage/addNewDeck/addNewDeck'
 import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
 import { DecksList } from '@/features/tables/decks/ui/decksPage/decksList/decksList'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashCardsApi'
@@ -11,6 +10,8 @@ import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashCardsA
 import s from './decksPage.module.scss'
 
 const DecksPage = () => {
+  const [sortingStatus, setSortingStatus] = useState<null | string>()
+
   const [currentTab, setCurrentTab] = useState<string>('all')
   const authorId = currentTab === 'my' ? 'c8a7805b-8d56-467d-9bd1-9380ea8cf583' : undefined
   const { data: minMaxCardsData, isLoading: minMaxCardsDataIsLoading } = useGetMinMaxCardsQuery()
@@ -26,6 +27,7 @@ const DecksPage = () => {
     maxCardsCount: cardsRange[1],
     minCardsCount: cardsRange[0],
     name: searchValue,
+    orderBy: sortingStatus,
   })
 
   const handleTabChange = (tab: string) => {
@@ -62,7 +64,7 @@ const DecksPage = () => {
         <Typography as={'h1'} variant={'h1'}>
           Decks list
         </Typography>
-        <AddNewDeck />
+        <Button>Add New Deck</Button>
       </div>
       <DecksFilter
         cardsRange={cardsRange}
@@ -75,7 +77,7 @@ const DecksPage = () => {
         setCardsRange={setCardsRange}
         setSearchValue={setSearchValue}
       />
-      <DecksList items={decksData?.items} />
+      <DecksList items={decksData?.items} sortingStatus={setSortingStatus} />
       {decksData && (
         <Pagination
           className={s.pagination}

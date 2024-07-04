@@ -1,27 +1,22 @@
 import { Table } from '@/components/ui/table'
 import { DecksRow } from '@/features/tables/decks/ui/decksPage/decksList/decksRow/decksRow'
+import { TableHeader } from '@/features/tables/tableHeader/tableHeader'
 import { deckTableName } from '@/features/tables/tableHeaderName'
 import { Deck } from '@/services/decks/decks.types'
 
 type Props = {
   items: Deck[] | undefined
+  sortingStatus: (status: null | string) => void
 }
-export const DecksList = ({ items }: Props) => {
+
+export const DecksList = ({ items, sortingStatus }: Props) => {
   if (!items) {
     return <Table.Empty>Вы кто такие? Здесь колод нет. Идите ....</Table.Empty>
   }
 
-  //TODO: Реализовать сортировку
-
   return (
     <Table.Root>
-      <Table.Head>
-        <Table.Row>
-          {deckTableName.map(el => (
-            <Table.HeaderCell key={el.key}>{el.title}</Table.HeaderCell>
-          ))}
-        </Table.Row>
-      </Table.Head>
+      <TableHeader item={deckTableName} sortingStatus={sortingStatus} />
       <Table.Body>
         {items.map(el => (
           <DecksRow deck={el} isMy key={el.id} />
