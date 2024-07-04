@@ -10,11 +10,18 @@ import s from './deleteCell.module.scss'
 type Props = {
   className?: string
   deleteThat: 'card' | 'deck'
+  isDisabled?: boolean
   name?: string
   onDeleteCallback: () => void
 }
 
-export const DeleteCell = ({ className, deleteThat, name, onDeleteCallback }: Props) => {
+export const DeleteCell = ({
+  className,
+  deleteThat,
+  isDisabled,
+  name,
+  onDeleteCallback,
+}: Props) => {
   const [open, setOpen] = useState(false)
 
   return (
@@ -35,7 +42,7 @@ export const DeleteCell = ({ className, deleteThat, name, onDeleteCallback }: Pr
       >
         <div className={s.content}>
           <Typography>
-            Do you really want to remove {deleteThat === 'deck' ? name : 'this card'}?
+            Do you really want to remove {deleteThat === 'deck' ? `deck ${name}` : 'this card'}?
             <br />
             {deleteThat === 'deck' && 'All cards will be deleted.'}
           </Typography>
@@ -43,7 +50,9 @@ export const DeleteCell = ({ className, deleteThat, name, onDeleteCallback }: Pr
             <Button onClick={() => setOpen(false)} variant={'secondary'}>
               Cancel
             </Button>
-            <Button onClick={onDeleteCallback}>Delete Card</Button>
+            <Button disabled={isDisabled} onClick={onDeleteCallback}>
+              Delete {deleteThat}
+            </Button>
           </div>
         </div>
       </Modal>

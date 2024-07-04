@@ -6,6 +6,7 @@ import { ArrowBackOutline } from '@/assets/components'
 import { Button, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Pagination } from '@/components/ui/pagination'
+import { AddNewCard } from '@/features/tables/cards/ui/addNewCard/addNewCard'
 import { CardsList } from '@/features/tables/cards/ui/cardsList/cardsList'
 import { useGetCardsQuery, useGetDeckQuery } from '@/services/flashCardsApi'
 
@@ -25,7 +26,8 @@ export const DeckPage = () => {
     itemsPerPage: pageSize,
     orderBy: sortingStatus,
   })
-  const isMyDeck = deckData?.userId === 'c8a7805b-8d56-467d-9bd1-9380ea8cf583'
+  const isMyDeck = true
+  // deckData?.userId === 'c8a7805b-8d56-467d-9bd1-9380ea8cf583'
 
   const { control } = useForm({
     defaultValues: {
@@ -57,7 +59,7 @@ export const DeckPage = () => {
           {deckData?.name}
         </Typography>
         {isMyDeck ? (
-          <Button variant={'primary'}>Add new card</Button>
+          <AddNewCard deckId={deckId} />
         ) : (
           <Button as={Link} className={s.linkCard} to={`/decks/${deckData?.id}/learn`}>
             <Typography as={'h3'}>Learn deck</Typography>
@@ -75,7 +77,7 @@ export const DeckPage = () => {
         />
       </div>
       {filteredCards ? (
-        <CardsList isMy={false} items={filteredCards} sortingStatus={setSortingStatus} />
+        <CardsList isMy={isMyDeck} items={filteredCards} sortingStatus={setSortingStatus} />
       ) : (
         <Typography>There is no cards in this deck!</Typography>
       )}

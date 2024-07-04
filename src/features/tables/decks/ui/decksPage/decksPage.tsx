@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Typography } from '@/components/ui'
+import { Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
+import { AddNewDeck } from '@/features/tables/decks/ui/decksPage/addNewDeck/addNewDeck'
 import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
 import { DecksList } from '@/features/tables/decks/ui/decksPage/decksList/decksList'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashCardsApi'
@@ -64,7 +65,7 @@ const DecksPage = () => {
         <Typography as={'h1'} variant={'h1'}>
           Decks list
         </Typography>
-        <Button>Add New Deck</Button>
+        <AddNewDeck />
       </div>
       <DecksFilter
         cardsRange={cardsRange}
@@ -77,7 +78,9 @@ const DecksPage = () => {
         setCardsRange={setCardsRange}
         setSearchValue={setSearchValue}
       />
+
       <DecksList isMy items={decksData?.items} sortingStatus={setSortingStatus} />
+
       {decksData && (
         <Pagination
           className={s.pagination}
