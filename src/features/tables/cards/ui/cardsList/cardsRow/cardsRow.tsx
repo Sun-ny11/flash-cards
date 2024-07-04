@@ -1,19 +1,22 @@
+import { Edit2Outline } from '@/assets/components'
 import { Typography } from '@/components/ui'
 import { Table } from '@/components/ui/table'
 import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
 import { Card } from '@/services/decks/decks.types'
+import { useDeleteCardMutation } from '@/services/flashCardsApi'
 
 import s from './cardsRow.module.scss'
 
-import { AddNewCard } from '../../addNewCard/addNewCard'
 import { Rating } from '../../rating'
+
 type Props = {
   card: Card
   isMy: boolean
 }
 export const CardsRow = ({ card, isMy }: Props) => {
+  const [deleteCard, { isLoading }] = useDeleteCardMutation()
   const onDeleteCallbackHandler = () => {
-    // удалить по ID
+    deleteCard(card.id)
   }
 
   return (
@@ -42,8 +45,12 @@ export const CardsRow = ({ card, isMy }: Props) => {
       <Table.Cell className={s.rating}>{<Rating rating={card.grade} />}</Table.Cell>
       {isMy ? (
         <Table.Cell className={s.controls}>
-          <AddNewCard card={card} isMy />
-          <DeleteCell deleteThat={'card'} onDeleteCallback={onDeleteCallbackHandler} />
+          <Edit2Outline />
+          <DeleteCell
+            deleteThat={'card'}
+            isDisabled={isLoading}
+            onDeleteCallback={onDeleteCallbackHandler}
+          />
         </Table.Cell>
       ) : (
         ''
