@@ -71,7 +71,7 @@ export type GetDeckArgs = {
   currentPage?: number
   id: string
   itemsPerPage?: number
-  orderBy?: string
+  orderBy?: null | string
   question?: string
 }
 
