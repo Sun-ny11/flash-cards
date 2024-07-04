@@ -1,42 +1,65 @@
 import { MouseEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { ImageOutline } from '@/assets/components'
+import { Edit2Outline, ImageOutline } from '@/assets/components'
 import { Button, ControlledCheckbox } from '@/components/ui'
 import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
+import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
+import { useCreateDeckMutation, useUpdateDeckMutation } from '@/services/flashCardsApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import s from './addNewDeck.module.scss'
 
-export const AddNewDeck = () => {
+const newDeckSchema = z.object({
+  cover: z.any(),
+  isPrivate: z.boolean().default(false),
+  name: z.string().min(1, 'This field is required'),
+})
+
+type FormValues = z.infer<typeof newDeckSchema>
+
+type Props = {
+  deckId?: string
+  defaultValues?: FormValues
+  isEditMode?: boolean
+}
+
+export const AddNewDeck = ({
+  deckId,
+  defaultValues = { cover: '', isPrivate: false, name: '' },
+  isEditMode,
+}: Props) => {
   const [open, setOpen] = useState(false)
+  const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
+  const [updateDeck, { isLoading: updateDeckIsLoading }] = useUpdateDeckMutation()
 
-  const newDeckSchema = z.object({
-    cover: z.any(),
-    isPrivate: z.boolean().default(false),
-    name: z.string().min(1, 'This field is required'),
-  })
-
-  type FormValues = z.infer<typeof newDeckSchema>
+  const { setCurrentPage } = useDecksSearchParams()
 
   const {
     control,
     formState: { errors },
     handleSubmit,
   } = useForm<FormValues>({
-    defaultValues: {
-      cover: '',
-      name: '',
-    },
+    defaultValues: defaultValues,
     resolver: zodResolver(newDeckSchema),
     shouldUnregister: true,
   })
   const onSubmit = handleSubmit(data => {
     setOpen(false)
-    console.log(data)
+    if (isEditMode && deckId) {
+      const updateData = { id: deckId, ...data }
+
+      updateDeck(updateData).then(() => {
+        setCurrentPage(1)
+      })
+    } else {
+      createDeck(data).then(() => {
+        setCurrentPage(1)
+      })
+    }
   })
 
   const cancelHandler = (e: MouseEvent<HTMLButtonElement>) => {
@@ -46,8 +69,16 @@ export const AddNewDeck = () => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>qqq</Button>
-      <Modal onOpenChange={() => setOpen(false)} open={open} title={'Add New Deck'}>
+      {isEditMode ? (
+        <Edit2Outline className={s.edit} onClick={() => setOpen(true)} />
+      ) : (
+        <Button onClick={() => setOpen(true)}>Add new deck</Button>
+      )}
+      <Modal
+        onOpenChange={() => setOpen(false)}
+        open={open}
+        title={isEditMode ? 'Update deck' : 'Add New Deck'}
+      >
         <div className={s.wrapper}>
           <form onSubmit={onSubmit}>
             <div className={s.form}>
@@ -67,7 +98,11 @@ export const AddNewDeck = () => {
               <Button onClick={cancelHandler} variant={'secondary'}>
                 Cancel
               </Button>
-              <Button>Add New Pack</Button>
+              {isEditMode ? (
+                <Button disabled={updateDeckIsLoading}>Update deck</Button>
+              ) : (
+                <Button disabled={createDeckIsLoading}>Add New Pack</Button>
+              )}
             </div>
           </form>
         </div>

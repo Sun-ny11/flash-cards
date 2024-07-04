@@ -39,18 +39,6 @@ export type Pagination = {
   totalPages: number
 }
 
-export type DeckResponse = {
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isFavorite: boolean
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
-
 export type MinMaxCardsResponse = {
   max: 1
   min: 1
@@ -88,6 +76,24 @@ export type GetDecksArgs = {
 export type GetRandomCardArgs = {
   id: string
   previousCardId?: string
+}
+
+export type createDeckArgs = {
+  cover?: string
+  isPrivate: boolean
+  name: string
+}
+
+export type updateDeckArgs = { id: string } & createDeckArgs
+
+export type createCardArgs = {
+  answer: string
+  answerImg?: string
+  answerVideo?: string
+  id: string
+  question: string
+  questionImg?: string
+  questionVideo?: string
 }
 
 export type SaveCardGradeArgs = {
