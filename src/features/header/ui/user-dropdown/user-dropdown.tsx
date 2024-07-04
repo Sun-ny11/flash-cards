@@ -6,12 +6,12 @@ import s from './user-dropdown.module.scss'
 
 export type UserProps = {
   avatar?: {
-    alt: string
-    src: string
+    alt: string | undefined
+    src: string | undefined
   }
-  email: string
+  email: string | undefined
   logout: () => void
-  name: string
+  name: string | undefined
 }
 
 export const UserDropdown = ({ avatar, email, logout, name }: UserProps) => {

@@ -8,7 +8,8 @@ import { ControlledTextField } from '@/components/ui/controlled/controlled-text-
 import { Pagination } from '@/components/ui/pagination'
 import { AddNewCard } from '@/features/tables/cards/ui/addNewCard/addNewCard'
 import { CardsList } from '@/features/tables/cards/ui/cardsList/cardsList'
-import { useGetCardsQuery, useGetDeckQuery } from '@/services/flashCardsApi'
+import { useGetCardsQuery } from '@/services/cards/cardsApi'
+import { useGetDeckQuery } from '@/services/decks/decksApi'
 
 import s from './deckPage.module.scss'
 

@@ -9,13 +9,13 @@ import s from './header.module.scss'
 
 type Props = {
   avatar?: {
-    alt: string
-    src: string
+    alt: string | undefined
+    src: string | undefined
   }
-  email: string
+  email: string | undefined
   isAuth: boolean
   logout: () => void
-  name: string
+  name: string | undefined
 }
 
 export const Header = (props: Props) => {

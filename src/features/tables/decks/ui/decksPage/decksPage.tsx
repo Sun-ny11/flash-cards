@@ -6,7 +6,7 @@ import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearch
 import { AddNewDeck } from '@/features/tables/decks/ui/decksPage/addNewDeck/addNewDeck'
 import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
 import { DecksList } from '@/features/tables/decks/ui/decksPage/decksList/decksList'
-import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/flashCardsApi'
+import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decksApi'
 
 import s from './decksPage.module.scss'
 

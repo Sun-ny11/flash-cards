@@ -2,8 +2,8 @@ import { Edit2Outline } from '@/assets/components'
 import { Typography } from '@/components/ui'
 import { Table } from '@/components/ui/table'
 import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
+import { useDeleteCardMutation } from '@/services/cards/cardsApi'
 import { Card } from '@/services/decks/decks.types'
-import { useDeleteCardMutation } from '@/services/flashCardsApi'
 
 import s from './cardsRow.module.scss'
 

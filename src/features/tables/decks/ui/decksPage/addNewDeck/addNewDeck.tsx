@@ -7,7 +7,7 @@ import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fi
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
 import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
-import { useCreateDeckMutation, useUpdateDeckMutation } from '@/services/flashCardsApi'
+import { useCreateDeckMutation, useUpdateDeckMutation } from '@/services/decks/decksApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 

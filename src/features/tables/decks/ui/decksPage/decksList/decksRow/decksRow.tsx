@@ -7,7 +7,7 @@ import { Typography } from '@/components/ui/typography'
 import { AddNewDeck } from '@/features/tables/decks/ui/decksPage/addNewDeck/addNewDeck'
 import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
 import { Deck } from '@/services/decks/decks.types'
-import { useDeleteDeckMutation } from '@/services/flashCardsApi'
+import { useDeleteDeckMutation } from '@/services/decks/decksApi'
 
 import s from './decksRow.module.scss'
 
