@@ -10,7 +10,7 @@ import { Spinner } from '../spiner'
 export const Layout = () => {
   const { data, isError, isLoading } = useGetMeQuery()
   const [logout] = useLogoutMutation()
-  const isAuth = !isError && !isLoading
+  const isAuth = !isError
 
   const profile: ProfileData | undefined = data && {
     avatar: data.avatar,

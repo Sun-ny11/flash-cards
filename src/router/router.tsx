@@ -49,18 +49,14 @@ const privateRoutes: RouteObject[] = [
   },
 ]
 
-function PrivateRoutes() {
+function PublicRoutes() {
   const { isAuth } = useAppOutletContext()
-
-  debugger
 
   return isAuth ? <Outlet /> : <Navigate to={'/login'} />
 }
 
-function PublicRoutes() {
+function PrivateRoutes() {
   const { isAuth } = useAppOutletContext()
-
-  debugger
 
   return isAuth ? <Navigate to={'/decks'} /> : <Outlet />
 }
