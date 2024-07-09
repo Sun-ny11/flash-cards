@@ -8,10 +8,10 @@ import s from './pagination.module.scss'
 
 type Props = {
   className?: string
-  currentPage: null | number
+  currentPage: number
   onPageChange: (page: number) => void
   onPageSizeChange: (size: number) => void
-  pageSize: null | number
+  pageSize: number
   siblingCount?: number // колличество отображаемых эллементов между точек с каждой стороны от выбранной страницы
   totalCount: number
 }

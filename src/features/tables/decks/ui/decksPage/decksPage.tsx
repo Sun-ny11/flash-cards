@@ -19,6 +19,10 @@ const DecksPage = () => {
 
   const { currentPage, pageSize, searchValue, setCurrentPage, setPageSize, setSearchValue } =
     useDecksSearchParams()
+  const onSearchValueChange = (value: string) => {
+    setSearchValue(value)
+    setCurrentPage(1)
+  }
 
   const { data: decksData, isLoading: decksAreLoading } = useGetDecksQuery({
     authorId,
@@ -49,10 +53,10 @@ const DecksPage = () => {
     }
   }, [minMaxCardsData])
 
-  useEffect(() => {
-    setCurrentPage(1)
-    setPageSize(10)
-  }, [searchValue, currentTab, cardsRange])
+  // useEffect(() => {
+  //   setCurrentPage(1)
+  //   setPageSize(10)
+  // }, [searchValue, currentTab, cardsRange])
 
   if (minMaxCardsDataIsLoading || decksAreLoading) {
     return <h2>Loading...</h2>
@@ -70,21 +74,21 @@ const DecksPage = () => {
         cardsRange={cardsRange}
         currentTab={currentTab}
         handleTabChange={handleTabChange}
-        maxRange={minMaxCardsData?.max || 0}
-        minRange={minMaxCardsData?.min || 0}
+        maxRange={minMaxCardsData?.max}
+        minRange={minMaxCardsData?.min}
         resetAllFilters={resetAllFilters}
         searchValue={searchValue}
         setCardsRange={setCardsRange}
-        setSearchValue={setSearchValue}
+        setSearchValue={onSearchValueChange}
       />
       <DecksList items={decksData?.items} sortingStatus={setSortingStatus} />
       {decksData && (
         <Pagination
           className={s.pagination}
-          currentPage={currentPage}
+          currentPage={currentPage ?? 1}
           onPageChange={setCurrentPage}
           onPageSizeChange={setPageSize}
-          pageSize={pageSize}
+          pageSize={pageSize ?? 10}
           totalCount={decksData.pagination?.totalItems}
         />
       )}

@@ -31,9 +31,9 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
   })
 
   type FormValues = z.infer<typeof newCardSchema>
-  type DataToSend = {
-    [key: string]: any
-  } & FormValues
+  // type DataToSend = {
+  //   [key: string]: any
+  // } & FormValues
 
   const {
     control,
@@ -50,17 +50,11 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
     shouldUnregister: true,
   })
 
-  const onSubmit = handleSubmit((data: DataToSend) => {
+  const onSubmit = handleSubmit((data: FormValues) => {
     setOpen(false)
     // удалять свойства с пустой строкой при отправке на сервер,
     // чтобы при редактировании, если не было загружено изображение,
     // старое изображение не перезаписывалось пустой строкой
-
-    for (const key in data) {
-      if (data[key] === '') {
-        delete data[key]
-      }
-    }
 
     if (deckId) {
       const dataToSend = {

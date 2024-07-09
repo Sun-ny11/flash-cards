@@ -3,8 +3,8 @@ import { useMemo } from 'react'
 ////www.freecodecamp.org/news/build-a-custom-pagination-component-in-react/
 
 type Props = {
-  currentPage: null | number
-  pageSize: null | number
+  currentPage: number
+  pageSize: number
   siblingCount?: number // колличество отображаемых эллементов между точек с каждой стороны от выбранной страницы
   totalCount: number
 }
@@ -22,13 +22,6 @@ const range = (start: number, end: number) => {
 }
 
 export const usePagination = ({ currentPage, pageSize, siblingCount = 1, totalCount }: Props) => {
-  if (currentPage === null) {
-    currentPage = 1
-  }
-  if (pageSize === null) {
-    pageSize = 5
-  }
-
   const paginationRange = useMemo(() => {
     const totalPageCount = Math.ceil(totalCount / pageSize)
 

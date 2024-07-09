@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { TrashOutline } from '@/assets/components'
@@ -11,11 +10,11 @@ type Props = {
   cardsRange: (number | undefined)[]
   currentTab: string
   handleTabChange: (value: string) => void
-  maxRange: number
-  minRange: number
+  maxRange?: number
+  minRange?: number
   resetAllFilters: () => void
   searchValue: null | string
-  setCardsRange: Dispatch<SetStateAction<number[]>>
+  setCardsRange: (value: number[]) => void
   setSearchValue: (value: null | string) => void
 }
 
@@ -35,6 +34,9 @@ const DecksFilter = ({
     },
   })
 
+  if (minRange === undefined || maxRange === undefined) {
+    return null
+  }
   const reset = () => {
     resetAllFilters()
     setValue('search', '')

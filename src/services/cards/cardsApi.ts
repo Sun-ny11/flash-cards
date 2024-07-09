@@ -6,13 +6,14 @@ import {
 } from '@/services/cards/cards.types'
 import { CardsInDeckResponse, GetDeckArgs } from '@/services/decks/decks.types'
 import { flashcardsApi } from '@/services/flashCardsApi'
+import { getValuable } from '@/utils/utils'
 
 const cardsApi = flashcardsApi.injectEndpoints({
   endpoints: builder => ({
     createCard: builder.mutation<Card, createCardArgs>({
       invalidatesTags: ['Cards'],
       query: ({ answer, answerImg, answerVideo, id, question, questionImg, questionVideo }) => ({
-        body: { answer, answerImg, answerVideo, question, questionImg, questionVideo },
+        body: getValuable({ answer, answerImg, answerVideo, question, questionImg, questionVideo }),
         method: 'POST',
         url: `/v1/decks/${id}/cards`,
       }),
@@ -38,6 +39,15 @@ const cardsApi = flashcardsApi.injectEndpoints({
       }),
     }),
     saveCardGrade: builder.mutation<Card, SaveCardGradeArgs>({
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        const result = await queryFulfilled
+
+        dispatch(
+          cardsApi.util.updateQueryData('getRandomCard', { id: arg.deckId }, draft => {
+            Object.assign(draft, result.data)
+          })
+        )
+      },
       query: ({ cardId, deckId: id, grade }) => ({
         body: { cardId, grade },
         method: 'POST',
