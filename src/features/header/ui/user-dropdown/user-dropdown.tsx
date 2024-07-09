@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom'
+
 import { LogOutOutline, PersonOutline } from '@/assets/components'
 import { DropDown, DropDownItem, DropDownSeparator } from '@/components/ui/dropdown'
 import { Typography } from '@/components/ui/typography'
+import { useLogoutMutation } from '@/services/auth/authApi'
 
 import s from './user-dropdown.module.scss'
 
@@ -10,11 +13,24 @@ export type UserProps = {
     src: string | undefined
   }
   email: string | undefined
-  logout: () => void
   name: string | undefined
 }
 
-export const UserDropdown = ({ avatar, email, logout, name }: UserProps) => {
+export const UserDropdown = ({ avatar, email, name }: UserProps) => {
+  const [logout] = useLogoutMutation()
+  const navigate = useNavigate()
+
+  const onLogout = async () => {
+    try {
+      await logout()
+      localStorage.removeItem('accessToken')
+      localStorage.removeItem('refreshToken')
+      navigate('/login')
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
     <>
       <DropDown trigger={<img alt={avatar?.alt} src={avatar?.src} />}>
@@ -39,7 +55,7 @@ export const UserDropdown = ({ avatar, email, logout, name }: UserProps) => {
           </a>
         </DropDownItem>
         <DropDownSeparator></DropDownSeparator>
-        <DropDownItem className={s.dropdownItem} onSelect={logout}>
+        <DropDownItem className={s.dropdownItem} onSelect={onLogout}>
           <LogOutOutline />
           <Typography as={'div'} variant={'caption'}>
             Sign Out

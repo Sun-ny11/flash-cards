@@ -14,12 +14,11 @@ type Props = {
   }
   email: string | undefined
   isAuth: boolean
-  logout: () => void
   name: string | undefined
 }
 
 export const Header = (props: Props) => {
-  const { avatar, email, isAuth, logout, name } = props
+  const { avatar, email, isAuth, name } = props
 
   return (
     <header className={s.header}>
@@ -30,7 +29,7 @@ export const Header = (props: Props) => {
         {isAuth && (
           <div className={s.nameAuthor}>
             <Typography>{name}</Typography>
-            <UserDropdown avatar={avatar} email={name} logout={logout} name={email} />
+            <UserDropdown avatar={avatar} email={name} name={email} />
           </div>
         )}
         {!isAuth && (
