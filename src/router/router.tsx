@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/components/ui/layout/layout'
+import { SignIn } from '@/features/auth/ui/sign-in'
 import { CardPage } from '@/features/tables/cards/ui/cardPage/cardPage'
 import { DeckPage } from '@/features/tables/decks/ui/deckPage/deckPage'
 import DecksPage from '@/features/tables/decks/ui/decksPage/decksPage'
@@ -14,7 +15,7 @@ import { useMeQuery } from '@/services/auth/authApi'
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <div>login</div>,
+    element: <SignIn />,
     path: '/login',
   },
 ]

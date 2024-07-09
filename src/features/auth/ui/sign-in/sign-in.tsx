@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Card, ControlledCheckbox, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
+import { useLoginMutation } from '@/services/auth/authApi'
+import { LoginArgs } from '@/services/auth/authTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -28,16 +31,34 @@ export const SignIn = () => {
     resolver: zodResolver(signInSchema),
   })
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
-  })
+  // const { isError, isLoading } = useMeQuery()
+  const [login] = useLoginMutation()
+  const navigate = useNavigate()
+
+  const handleSignIn = async (data: LoginArgs) => {
+    try {
+      await login(data).unwrap()
+      navigate('/')
+    } catch (error: any) {
+      console.log(error)
+    }
+  }
+
+  // if (!isError && !isLoading) {
+  //   return <Navigate to={'/'} />
+  // }
 
   return (
     <Card className={s.signIn}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(handleSignIn)}>
         <Typography as={'h1'} className={s.title} variant={'h1'}>
           Sign In
         </Typography>
+        <div className={s.test}>
+          <Typography variant={'h4'}>Test mode credentials:</Typography>
+          <Typography variant={'body1'}>Email: test@test.com</Typography>
+          <Typography variant={'body1'}>Password: test</Typography>
+        </div>
         <ControlledTextField
           control={control}
           error={errors.email?.message}
