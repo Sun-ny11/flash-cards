@@ -6,7 +6,7 @@ import { Button, Card, Typography } from '@/components/ui'
 import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
-import { useCreateCardMutation } from '@/services/flashCardsApi'
+import { useCreateCardMutation } from '@/services/cards/cardsApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
