@@ -1,18 +1,4 @@
-export type Card = {
-  answer: string
-  answerImg: string
-  answerVideo: string
-  created: string
-  deckId: string
-  grade: number
-  id: string
-  question: string
-  questionImg: string
-  questionVideo: string
-  shots: number
-  updated: string
-  userId: string
-}
+import { Card } from '@/services/cards/cards.types'
 
 export type Author = {
   id: string
@@ -73,11 +59,6 @@ export type GetDecksArgs = {
   orderBy?: null | string
 }
 
-export type GetRandomCardArgs = {
-  id: string
-  previousCardId?: string
-}
-
 export type createDeckArgs = {
   cover?: string
   isPrivate: boolean
@@ -85,19 +66,3 @@ export type createDeckArgs = {
 }
 
 export type updateDeckArgs = { id: string } & createDeckArgs
-
-export type createCardArgs = {
-  answer: string
-  answerImg?: string
-  answerVideo?: string
-  id: string
-  question: string
-  questionImg?: string
-  questionVideo?: string
-}
-
-export type SaveCardGradeArgs = {
-  cardId: string
-  deckId: string
-  grade: number
-}

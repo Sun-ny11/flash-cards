@@ -9,17 +9,16 @@ import s from './header.module.scss'
 
 type Props = {
   avatar?: {
-    alt: string
-    src: string
+    alt: string | undefined
+    src: string | undefined
   }
-  email: string
+  email: string | undefined
   isAuth: boolean
-  logout: () => void
-  name: string
+  name: string | undefined
 }
 
 export const Header = (props: Props) => {
-  const { avatar, email, isAuth, logout, name } = props
+  const { avatar, email, isAuth, name } = props
 
   return (
     <header className={s.header}>
@@ -30,7 +29,7 @@ export const Header = (props: Props) => {
         {isAuth && (
           <div className={s.nameAuthor}>
             <Typography>{name}</Typography>
-            <UserDropdown avatar={avatar} email={name} logout={logout} name={email} />
+            <UserDropdown avatar={avatar} email={name} name={email} />
           </div>
         )}
         {!isAuth && (
