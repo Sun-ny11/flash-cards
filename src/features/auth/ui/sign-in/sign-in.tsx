@@ -27,6 +27,7 @@ export const SignIn = () => {
     defaultValues: {
       email: '',
       password: '',
+      rememberMe: false,
     },
     resolver: zodResolver(signInSchema),
   })
