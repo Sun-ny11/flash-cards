@@ -29,15 +29,15 @@ export const ControlledFileUploader = <T extends FieldValues>({
   })
 
   const [fileURL, setFileURL] = useState<string>()
-  const formData = new FormData()
+  // const formData = new FormData()
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0]
 
-      formData.append('cover', file)
+      // formData.append('cover', file)
 
-      onChange(formData)
+      onChange(file)
 
       setFileURL(URL.createObjectURL(file))
     }

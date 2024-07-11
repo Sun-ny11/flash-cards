@@ -9,6 +9,8 @@ import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decks
 
 import s from './decksPage.module.scss'
 
+import { AddNewDeck } from './addNewDeck/addNewDeck'
+
 const DecksPage = () => {
   const [sortingStatus, setSortingStatus] = useState<null | string>()
 
@@ -64,7 +66,7 @@ const DecksPage = () => {
         <Typography as={'h1'} variant={'h1'}>
           Decks list
         </Typography>
-        <Button>Add New Deck</Button>
+        <AddNewDeck />
       </div>
       <DecksFilter
         cardsRange={cardsRange}

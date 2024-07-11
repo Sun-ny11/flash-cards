@@ -48,6 +48,18 @@ export const AddNewDeck = ({
     shouldUnregister: true,
   })
   const onSubmit = handleSubmit(data => {
+    console.log(data)
+
+    // const formData = new FormData()
+
+    // formData.append('name', data.name)
+    // formData.append('isPrivate', `${data.isPrivate}`)
+    // formData.append('cover', `${data.cover}`)
+
+    // for (const pair of data.cover.entries()) {
+    //   console.log(pair[0] + ': ' + pair[1])
+    // }
+
     setOpen(false)
     if (isEditMode && deckId) {
       const updateData = { id: deckId, ...data }
@@ -56,9 +68,11 @@ export const AddNewDeck = ({
         setCurrentPage(1)
       })
     } else {
-      createDeck(data).then(() => {
-        setCurrentPage(1)
-      })
+      createDeck(data)
+        .unwrap()
+        .then(() => {
+          setCurrentPage(1)
+        })
     }
   })
 
