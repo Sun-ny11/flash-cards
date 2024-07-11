@@ -11,11 +11,26 @@ const cardsApi = flashcardsApi.injectEndpoints({
   endpoints: builder => ({
     createCard: builder.mutation<Card, createCardArgs>({
       invalidatesTags: ['Cards'],
-      query: ({ answer, answerImg, answerVideo, id, question, questionImg, questionVideo }) => ({
-        body: { answer, answerImg, answerVideo, question, questionImg, questionVideo },
-        method: 'POST',
-        url: `/v1/decks/${id}/cards`,
-      }),
+      query: ({ answer, answerImg, answerVideo, id, question, questionImg, questionVideo }) => {
+        const formData = new FormData()
+
+        formData.append('answer', answer)
+        formData.append('question', question)
+
+        if (answerImg) {
+          formData.append('answerImg', answerImg)
+        }
+
+        if (questionImg) {
+          formData.append('questionImg', questionImg)
+        }
+
+        return {
+          body: formData,
+          method: 'POST',
+          url: `/v1/decks/${id}/cards`,
+        }
+      },
     }),
     deleteCard: builder.mutation<undefined, string>({
       invalidatesTags: ['Cards'],

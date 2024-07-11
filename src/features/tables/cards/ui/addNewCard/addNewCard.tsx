@@ -25,9 +25,9 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
 
   const newCardSchema = z.object({
     answer: z.string().min(3, 'This field is required'),
-    answerImg: z.string(),
+    answerImg: z.any(),
     question: z.string().min(3, 'This field is required'),
-    questionImg: z.string(),
+    questionImg: z.any(),
   })
 
   type FormValues = z.infer<typeof newCardSchema>
@@ -51,6 +51,7 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
   })
 
   const onSubmit = handleSubmit((data: DataToSend) => {
+    debugger
     setOpen(false)
     // удалять свойства с пустой строкой при отправке на сервер,
     // чтобы при редактировании, если не было загружено изображение,

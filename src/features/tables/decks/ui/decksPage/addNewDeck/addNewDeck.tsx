@@ -102,7 +102,12 @@ export const AddNewDeck = ({
                 label={'Name Pack'}
                 name={'name'}
               />
-              <ControlledFileUploader accept={'image/*'} control={control} name={'cover'}>
+              <ControlledFileUploader
+                accept={'image/*'}
+                control={control}
+                imgFromCard={defaultValues.cover}
+                name={'cover'}
+              >
                 <ImageOutline /> Upload Image
               </ControlledFileUploader>
               <ControlledCheckbox control={control} label={'Private pack'} name={'isPrivate'} />
