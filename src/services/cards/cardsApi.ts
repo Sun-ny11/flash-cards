@@ -11,7 +11,7 @@ const cardsApi = flashcardsApi.injectEndpoints({
   endpoints: builder => ({
     createCard: builder.mutation<Card, createCardArgs>({
       invalidatesTags: ['Cards'],
-      query: ({ answer, answerImg, answerVideo, id, question, questionImg, questionVideo }) => {
+      query: ({ answer, answerImg, id, question, questionImg }) => {
         const formData = new FormData()
 
         formData.append('answer', answer)
@@ -65,7 +65,7 @@ const cardsApi = flashcardsApi.injectEndpoints({
     }),
     updateCard: builder.mutation<Card, createCardArgs>({
       invalidatesTags: ['Cards'],
-      query: ({ answer, answerImg, answerVideo, id, question, questionImg, questionVideo }) => {
+      query: ({ answer, answerImg, id, question, questionImg }) => {
         const formData = new FormData()
 
         formData.append('answer', answer)

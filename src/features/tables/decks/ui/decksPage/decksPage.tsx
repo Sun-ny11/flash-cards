@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Typography } from '@/components/ui'
+import { Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
 import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
