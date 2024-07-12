@@ -15,7 +15,6 @@ export const Default: Story = {
   args: {
     avatar: { alt: 'aaa', src: '' },
     email: 'aaqqqqqqqaa@aaa.aa',
-    logout: () => {},
     name: 'Naaaaaaaaame',
   },
 }

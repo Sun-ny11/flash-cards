@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Header } from '@/components/ui/layout/header/header'
-import { fn } from '@storybook/test'
 
 import ava from '../../../../assets/images/defaultAvatar.webp'
 
@@ -20,7 +19,6 @@ export const HeaderStory: Story = {
     avatar: { alt: 'photo', src: ava },
     email: 'test@test.com',
     isAuth: true,
-    logout: fn(),
     name: 'ivan',
   },
 }
@@ -29,7 +27,6 @@ export const HeaderIsNotAuth: Story = {
     avatar: { alt: 'photo', src: ava },
     email: 'test@test.com',
     isAuth: false,
-    logout: fn(),
     name: 'ivan',
   },
 }

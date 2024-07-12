@@ -6,10 +6,11 @@ import { ArrowBackOutline } from '@/assets/components'
 import { Button, Card, Typography } from '@/components/ui'
 import { ControlledRadioGroup } from '@/components/ui/controlled/controlledRadioGroup'
 import { useGetRandomCardQuery, useSaveCardGradeMutation } from '@/services/cards/cardsApi'
-import { Card as CardType } from '@/services/decks/decks.types'
 import { useGetDeckQuery } from '@/services/decks/decksApi'
 
 import s from './cardPage.module.scss'
+
+import { Card as CardType } from '../../../../../services/cards/cards.types'
 
 type radioGroupType = {
   grade: string
