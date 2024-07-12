@@ -1,12 +1,12 @@
-import { Edit2Outline } from '@/assets/components'
 import { Typography } from '@/components/ui'
 import { Table } from '@/components/ui/table'
 import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
+import { Card } from '@/services/cards/cards.types'
 import { useDeleteCardMutation } from '@/services/cards/cardsApi'
-import { Card } from '@/services/decks/decks.types'
 
 import s from './cardsRow.module.scss'
 
+import { AddNewCard } from '../../addNewCard/addNewCard'
 import { Rating } from '../../rating'
 
 type Props = {
@@ -45,7 +45,7 @@ export const CardsRow = ({ card, isMy }: Props) => {
       <Table.Cell className={s.rating}>{<Rating rating={card.grade} />}</Table.Cell>
       {isMy ? (
         <Table.Cell className={s.controls}>
-          <Edit2Outline />
+          <AddNewCard card={card} deckId={card.id} isMy />
           <DeleteCell
             deleteThat={'card'}
             isDisabled={isLoading}

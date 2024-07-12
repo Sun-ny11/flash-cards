@@ -6,22 +6,22 @@ import { Button, Card, Typography } from '@/components/ui'
 import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
-import { useCreateCardMutation } from '@/services/cards/cardsApi'
+import { Card as CardType } from '@/services/cards/cards.types'
+import { useCreateCardMutation, useUpdateCardMutation } from '@/services/cards/cardsApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import s from './addNewCard.module.scss'
 
-import { Card as CardItem } from '../../../../../services/decks/decks.types'
-
 type Props = {
-  card?: CardItem
+  card?: CardType
   deckId: string | undefined
   isMy?: boolean
 }
 export const AddNewCard = ({ card, deckId, isMy }: Props) => {
   const [open, setOpen] = useState(false)
   const [createCard, { isLoading }] = useCreateCardMutation()
+  const [updateCard] = useUpdateCardMutation()
 
   const newCardSchema = z.object({
     answer: z.string().min(3, 'This field is required'),
@@ -39,6 +39,7 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<FormValues>({
     defaultValues: {
       answer: card?.answer || '',
@@ -51,17 +52,7 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
   })
 
   const onSubmit = handleSubmit((data: DataToSend) => {
-    debugger
     setOpen(false)
-    // удалять свойства с пустой строкой при отправке на сервер,
-    // чтобы при редактировании, если не было загружено изображение,
-    // старое изображение не перезаписывалось пустой строкой
-
-    for (const key in data) {
-      if (data[key] === '') {
-        delete data[key]
-      }
-    }
 
     if (deckId) {
       const dataToSend = {
@@ -69,7 +60,18 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
         ...data,
       }
 
-      createCard(dataToSend)
+      if (isMy) {
+        updateCard(dataToSend).then(res => {
+          reset({
+            answer: res.data?.answer,
+            answerImg: res.data?.answerImg,
+            question: res.data?.question,
+            questionImg: res.data?.questionImg,
+          })
+        })
+      } else {
+        createCard(dataToSend)
+      }
     }
   })
 

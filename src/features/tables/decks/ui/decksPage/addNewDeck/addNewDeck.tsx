@@ -42,30 +42,21 @@ export const AddNewDeck = ({
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<FormValues>({
     defaultValues: defaultValues,
     resolver: zodResolver(newDeckSchema),
     shouldUnregister: true,
   })
+
   const onSubmit = handleSubmit(data => {
-    console.log(data)
-
-    // const formData = new FormData()
-
-    // formData.append('name', data.name)
-    // formData.append('isPrivate', `${data.isPrivate}`)
-    // formData.append('cover', `${data.cover}`)
-
-    // for (const pair of data.cover.entries()) {
-    //   console.log(pair[0] + ': ' + pair[1])
-    // }
-
     setOpen(false)
     if (isEditMode && deckId) {
       const updateData = { id: deckId, ...data }
 
-      updateDeck(updateData).then(() => {
+      updateDeck(updateData).then(res => {
         setCurrentPage(1)
+        reset({ cover: res.data?.cover, isPrivate: res.data?.isPrivate, name: res.data?.name })
       })
     } else {
       createDeck(data)
