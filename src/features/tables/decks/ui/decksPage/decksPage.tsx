@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Typography } from '@/components/ui'
+import { Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
 import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
@@ -8,6 +8,8 @@ import { DecksList } from '@/features/tables/decks/ui/decksPage/decksList/decksL
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decksApi'
 
 import s from './decksPage.module.scss'
+
+import { AddNewDeck } from './addNewDeck/addNewDeck'
 
 const DecksPage = () => {
   const [sortingStatus, setSortingStatus] = useState<null | string>()
@@ -64,7 +66,7 @@ const DecksPage = () => {
         <Typography as={'h1'} variant={'h1'}>
           Decks list
         </Typography>
-        <Button>Add New Deck</Button>
+        <AddNewDeck />
       </div>
       <DecksFilter
         cardsRange={cardsRange}

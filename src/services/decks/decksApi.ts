@@ -36,11 +36,25 @@ const decksApi = flashcardsApi.injectEndpoints({
           console.log(e)
         }
       },
-      query: ({ cover, isPrivate, name }) => ({
-        body: { cover, isPrivate, name },
-        method: 'POST',
-        url: `/v1/decks`,
-      }),
+      query: ({ cover, isPrivate, name }) => {
+        const formData = new FormData()
+
+        formData.append('name', name)
+
+        if (isPrivate) {
+          formData.append('isPrivate', isPrivate.toString())
+        }
+
+        if (cover) {
+          formData.append('cover', cover)
+        }
+
+        return {
+          body: formData,
+          method: 'POST',
+          url: `/v1/decks`,
+        }
+      },
     }),
     deleteDeck: builder.mutation<Deck, string>({
       invalidatesTags: ['Decks'],
@@ -97,11 +111,25 @@ const decksApi = flashcardsApi.injectEndpoints({
           })
         }
       },
-      query: ({ cover, id, isPrivate, name }) => ({
-        body: { cover, isPrivate, name },
-        method: 'PATCH',
-        url: `/v1/decks/${id}`,
-      }),
+      query: ({ cover, id, isPrivate, name }) => {
+        const formData = new FormData()
+
+        formData.append('name', name)
+
+        if (isPrivate) {
+          formData.append('isPrivate', isPrivate.toString())
+        }
+
+        if (cover) {
+          formData.append('cover', cover)
+        }
+
+        return {
+          body: formData,
+          method: 'PATCH',
+          url: `/v1/decks/${id}`,
+        }
+      },
     }),
   }),
 })

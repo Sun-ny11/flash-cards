@@ -2,7 +2,7 @@ import { Table } from '@/components/ui/table'
 import { CardsRow } from '@/features/tables/cards/ui/cardsList/cardsRow/cardsRow'
 import { TableHeader } from '@/features/tables/tableHeader/tableHeader'
 import { cardTableName } from '@/features/tables/tableHeaderName'
-import { Card } from '@/services/decks/decks.types'
+import { Card } from '@/services/cards/cards.types'
 
 type Props = {
   isMy: boolean
