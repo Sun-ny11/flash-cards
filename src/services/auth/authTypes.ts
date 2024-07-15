@@ -18,3 +18,11 @@ export type LoginArgs = {
   password: string
   rememberMe: boolean
 }
+export type RecoverPassword = {
+  email: string
+  html: string
+}
+export type CreateNewPassword = {
+  password: string
+  token: string
+}

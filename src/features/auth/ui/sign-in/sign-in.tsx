@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Button, Card, ControlledCheckbox, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
@@ -76,7 +76,7 @@ export const SignIn = () => {
         <div className={s.checkoxContainer}>
           <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
         </div>
-        <Button as={'a'} className={s.forgotPassword} href={'/'} variant={'link'}>
+        <Button as={Link} className={s.forgotPassword} to={'/recover-password'} variant={'link'}>
           Forgot password
         </Button>
         <Button className={s.submitBtn} fullWidth type={'submit'}>
