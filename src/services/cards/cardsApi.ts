@@ -25,10 +25,6 @@ const cardsApi = flashcardsApi.injectEndpoints({
           formData.append('questionImg', questionImg)
         }
 
-        for (const pair of formData.entries()) {
-          console.log(pair[0] + ': ' + pair[1])
-        }
-
         return {
           body: formData,
           method: 'POST',
