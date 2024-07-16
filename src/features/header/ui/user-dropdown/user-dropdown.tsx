@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { LogOutOutline, PersonOutline } from '@/assets/components'
 import { DropDown, DropDownItem, DropDownSeparator } from '@/components/ui/dropdown'
 import { Typography } from '@/components/ui/typography'
+import { routes } from '@/router'
 import { useLogoutMutation } from '@/services/auth/authApi'
 
 import s from './user-dropdown.module.scss'
@@ -25,7 +26,7 @@ export const UserDropdown = ({ avatar, email, name }: UserProps) => {
       await logout()
       localStorage.removeItem('accessToken')
       localStorage.removeItem('refreshToken')
-      navigate('/login')
+      navigate(routes.public.signIn)
     } catch (e) {
       console.log(e)
     }

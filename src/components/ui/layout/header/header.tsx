@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Logo } from '@/assets/icons/Logo'
 import { Button, Typography } from '@/components/ui'
 import { UserDropdown } from '@/features/header/ui/user-dropdown/user-dropdown'
+import { routes } from '@/router'
 import clsx from 'clsx'
 
 import s from './header.module.scss'
@@ -33,7 +34,7 @@ export const Header = (props: Props) => {
           </div>
         )}
         {!isAuth && (
-          <Button as={'button'} variant={'secondary'}>
+          <Button as={Link} to={routes.public.signIn} variant={'secondary'}>
             Sign in
           </Button>
         )}
