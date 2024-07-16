@@ -19,16 +19,30 @@
 }
 
 .option {
-  width: 24px;
-  height: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  width: 24px;
+  height: 24px;
   margin-right: 2px;
+
   color: inherit;
 
   svg {
     width: 16px;
     height: 16px;
+  }
+}
+
+.buttonCell {
+  text-align: center;
+}
+
+.disabled {
+  pointer-events: none;
+
+  svg {
+    color: var(--color-dark-100);
   }
 }

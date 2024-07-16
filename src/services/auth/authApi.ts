@@ -1,8 +1,24 @@
-import { AuthResponse, LoginArgs, SignUpArgs, User } from '@/services/auth/authTypes'
+import {
+  AuthResponse,
+  CreateNewPassword,
+  LoginArgs,
+  RecoverPassword,
+  SignUpArgs,
+  User,
+} from '@/services/auth/authTypes'
 import { flashcardsApi } from '@/services/flashCardsApi'
 
 const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => ({
+    createNewPassword: builder.mutation<void, CreateNewPassword>({
+      query: ({ password, token }) => {
+        return {
+          body: { password },
+          method: 'POST',
+          url: `/v1/auth/reset-password/${token}`,
+        }
+      },
+    }),
     login: builder.mutation<AuthResponse, LoginArgs>({
       // invalidatesTags: ['Me'],
       async onQueryStarted(
@@ -47,7 +63,21 @@ const authApi = flashcardsApi.injectEndpoints({
         url: `/v1/auth/sign-up`,
       }),
     }),
+    recoverPassword: builder.mutation<void, RecoverPassword>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: 'v1/auth/recover-password',
+      }),
+    }),
   }),
 })
 
-export const { useLoginMutation, useLogoutMutation, useMeQuery, useSignUpMutation } = authApi
+export const {
+  useCreateNewPasswordMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useSignUpMutation,
+  useRecoverPasswordMutation,
+} = authApi

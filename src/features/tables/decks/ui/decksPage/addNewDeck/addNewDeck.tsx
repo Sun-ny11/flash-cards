@@ -42,23 +42,28 @@ export const AddNewDeck = ({
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<FormValues>({
     defaultValues: defaultValues,
     resolver: zodResolver(newDeckSchema),
     shouldUnregister: true,
   })
+
   const onSubmit = handleSubmit(data => {
     setOpen(false)
     if (isEditMode && deckId) {
       const updateData = { id: deckId, ...data }
 
-      updateDeck(updateData).then(() => {
+      updateDeck(updateData).then(res => {
         setCurrentPage(1)
+        reset({ cover: res.data?.cover, isPrivate: res.data?.isPrivate, name: res.data?.name })
       })
     } else {
-      createDeck(data).then(() => {
-        setCurrentPage(1)
-      })
+      createDeck(data)
+        .unwrap()
+        .then(() => {
+          setCurrentPage(1)
+        })
     }
   })
 
@@ -70,8 +75,11 @@ export const AddNewDeck = ({
   return (
     <>
       {isEditMode ? (
-        <Edit2Outline className={s.edit} onClick={() => setOpen(true)} />
+        <Button as={'button'} onClick={() => setOpen(true)} variant={'withSVG'}>
+          <Edit2Outline />
+        </Button>
       ) : (
+        // <Edit2Outline className={s.edit} onClick={() => setOpen(true)} />
         <Button onClick={() => setOpen(true)}>Add new deck</Button>
       )}
       <Modal
@@ -88,7 +96,12 @@ export const AddNewDeck = ({
                 label={'Name Pack'}
                 name={'name'}
               />
-              <ControlledFileUploader accept={'image/*'} control={control} name={'cover'}>
+              <ControlledFileUploader
+                accept={'image/*'}
+                control={control}
+                imgFromCard={defaultValues.cover}
+                name={'cover'}
+              >
                 <ImageOutline /> Upload Image
               </ControlledFileUploader>
               <ControlledCheckbox control={control} label={'Private pack'} name={'isPrivate'} />

@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Typography } from '@/components/ui'
+import { Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
 import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
 import { DecksList } from '@/features/tables/decks/ui/decksPage/decksList/decksList'
+import { useMeQuery } from '@/services/auth/authApi'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decksApi'
 
 import s from './decksPage.module.scss'
 
+import { AddNewDeck } from './addNewDeck/addNewDeck'
+
 const DecksPage = () => {
   const [sortingStatus, setSortingStatus] = useState<null | string>()
-
+  const { data } = useMeQuery()
   const [currentTab, setCurrentTab] = useState<string>('all')
-  const authorId = currentTab === 'my' ? 'c8a7805b-8d56-467d-9bd1-9380ea8cf583' : undefined
+  const authorId = currentTab === 'my' ? data?.id : undefined
   const { data: minMaxCardsData, isLoading: minMaxCardsDataIsLoading } = useGetMinMaxCardsQuery()
   const [cardsRange, setCardsRange] = useState<number[]>([0, 10])
 
@@ -63,7 +66,7 @@ const DecksPage = () => {
         <Typography as={'h1'} variant={'h1'}>
           Decks list
         </Typography>
-        <Button>Add New Deck</Button>
+        <AddNewDeck />
       </div>
       <DecksFilter
         cardsRange={cardsRange}

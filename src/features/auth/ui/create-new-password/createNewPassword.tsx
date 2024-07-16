@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button, Card, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
+import { useCreateNewPasswordMutation } from '@/services/auth/authApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -13,10 +15,12 @@ const createNewPasswordSchema = z.object({
 
 type CreateNewPasswordValues = z.infer<typeof createNewPasswordSchema>
 
-type Props = {
-  onSubmit: (data: CreateNewPasswordValues) => void
-}
-export const CreateNewPassword = ({ onSubmit }: Props) => {
+type Props = {}
+export const CreateNewPassword = ({}: Props) => {
+  const [createNewPassword] = useCreateNewPasswordMutation()
+  const { token = '' } = useParams()
+  const navigate = useNavigate()
+
   const {
     control,
     formState: { errors },
@@ -28,7 +32,10 @@ export const CreateNewPassword = ({ onSubmit }: Props) => {
     resolver: zodResolver(createNewPasswordSchema),
   })
   const onSubmitHandler = (data: CreateNewPasswordValues) => {
-    onSubmit(data)
+    createNewPassword({ ...data, token }).then(() => {
+      navigate('/login')
+    })
+    //показать ошибку если есть
   }
 
   return (

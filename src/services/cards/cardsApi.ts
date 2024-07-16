@@ -12,11 +12,26 @@ const cardsApi = flashcardsApi.injectEndpoints({
   endpoints: builder => ({
     createCard: builder.mutation<Card, createCardArgs>({
       invalidatesTags: ['Cards'],
-      query: ({ answer, answerImg, answerVideo, id, question, questionImg, questionVideo }) => ({
-        body: getValuable({ answer, answerImg, answerVideo, question, questionImg, questionVideo }),
-        method: 'POST',
-        url: `/v1/decks/${id}/cards`,
-      }),
+      query: ({ answer, answerImg, id, question, questionImg }) => {
+        const formData = new FormData()
+
+        formData.append('answer', answer)
+        formData.append('question', question)
+
+        if (answerImg) {
+          formData.append('answerImg', answerImg)
+        }
+
+        if (questionImg) {
+          formData.append('questionImg', questionImg)
+        }
+
+        return {
+          body: formData,
+          method: 'POST',
+          url: `/v1/decks/${id}/cards`,
+        }
+      },
     }),
     deleteCard: builder.mutation<undefined, string>({
       invalidatesTags: ['Cards'],
@@ -54,6 +69,29 @@ const cardsApi = flashcardsApi.injectEndpoints({
         url: `/v1/decks/${id}/learn`,
       }),
     }),
+    updateCard: builder.mutation<Card, createCardArgs>({
+      invalidatesTags: ['Cards'],
+      query: ({ answer, answerImg, id, question, questionImg }) => {
+        const formData = new FormData()
+
+        formData.append('answer', answer)
+        formData.append('question', question)
+
+        if (answerImg) {
+          formData.append('answerImg', answerImg)
+        }
+
+        if (questionImg) {
+          formData.append('questionImg', questionImg)
+        }
+
+        return {
+          body: formData,
+          method: 'PATCH',
+          url: `/v1/cards/${id}`,
+        }
+      },
+    }),
   }),
 })
 
@@ -63,4 +101,5 @@ export const {
   useGetCardsQuery,
   useGetRandomCardQuery,
   useSaveCardGradeMutation,
+  useUpdateCardMutation,
 } = cardsApi

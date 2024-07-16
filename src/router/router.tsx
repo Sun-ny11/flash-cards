@@ -7,6 +7,9 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/components/ui/layout/layout'
+import { CheckEmail } from '@/features/auth/ui/check-email'
+import { CreateNewPassword } from '@/features/auth/ui/create-new-password'
+import { ForgotPassword } from '@/features/auth/ui/forgotPassword/forgotPassword'
 import { SignIn } from '@/features/auth/ui/sign-in'
 import { SignUp } from '@/features/auth/ui/sign-up'
 import { CardPage } from '@/features/tables/cards/ui/cardPage/cardPage'
@@ -35,6 +38,18 @@ const publicRoutes: RouteObject[] = [
   {
     element: <SignUp />,
     path: routes.public.signUp,
+  },
+  {
+    element: <ForgotPassword />,
+    path: '/recover-password',
+  },
+  {
+    element: <CreateNewPassword />,
+    path: '/create-new-password/:token',
+  },
+  {
+    element: <CheckEmail />,
+    path: '/check-email/:email',
   },
 ]
 

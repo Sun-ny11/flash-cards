@@ -10,6 +10,8 @@ import { useGetDeckQuery } from '@/services/decks/decksApi'
 
 import s from './cardPage.module.scss'
 
+import { Card as CardType } from '../../../../../services/cards/cards.types'
+
 type RadioGroupType = {
   grade: string
 }
