@@ -37,7 +37,17 @@
   text-align: center;
 }
 
-a.signUp {
+a.link {
+  font-weight: 700;
+  font-size: var(--font-size-m);
   color: var(--color-accent-500);
   text-decoration: underline;
+  display: block;
+  text-align: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.formInput {
+  margin-bottom: 20px;
 }

@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Button, Card, ControlledCheckbox, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
+import { routes } from '@/router'
 import { useLoginMutation } from '@/services/auth/authApi'
 import { LoginArgs } from '@/services/auth/authTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -80,18 +81,18 @@ export const SignIn = () => {
         <div className={s.checkoxContainer}>
           <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
         </div>
-        <Button as={'a'} className={s.forgotPassword} href={'/'} variant={'link'}>
+        <Typography as={Link} className={s.forgotPassword} to={'/'} variant={'link1'}>
           Forgot password
-        </Button>
+        </Typography>
         <Button className={s.submitBtn} fullWidth type={'submit'}>
           Sign in
         </Button>
         <Typography className={s.subtitle} variant={'body2'}>
           Don&apos;t have an account?
         </Typography>
-        <Button as={'a'} className={s.signUp} href={'/'} variant={'link'}>
+        <Typography as={Link} className={s.signUp} to={routes.public.signUp} variant={'subtitle1'}>
           Sign Up
-        </Button>
+        </Typography>
       </form>
     </Card>
   )

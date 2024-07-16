@@ -1,4 +1,4 @@
-import { AuthResponse, LoginArgs, User } from '@/services/auth/authTypes'
+import { AuthResponse, LoginArgs, SignUpArgs, User } from '@/services/auth/authTypes'
 import { flashcardsApi } from '@/services/flashCardsApi'
 
 const authApi = flashcardsApi.injectEndpoints({
@@ -40,7 +40,14 @@ const authApi = flashcardsApi.injectEndpoints({
         url: `/v1/auth/me`,
       }),
     }),
+    signUp: builder.mutation<User, SignUpArgs>({
+      query: ({ email, html, name, password, sendConfirmationEmail, subject }) => ({
+        body: { email, html, name, password, sendConfirmationEmail, subject },
+        method: 'POST',
+        url: `/v1/auth/sign-up`,
+      }),
+    }),
   }),
 })
 
-export const { useLoginMutation, useLogoutMutation, useMeQuery } = authApi
+export const { useLoginMutation, useLogoutMutation, useMeQuery, useSignUpMutation } = authApi

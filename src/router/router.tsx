@@ -8,6 +8,7 @@ import {
 
 import { Layout } from '@/components/ui/layout/layout'
 import { SignIn } from '@/features/auth/ui/sign-in'
+import { SignUp } from '@/features/auth/ui/sign-up'
 import { CardPage } from '@/features/tables/cards/ui/cardPage/cardPage'
 import { DeckPage } from '@/features/tables/decks/ui/deckPage/deckPage'
 import DecksPage from '@/features/tables/decks/ui/decksPage/decksPage'
@@ -21,33 +22,38 @@ export const routes = {
     main: '/',
   },
   public: {
-    signIn: '/login',
+    signIn: '/sign-in',
+    signUp: '/sign-up',
   },
 }
 
 const publicRoutes: RouteObject[] = [
   {
     element: <SignIn />,
-    path: '/login',
+    path: routes.public.signIn,
+  },
+  {
+    element: <SignUp />,
+    path: routes.public.signUp,
   },
 ]
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <Navigate to={'/decks'} />,
+    element: <Navigate to={routes.private.decks} />,
     path: '/',
   },
   {
     element: <DecksPage />,
-    path: '/decks',
+    path: routes.private.decks,
   },
   {
     element: <DeckPage />,
-    path: '/decks/:deckId',
+    path: routes.private.deck,
   },
   {
     element: <CardPage />,
-    path: '/decks/:deckId/learn',
+    path: routes.private.card,
   },
 ]
 
@@ -69,7 +75,7 @@ function PrivateRoutes() {
   const { isError, isLoading } = useMeQuery()
   const isAuthenticated = !isError && !isLoading
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={routes.public.signIn} />
 }
 
 export function Router() {

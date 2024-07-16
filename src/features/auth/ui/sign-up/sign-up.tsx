@@ -1,7 +1,11 @@
 import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Button, Card, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
+import { routes } from '@/router'
+import { useSignUpMutation } from '@/services/auth/authApi'
+import { SignUpArgs } from '@/services/auth/authTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -21,10 +25,14 @@ const signUpSchema = z
 type FormValues = z.infer<typeof signUpSchema>
 
 export const SignUp = () => {
+  const [signUp, { isLoading }] = useSignUpMutation()
+  const navigate = useNavigate()
+
   const {
     control,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForm<FormValues>({
     defaultValues: {
       confirmPassword: '',
@@ -34,43 +42,57 @@ export const SignUp = () => {
     resolver: zodResolver(signUpSchema),
   })
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
-  })
+  const handleSignUp = async (data: SignUpArgs) => {
+    try {
+      await signUp(data).unwrap()
+      navigate(routes.public.signIn)
+    } catch (error: any) {
+      setError('email', {
+        message: error.data.errorMessages[0],
+        type: 'manual',
+      })
+    }
+  }
 
   return (
     <Card className={s.signIn}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(handleSignUp)}>
         <Typography as={'h1'} className={s.title} variant={'h1'}>
           Sign Up
         </Typography>
-        <ControlledTextField
-          control={control}
-          error={errors.email?.message}
-          label={'Email'}
-          name={'email'}
-        />
-        <ControlledTextField
-          control={control}
-          error={errors.password?.message}
-          label={'Password'}
-          name={'password'}
-          type={'password'}
-        />
-        <ControlledTextField
-          control={control}
-          error={errors.confirmPassword?.message}
-          label={'Confirm Password'}
-          name={'confirmPassword'}
-          type={'password'}
-        />
-        <Button className={s.submitBtn} fullWidth type={'submit'}>
+        <div className={s.formInput}>
+          <ControlledTextField
+            control={control}
+            error={errors.email?.message}
+            label={'Email'}
+            name={'email'}
+          />
+        </div>
+        <div className={s.formInput}>
+          <ControlledTextField
+            control={control}
+            error={errors.password?.message}
+            label={'Password'}
+            name={'password'}
+            type={'password'}
+          />
+        </div>
+        <div className={s.formInput}>
+          <ControlledTextField
+            control={control}
+            error={errors.confirmPassword?.message}
+            label={'Confirm Password'}
+            name={'confirmPassword'}
+            type={'password'}
+          />
+        </div>
+        <Button className={s.submitBtn} disabled={isLoading} fullWidth type={'submit'}>
           Sign Up
         </Button>
         <Typography className={s.subtitle} variant={'body2'}>
           Already have an account?
         </Typography>
-        <Button as={'a'} className={s.signUp} href={'/'} variant={'link'}>
+        <Button as={Link} className={s.link} to={routes.public.signIn} variant={'link'}>
           Sign In
         </Button>
       </form>

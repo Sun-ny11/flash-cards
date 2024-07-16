@@ -20,6 +20,9 @@
   margin-bottom: 60px;
   background-color: transparent;
   margin-left: auto;
+  justify-content: flex-end;
+  font-weight: 400;
+  text-decoration: none;
 }
 
 .submitBtn {
@@ -30,13 +33,17 @@
 
 .subtitle {
   text-align: center;
-  margin: 0 0 7px 0;
+  margin: 20px 0 7px 0;
   color: var(--color-light-900);
 }
 
 a.signUp {
   color: var(--color-accent-500);
   text-decoration: underline;
+  display: block;
+  text-align: center;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .test {
