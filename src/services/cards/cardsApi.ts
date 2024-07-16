@@ -6,7 +6,6 @@ import {
 } from '@/services/cards/cards.types'
 import { CardsInDeckResponse, GetDeckArgs } from '@/services/decks/decks.types'
 import { flashcardsApi } from '@/services/flashCardsApi'
-import { getValuable } from '@/utils/utils'
 
 const cardsApi = flashcardsApi.injectEndpoints({
   endpoints: builder => ({

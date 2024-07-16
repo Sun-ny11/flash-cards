@@ -56,18 +56,18 @@ const authApi = flashcardsApi.injectEndpoints({
         url: `/v1/auth/me`,
       }),
     }),
-    signUp: builder.mutation<User, SignUpArgs>({
-      query: ({ email, html, name, password, sendConfirmationEmail, subject }) => ({
-        body: { email, html, name, password, sendConfirmationEmail, subject },
-        method: 'POST',
-        url: `/v1/auth/sign-up`,
-      }),
-    }),
     recoverPassword: builder.mutation<void, RecoverPassword>({
       query: body => ({
         body,
         method: 'POST',
         url: 'v1/auth/recover-password',
+      }),
+    }),
+    signUp: builder.mutation<User, SignUpArgs>({
+      query: ({ email, html, name, password, sendConfirmationEmail, subject }) => ({
+        body: { email, html, name, password, sendConfirmationEmail, subject },
+        method: 'POST',
+        url: `/v1/auth/sign-up`,
       }),
     }),
   }),
@@ -78,6 +78,6 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
-  useSignUpMutation,
   useRecoverPasswordMutation,
+  useSignUpMutation,
 } = authApi

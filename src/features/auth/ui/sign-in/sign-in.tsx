@@ -81,7 +81,12 @@ export const SignIn = () => {
         <div className={s.checkoxContainer}>
           <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
         </div>
-        <Button as={Link} className={s.forgotPassword} to={'/recover-password'} variant={'link'}>
+        <Typography
+          as={Link}
+          className={s.forgotPassword}
+          to={'/recover-password'}
+          variant={'link1'}
+        >
           Forgot password
         </Typography>
         <Button className={s.submitBtn} fullWidth type={'submit'}>
