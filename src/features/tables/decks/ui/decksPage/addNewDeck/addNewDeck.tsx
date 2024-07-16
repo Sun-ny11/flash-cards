@@ -75,8 +75,11 @@ export const AddNewDeck = ({
   return (
     <>
       {isEditMode ? (
-        <Edit2Outline className={s.edit} onClick={() => setOpen(true)} />
+        <Button as={'button'} onClick={() => setOpen(true)} variant={'withSVG'}>
+          <Edit2Outline />
+        </Button>
       ) : (
+        // <Edit2Outline className={s.edit} onClick={() => setOpen(true)} />
         <Button onClick={() => setOpen(true)}>Add new deck</Button>
       )}
       <Modal

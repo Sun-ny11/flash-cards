@@ -19,7 +19,7 @@ export const DecksList = ({ items, sortingStatus }: Props) => {
       <TableHeader item={deckTableName} sortingStatus={sortingStatus} />
       <Table.Body>
         {items.map(el => (
-          <DecksRow deck={el} isMy key={el.id} />
+          <DecksRow deck={el} key={el.id} />
         ))}
       </Table.Body>
     </Table.Root>
