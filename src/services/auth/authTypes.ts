@@ -26,3 +26,12 @@ export type CreateNewPassword = {
   password: string
   token: string
 }
+
+export type SignUpArgs = {
+  email: string
+  html?: string
+  name?: string
+  password: string
+  sendConfirmationEmail?: boolean
+  subject?: string
+}

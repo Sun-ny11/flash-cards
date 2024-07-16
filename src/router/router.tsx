@@ -11,15 +11,33 @@ import { CheckEmail } from '@/features/auth/ui/check-email'
 import { CreateNewPassword } from '@/features/auth/ui/create-new-password'
 import { ForgotPassword } from '@/features/auth/ui/forgotPassword/forgotPassword'
 import { SignIn } from '@/features/auth/ui/sign-in'
+import { SignUp } from '@/features/auth/ui/sign-up'
 import { CardPage } from '@/features/tables/cards/ui/cardPage/cardPage'
 import { DeckPage } from '@/features/tables/decks/ui/deckPage/deckPage'
 import DecksPage from '@/features/tables/decks/ui/decksPage/decksPage'
 import { useMeQuery } from '@/services/auth/authApi'
 
+export const routes = {
+  private: {
+    card: '/decks/:deckId/learn',
+    deck: '/decks/:deckId',
+    decks: '/decks',
+    main: '/',
+  },
+  public: {
+    signIn: '/sign-in',
+    signUp: '/sign-up',
+  },
+}
+
 const publicRoutes: RouteObject[] = [
   {
     element: <SignIn />,
-    path: '/login',
+    path: routes.public.signIn,
+  },
+  {
+    element: <SignUp />,
+    path: routes.public.signUp,
   },
   {
     element: <ForgotPassword />,
@@ -37,20 +55,20 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <Navigate to={'/decks'} />,
+    element: <Navigate to={routes.private.decks} />,
     path: '/',
   },
   {
     element: <DecksPage />,
-    path: '/decks',
+    path: routes.private.decks,
   },
   {
     element: <DeckPage />,
-    path: '/decks/:deckId',
+    path: routes.private.deck,
   },
   {
     element: <CardPage />,
-    path: '/decks/:deckId/learn',
+    path: routes.private.card,
   },
 ]
 
@@ -72,7 +90,7 @@ function PrivateRoutes() {
   const { isError, isLoading } = useMeQuery()
   const isAuthenticated = !isError && !isLoading
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={routes.public.signIn} />
 }
 
 export function Router() {

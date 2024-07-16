@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { NavLink, useParams } from 'react-router-dom'
 
@@ -10,9 +10,7 @@ import { useGetDeckQuery } from '@/services/decks/decksApi'
 
 import s from './cardPage.module.scss'
 
-import { Card as CardType } from '../../../../../services/cards/cards.types'
-
-type radioGroupType = {
+type RadioGroupType = {
   grade: string
 }
 
@@ -27,31 +25,27 @@ const rateItems = [
 export const CardPage = () => {
   const { deckId } = useParams()
 
-  const [currentQuestion, setCurrentQuestion] = useState<CardType>()
   const [answerIsShown, setAnswerIsShown] = useState(false)
   const { data: deckData, isLoading: deckDataIsLoading } = useGetDeckQuery(deckId || '')
   const { data: randomCardData, isLoading: randomCardIsLoading } = useGetRandomCardQuery({
     id: deckId || '',
   })
-  const [saveCardGrade, { data: newCardData, isLoading: saveCardGradeIsLoading }] =
-    useSaveCardGradeMutation()
-  const { control, handleSubmit } = useForm<radioGroupType>({
+  const [saveCardGrade, { isLoading: saveCardGradeIsLoading }] = useSaveCardGradeMutation()
+  const { control, handleSubmit } = useForm<RadioGroupType>({
     defaultValues: {
       grade: '1',
     },
   })
   const onSubmit = handleSubmit(data => {
-    saveCardGrade({ cardId: currentQuestion!.id, deckId: deckId!, grade: +data.grade })
-  })
-
-  useEffect(() => {
-    if (newCardData) {
-      setCurrentQuestion(newCardData)
-    } else if (!saveCardGradeIsLoading) {
-      setCurrentQuestion(randomCardData)
+    if (!randomCardData) {
+      return
     }
-    setAnswerIsShown(false)
-  }, [randomCardData, newCardData])
+    saveCardGrade({
+      cardId: randomCardData.id,
+      deckId: deckId ?? '',
+      grade: parseInt(data.grade, 10),
+    })
+  })
 
   if (deckDataIsLoading || randomCardIsLoading) {
     return <h2>Loading...</h2>
@@ -70,8 +64,8 @@ export const CardPage = () => {
           Learn {deckData?.name}
         </Typography>
         <div className={s.imageContainer}>
-          {currentQuestion?.questionImg && (
-            <img alt={'question image'} src={currentQuestion?.questionImg} />
+          {randomCardData?.questionImg && (
+            <img alt={'question image'} src={randomCardData?.questionImg} />
           )}
         </div>
         <div className={s.questionContainer}>
@@ -79,11 +73,11 @@ export const CardPage = () => {
             Question:
           </Typography>
           <Typography as={'div'} variant={'body1'}>
-            {currentQuestion?.question}
+            {randomCardData?.question}
           </Typography>
         </div>
         <Typography as={'p'} className={s.shots} variant={'body2'}>
-          Количество попыток ответов на вопрос: {currentQuestion?.shots}
+          Количество попыток ответов на вопрос: {randomCardData?.shots}
         </Typography>
         {!answerIsShown && (
           <Button fullWidth onClick={() => setAnswerIsShown(true)} variant={'primary'}>
@@ -93,8 +87,8 @@ export const CardPage = () => {
         {answerIsShown && (
           <>
             <div className={s.imageContainer}>
-              {currentQuestion?.answerImg && (
-                <img alt={'question image'} src={currentQuestion?.answerImg} />
+              {randomCardData?.answerImg && (
+                <img alt={'question image'} src={randomCardData?.answerImg} />
               )}
             </div>
             <div className={s.answerContainer}>
@@ -102,7 +96,7 @@ export const CardPage = () => {
                 Answer:
               </Typography>
               <Typography as={'div'} variant={'body1'}>
-                {currentQuestion?.answer}
+                {randomCardData?.answer}
               </Typography>
             </div>
             <Typography className={s.rate} variant={'subtitle1'}>

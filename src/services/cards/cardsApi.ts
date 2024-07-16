@@ -53,6 +53,15 @@ const cardsApi = flashcardsApi.injectEndpoints({
       }),
     }),
     saveCardGrade: builder.mutation<Card, SaveCardGradeArgs>({
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        const result = await queryFulfilled
+
+        dispatch(
+          cardsApi.util.updateQueryData('getRandomCard', { id: arg.deckId }, draft => {
+            Object.assign(draft, result.data)
+          })
+        )
+      },
       query: ({ cardId, deckId: id, grade }) => ({
         body: { cardId, grade },
         method: 'POST',

@@ -70,13 +70,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       ),
       label: clsx(s.label, restProps.disabled && s.disabled),
       searchIcon: clsx(s.searchIcon, restProps.disabled && s.disabled),
+      wrapper: clsx(s.wrapper, error && s.wrapperError),
     }
 
     return (
       <Typography as={'label'} className={classes.label} variant={'body2'}>
         {label}
 
-        <div className={s.wrapper}>
+        <div className={classes.wrapper}>
           <input
             className={classes.input}
             onChange={handleChange}
@@ -109,7 +110,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             </button>
           )}
 
-          {error && <div className={s.errorText}>{error}</div>}
+          {error && (
+            <Typography className={s.errorText} variant={'body2'}>
+              {error}
+            </Typography>
+          )}
         </div>
       </Typography>
     )

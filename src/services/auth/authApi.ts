@@ -3,6 +3,7 @@ import {
   CreateNewPassword,
   LoginArgs,
   RecoverPassword,
+  SignUpArgs,
   User,
 } from '@/services/auth/authTypes'
 import { flashcardsApi } from '@/services/flashCardsApi'
@@ -62,6 +63,13 @@ const authApi = flashcardsApi.injectEndpoints({
         url: 'v1/auth/recover-password',
       }),
     }),
+    signUp: builder.mutation<User, SignUpArgs>({
+      query: ({ email, html, name, password, sendConfirmationEmail, subject }) => ({
+        body: { email, html, name, password, sendConfirmationEmail, subject },
+        method: 'POST',
+        url: `/v1/auth/sign-up`,
+      }),
+    }),
   }),
 })
 
@@ -71,4 +79,5 @@ export const {
   useLogoutMutation,
   useMeQuery,
   useRecoverPasswordMutation,
+  useSignUpMutation,
 } = authApi

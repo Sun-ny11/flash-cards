@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button/button'
 import { Card } from '@/components/ui/card/card'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
 import { Typography } from '@/components/ui/typography/typography'
+import { routes } from '@/router'
 import { useRecoverPasswordMutation } from '@/services/auth/authApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -65,7 +66,7 @@ export const ForgotPassword = () => {
           Did you remember your password?
         </Typography>
 
-        <Button as={Link} className={s.link} fullWidth to={'/login'} variant={'link'}>
+        <Button as={Link} className={s.link} fullWidth to={routes.public.signIn} variant={'link'}>
           Try logging in
         </Button>
       </form>
