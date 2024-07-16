@@ -55,7 +55,14 @@ export const baseQueryWithReauth: BaseQueryFn<
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
-          // router.navigate('/login')
+          // const privateRoutes = Object.values(routes.private)
+          // const location = window.location.pathname
+          //
+          // const shouldRedirect = privateRoutes.some(route => matchPath(route, location))
+          //
+          // if (shouldRedirect) {
+          //   router.navigate(routes.public.signIn)
+          // }
         }
       } finally {
         // release must be called once the mutex should be released again.

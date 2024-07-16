@@ -60,19 +60,23 @@ export const SignIn = () => {
           <Typography variant={'body1'}>Email: test@test.com</Typography>
           <Typography variant={'body1'}>Password: test</Typography>
         </div>
-        <ControlledTextField
-          control={control}
-          error={errors.email?.message}
-          label={'Email'}
-          name={'email'}
-        />
-        <ControlledTextField
-          control={control}
-          error={errors.password?.message}
-          label={'Password'}
-          name={'password'}
-          type={'password'}
-        />
+        <div className={s.formInput}>
+          <ControlledTextField
+            control={control}
+            error={errors.email?.message}
+            label={'Email'}
+            name={'email'}
+          />
+        </div>
+        <div className={s.formInput}>
+          <ControlledTextField
+            control={control}
+            error={errors.password?.message}
+            label={'Password'}
+            name={'password'}
+            type={'password'}
+          />
+        </div>
         <div className={s.checkoxContainer}>
           <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
         </div>

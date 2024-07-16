@@ -13,6 +13,18 @@ import { DeckPage } from '@/features/tables/decks/ui/deckPage/deckPage'
 import DecksPage from '@/features/tables/decks/ui/decksPage/decksPage'
 import { useMeQuery } from '@/services/auth/authApi'
 
+export const routes = {
+  private: {
+    card: '/decks/:deckId/learn',
+    deck: '/decks/:deckId',
+    decks: '/decks',
+    main: '/',
+  },
+  public: {
+    signIn: '/login',
+  },
+}
+
 const publicRoutes: RouteObject[] = [
   {
     element: <SignIn />,

@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { Link, NavLink, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/components'
-import { Button, Typography } from '@/components/ui'
-import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
+import { Button, Input, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { AddNewCard } from '@/features/tables/cards/ui/addNewCard/addNewCard'
 import { CardsList } from '@/features/tables/cards/ui/cardsList/cardsList'
@@ -29,12 +27,6 @@ export const DeckPage = () => {
   })
   const isMyDeck = true
   // deckData?.userId === 'c8a7805b-8d56-467d-9bd1-9380ea8cf583'
-
-  const { control } = useForm({
-    defaultValues: {
-      search: '',
-    },
-  })
   let filteredCards = cardsData?.items
 
   useEffect(() => {
@@ -69,8 +61,8 @@ export const DeckPage = () => {
       </div>
       <img alt={'deck cover'} className={s.image} src={deckData?.cover} />
       <div className={s.search}>
-        <ControlledTextField
-          control={control}
+        <Input
+          className={s.searchInput}
           label={'Search by question'}
           name={'search'}
           onValueChange={setSearchValue}

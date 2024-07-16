@@ -15,7 +15,7 @@ type Props = {
   resetAllFilters: () => void
   searchValue: null | string
   setCardsRange: (value: number[]) => void
-  setSearchValue: (value: null | string) => void
+  setSearchValue: (value: string) => void
 }
 
 const DecksFilter = ({

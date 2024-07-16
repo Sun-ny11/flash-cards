@@ -53,11 +53,6 @@ const DecksPage = () => {
     }
   }, [minMaxCardsData])
 
-  // useEffect(() => {
-  //   setCurrentPage(1)
-  //   setPageSize(10)
-  // }, [searchValue, currentTab, cardsRange])
-
   if (minMaxCardsDataIsLoading || decksAreLoading) {
     return <h2>Loading...</h2>
   }
