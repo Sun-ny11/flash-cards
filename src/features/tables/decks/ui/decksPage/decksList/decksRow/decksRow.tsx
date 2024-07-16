@@ -6,8 +6,10 @@ import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
 import { AddNewDeck } from '@/features/tables/decks/ui/decksPage/addNewDeck/addNewDeck'
 import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
+import { useMeQuery } from '@/services/auth/authApi'
 import { Deck } from '@/services/decks/decks.types'
 import { useDeleteDeckMutation } from '@/services/decks/decksApi'
+import clsx from 'clsx'
 
 import s from './decksRow.module.scss'
 
@@ -15,14 +17,18 @@ import defaultCard from '../../../../../../../assets/images/defaultCard.webp'
 
 type Props = {
   deck: Deck
-  isMy: boolean
 }
 
-export const DecksRow = ({ deck, isMy }: Props) => {
+export const DecksRow = ({ deck }: Props) => {
   const [deleteCard, { isLoading }] = useDeleteDeckMutation()
   const onDeleteCallbackHandler = () => {
     deleteCard(deck.id)
   }
+  const { data } = useMeQuery()
+  const isMy = data?.id === deck.userId
+  const isDisabled = !deck.cardsCount
+
+  console.log(isDisabled)
 
   return (
     <Table.Row>
@@ -38,9 +44,15 @@ export const DecksRow = ({ deck, isMy }: Props) => {
       <Table.Cell className={s.buttonCell}>
         {isMy ? (
           <>
-            <NavLink className={s.option} to={`/decks/${deck.id}/learn`}>
+            <Button
+              as={NavLink}
+              className={clsx(isDisabled ? s.disabled : '', s.option)}
+              to={`/decks/${deck.id}/learn`}
+              variant={'withSVG'}
+            >
               <PlayCircleOutline />
-            </NavLink>
+            </Button>
+
             <div className={s.option}>
               <AddNewDeck deckId={deck.id} defaultValues={deck} isEditMode />
             </div>
@@ -53,9 +65,14 @@ export const DecksRow = ({ deck, isMy }: Props) => {
             />
           </>
         ) : (
-          <NavLink className={s.option} to={`/decks/${deck.id}/learn`}>
+          <Button
+            as={NavLink}
+            className={clsx(isDisabled && s.disabled, s.option)}
+            to={`/decks/${deck.id}/learn`}
+            variant={'withSVG'}
+          >
             <PlayCircleOutline />
-          </NavLink>
+          </Button>
         )}
       </Table.Cell>
     </Table.Row>
