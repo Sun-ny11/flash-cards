@@ -8,6 +8,7 @@ import { ControlledTextField } from '@/components/ui/controlled/controlled-text-
 import { Pagination } from '@/components/ui/pagination'
 import { AddNewCard } from '@/features/tables/cards/ui/addNewCard/addNewCard'
 import { CardsList } from '@/features/tables/cards/ui/cardsList/cardsList'
+import { useMeQuery } from '@/services/auth/authApi'
 import { useGetCardsQuery } from '@/services/cards/cardsApi'
 import { useGetDeckQuery } from '@/services/decks/decksApi'
 
@@ -15,7 +16,7 @@ import s from './deckPage.module.scss'
 
 export const DeckPage = () => {
   const [sortingStatus, setSortingStatus] = useState<null | string>()
-
+  const { data: userData } = useMeQuery()
   const { deckId } = useParams()
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
@@ -27,7 +28,7 @@ export const DeckPage = () => {
     itemsPerPage: pageSize,
     orderBy: sortingStatus,
   })
-  const isMyDeck = true
+  const isMyDeck = userData?.id === deckData?.userId
   // deckData?.userId === 'c8a7805b-8d56-467d-9bd1-9380ea8cf583'
 
   const { control } = useForm({
