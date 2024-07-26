@@ -4,7 +4,7 @@ import { PlayCircleOutline } from '@/assets/components'
 import { Button } from '@/components/ui/button'
 import { Table } from '@/components/ui/table'
 import { Typography } from '@/components/ui/typography'
-import { AddNewDeck } from '@/features/tables/decks/ui/decksPage/addNewDeck/addNewDeck'
+import { HandleDeckComponent } from '@/features/tables/decks/ui/decksPage/HandleDeckComponent/HandleDeckComponent'
 import { DeleteCell } from '@/features/tables/deleteCell/deleteCell'
 import { useMeQuery } from '@/services/auth/authApi'
 import { Deck } from '@/services/decks/decks.types'
@@ -20,9 +20,9 @@ type Props = {
 }
 
 export const DecksRow = ({ deck }: Props) => {
-  const [deleteCard, { isLoading }] = useDeleteDeckMutation()
+  const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
   const onDeleteCallbackHandler = () => {
-    deleteCard(deck.id)
+    deleteDeck(deck.id)
   }
   const { data } = useMeQuery()
   const isMy = data?.id === deck.userId
@@ -52,7 +52,7 @@ export const DecksRow = ({ deck }: Props) => {
             </Button>
 
             <div className={s.option}>
-              <AddNewDeck deckId={deck.id} defaultValues={deck} isEditMode />
+              <HandleDeckComponent deckId={deck.id} defaultValues={deck} isEditMode />
             </div>
             <DeleteCell
               className={s.option}

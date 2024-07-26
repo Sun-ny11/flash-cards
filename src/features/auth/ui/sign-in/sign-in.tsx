@@ -37,6 +37,11 @@ export const SignIn = () => {
   const [login] = useLoginMutation()
   const navigate = useNavigate()
 
+  // const { isError, isLoading } = useMeQuery()
+  // if (!isLoading && !isError) {
+  //   return <Navigate to={'/'} />
+  // }
+
   const handleSignIn = async (data: LoginArgs) => {
     try {
       await login(data).unwrap()
