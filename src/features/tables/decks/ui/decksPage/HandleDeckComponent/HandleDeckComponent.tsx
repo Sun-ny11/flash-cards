@@ -2,16 +2,17 @@ import { MouseEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Edit2Outline, ImageOutline } from '@/assets/components'
-import { Button, ControlledCheckbox } from '@/components/ui'
+import { Button, ControlledCheckbox, Typography } from '@/components/ui'
 import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
 import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
 import { useCreateDeckMutation, useUpdateDeckMutation } from '@/services/decks/decksApi'
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 import { z } from 'zod'
 
-import s from './addNewDeck.module.scss'
+import s from './HandleDeckComponent.module.scss'
 
 const newDeckSchema = z.object({
   cover: z.any(),
@@ -22,15 +23,19 @@ const newDeckSchema = z.object({
 type FormValues = z.infer<typeof newDeckSchema>
 
 type Props = {
+  className?: string
   deckId?: string
   defaultValues?: FormValues
   isEditMode?: boolean
+  label?: string
 }
 
-export const AddNewDeck = ({
+export const HandleDeckComponent = ({
+  className,
   deckId,
   defaultValues = { cover: '', isPrivate: false, name: '' },
   isEditMode,
+  label,
 }: Props) => {
   const [open, setOpen] = useState(false)
   const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
@@ -75,8 +80,18 @@ export const AddNewDeck = ({
   return (
     <>
       {isEditMode ? (
-        <Button as={'button'} onClick={() => setOpen(true)} variant={'withSVG'}>
+        <Button
+          as={'button'}
+          className={clsx(className, label && s.editButton)}
+          onClick={() => setOpen(true)}
+          variant={'withSVG'}
+        >
           <Edit2Outline />
+          {label && (
+            <Typography className={s.label} variant={'body2'}>
+              {label}
+            </Typography>
+          )}
         </Button>
       ) : (
         // <Edit2Outline className={s.edit} onClick={() => setOpen(true)} />

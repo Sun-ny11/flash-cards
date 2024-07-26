@@ -3,14 +3,13 @@ import { useEffect, useState } from 'react'
 import { Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
+import { HandleDeckComponent } from '@/features/tables/decks/ui/decksPage/HandleDeckComponent/HandleDeckComponent'
 import DecksFilter from '@/features/tables/decks/ui/decksPage/decksFilter/decksFilter'
 import { DecksList } from '@/features/tables/decks/ui/decksPage/decksList/decksList'
 import { useMeQuery } from '@/services/auth/authApi'
 import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decksApi'
 
 import s from './decksPage.module.scss'
-
-import { AddNewDeck } from './addNewDeck/addNewDeck'
 
 const DecksPage = () => {
   const [sortingStatus, setSortingStatus] = useState<null | string>()
@@ -66,7 +65,7 @@ const DecksPage = () => {
         <Typography as={'h1'} variant={'h1'}>
           Decks list
         </Typography>
-        <AddNewDeck />
+        <HandleDeckComponent />
       </div>
       <DecksFilter
         cardsRange={cardsRange}
