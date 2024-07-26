@@ -24,6 +24,7 @@ export const SignIn = () => {
     control,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForm<FormValues>({
     defaultValues: {
       email: '',
@@ -33,7 +34,6 @@ export const SignIn = () => {
     resolver: zodResolver(signInSchema),
   })
 
-  // const { isError, isLoading } = useMeQuery()
   const [login] = useLoginMutation()
   const navigate = useNavigate()
 
@@ -42,13 +42,12 @@ export const SignIn = () => {
       await login(data).unwrap()
       navigate('/')
     } catch (error: any) {
-      console.log(error)
+      setError('email', {
+        message: error.data.message,
+        type: 'manual',
+      })
     }
   }
-
-  // if (!isError && !isLoading) {
-  //   return <Navigate to={'/'} />
-  // }
 
   return (
     <Card className={s.signIn}>

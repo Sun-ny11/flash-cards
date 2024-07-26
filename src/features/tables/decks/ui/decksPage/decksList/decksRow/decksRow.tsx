@@ -28,8 +28,6 @@ export const DecksRow = ({ deck }: Props) => {
   const isMy = data?.id === deck.userId
   const isDisabled = !deck.cardsCount
 
-  console.log(isDisabled)
-
   return (
     <Table.Row>
       <Table.Cell>
