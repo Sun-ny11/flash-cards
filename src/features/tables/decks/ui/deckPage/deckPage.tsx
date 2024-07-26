@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/components'
+import defaultCard from '@/assets/images/defaultCard.webp'
 import { Button, Input, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
+import { CardDropdown } from '@/features/card/ui/card-dropdown/card-dropdown'
 import { AddNewCard } from '@/features/tables/cards/ui/addNewCard/addNewCard'
 import { CardsList } from '@/features/tables/cards/ui/cardsList/cardsList'
 import { useMeQuery } from '@/services/auth/authApi'
@@ -27,7 +29,6 @@ export const DeckPage = () => {
     orderBy: sortingStatus,
   })
   const isMyDeck = userData?.id === deckData?.userId
-  // deckData?.userId === 'c8a7805b-8d56-467d-9bd1-9380ea8cf583'
   let filteredCards = cardsData?.items
 
   useEffect(() => {
@@ -49,9 +50,12 @@ export const DeckPage = () => {
         </Typography>
       </NavLink>
       <div className={s.topContainer}>
-        <Typography as={'h1'} className={s.title} variant={'h1'}>
-          {deckData?.name}
-        </Typography>
+        <div className={s.cardInfoContainer}>
+          <Typography as={'h1'} className={s.title} variant={'h1'}>
+            {deckData?.name}
+          </Typography>
+          {isMyDeck && deckData && <CardDropdown deck={deckData} />}
+        </div>
         {isMyDeck ? (
           <AddNewCard deckId={deckId} />
         ) : (
@@ -60,7 +64,7 @@ export const DeckPage = () => {
           </Button>
         )}
       </div>
-      <img alt={'deck cover'} className={s.image} src={deckData?.cover} />
+      <img alt={'deck cover'} className={s.image} src={deckData?.cover || defaultCard} />
       <div className={s.search}>
         <Input
           className={s.searchInput}

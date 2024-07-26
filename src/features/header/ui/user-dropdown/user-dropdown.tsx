@@ -34,9 +34,16 @@ export const UserDropdown = ({ avatar, email, name }: UserProps) => {
 
   return (
     <>
-      <DropDown trigger={<img alt={avatar?.alt} src={avatar?.src} />}>
+      <DropDown
+        trigger={
+          <div className={s.trigger}>
+            <Typography>{email}</Typography>
+            <img alt={avatar?.alt || 'avatar'} src={avatar?.src || 'img/default-avatar.png'} />
+          </div>
+        }
+      >
         <DropDownItem className={s.dropdownItem}>
-          <img alt={avatar?.alt} src={avatar?.src} />
+          <img alt={avatar?.alt || 'avatar'} src={avatar?.src || 'img/default-avatar.png'} />
           <div>
             <Typography as={'div'} variant={'body2'}>
               {name}

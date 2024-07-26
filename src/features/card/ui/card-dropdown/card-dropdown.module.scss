@@ -1,8 +1,28 @@
 .dropdownItem {
+  display: flex;
+  gap: 5px;
   color: inherit;
   text-decoration: none;
   cursor: pointer;
   img {
     margin-right: 6px;
   }
+}
+
+.option {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+
+  svg {
+    flex: 0 0 auto;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 36px;
 }

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Logo } from '@/assets/icons/Logo'
-import { Button, Typography } from '@/components/ui'
+import { Button } from '@/components/ui'
 import { UserDropdown } from '@/features/header/ui/user-dropdown/user-dropdown'
 import { routes } from '@/router'
 import clsx from 'clsx'
@@ -29,7 +29,6 @@ export const Header = (props: Props) => {
         </Link>
         {isAuth && (
           <div className={s.nameAuthor}>
-            <Typography>{name}</Typography>
             <UserDropdown avatar={avatar} email={name} name={email} />
           </div>
         )}
