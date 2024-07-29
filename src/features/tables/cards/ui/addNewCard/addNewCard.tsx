@@ -63,6 +63,8 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
         ...data,
       }
 
+      console.log('dataToSend', dataToSend)
+
       if (isMy) {
         updateCard(dataToSend).then(res => {
           reset({

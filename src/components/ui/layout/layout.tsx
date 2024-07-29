@@ -15,16 +15,9 @@ export const Layout = () => {
     return <h2>Loading...</h2>
   }
 
-  console.log('user data', data)
-
   return (
     <>
-      <Header
-        avatar={{ alt: data?.avatar, src: data?.avatar }}
-        email={data?.email}
-        isAuth={isAuth}
-        name={data?.name}
-      />
+      <Header avatar={data?.avatar} email={data?.email} isAuth={isAuth} name={data?.name} />
       <div className={clsx('container', s.wrapper)}>
         <Outlet />
       </div>

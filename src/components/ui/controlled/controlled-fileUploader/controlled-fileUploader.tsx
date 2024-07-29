@@ -11,7 +11,9 @@ export type ControlledFileUploaderProps<T extends FieldValues> = {
   children: ReactNode
   control: Control<T>
   imgFromCard?: null | string
+  mode?: string
   name: Path<T>
+  onUpdate?: (data: { avatar: any }) => void
 }
 
 export const ControlledFileUploader = <T extends FieldValues>({
@@ -19,7 +21,9 @@ export const ControlledFileUploader = <T extends FieldValues>({
   children,
   control,
   imgFromCard,
+  mode = 'default',
   name,
+  onUpdate,
 }: ControlledFileUploaderProps<T>) => {
   const {
     field: { onChange },
@@ -40,6 +44,11 @@ export const ControlledFileUploader = <T extends FieldValues>({
       onChange(file)
 
       setFileURL(URL.createObjectURL(file))
+
+      if (onUpdate) {
+        console.log('onUpdate')
+        onUpdate({ avatar: file })
+      }
     }
   }
 
@@ -54,7 +63,7 @@ export const ControlledFileUploader = <T extends FieldValues>({
       <img alt={'img'} className={s.image} src={fileURL || imgFromCard || defaultImage} />
 
       <div className={s.buttons}>
-        {fileURL ? (
+        {fileURL && mode !== 'profile' ? (
           <Button fullWidth onClick={deleteImageHandler} variant={'secondary'}>
             Delete Image
           </Button>
@@ -63,7 +72,7 @@ export const ControlledFileUploader = <T extends FieldValues>({
         )}
 
         <FileUploader accept={accept} name={name} onChange={onChangeHandler}>
-          {fileURL ? 'Change Image' : children}
+          {fileURL ? (mode !== 'profile' ? 'Change Image' : children) : children}
         </FileUploader>
       </div>
     </>

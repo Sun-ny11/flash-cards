@@ -1,36 +1,24 @@
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { LogOutOutline, PersonOutline } from '@/assets/components'
+import { Button } from '@/components/ui'
 import { DropDown, DropDownItem, DropDownSeparator } from '@/components/ui/dropdown'
 import { Typography } from '@/components/ui/typography'
+import { useLogout } from '@/hooks/useLogout'
 import { routes } from '@/router'
-import { useLogoutMutation } from '@/services/auth/authApi'
 
 import s from './user-dropdown.module.scss'
 
 export type UserProps = {
-  avatar?: {
-    alt: string | undefined
-    src: string | undefined
-  }
+  avatar?: string | undefined
   email: string | undefined
+  isVerificated?: boolean
   name: string | undefined
+  userId: string | undefined
 }
 
 export const UserDropdown = ({ avatar, email, name }: UserProps) => {
-  const [logout] = useLogoutMutation()
-  const navigate = useNavigate()
-
-  const onLogout = async () => {
-    try {
-      await logout()
-      localStorage.removeItem('accessToken')
-      localStorage.removeItem('refreshToken')
-      navigate(routes.public.signIn)
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  const { logout } = useLogout()
 
   return (
     <>
@@ -38,12 +26,12 @@ export const UserDropdown = ({ avatar, email, name }: UserProps) => {
         trigger={
           <div className={s.trigger}>
             <Typography>{email}</Typography>
-            <img alt={avatar?.alt || 'avatar'} src={avatar?.src || 'img/default-avatar.png'} />
+            <img alt={'avatar'} src={avatar || 'img/default-avatar.png'} />
           </div>
         }
       >
         <DropDownItem className={s.dropdownItem}>
-          <img alt={avatar?.alt || 'avatar'} src={avatar?.src || 'img/default-avatar.png'} />
+          <img alt={'avatar'} src={avatar || 'img/default-avatar.png'} />
           <div>
             <Typography as={'div'} variant={'body2'}>
               {name}
@@ -54,16 +42,14 @@ export const UserDropdown = ({ avatar, email, name }: UserProps) => {
           </div>
         </DropDownItem>
         <DropDownSeparator></DropDownSeparator>
-        <DropDownItem asChild className={s.dropdownItem}>
-          <a href={'https://google.com'}>
+        <DropDownItem className={s.dropdownItem}>
+          <Button as={Link} className={s.link} to={routes.private.profile} variant={'link'}>
             <PersonOutline />
-            <Typography as={'div'} variant={'caption'}>
-              My Profile
-            </Typography>
-          </a>
+            My Profile
+          </Button>
         </DropDownItem>
         <DropDownSeparator></DropDownSeparator>
-        <DropDownItem className={s.dropdownItem} onSelect={onLogout}>
+        <DropDownItem className={s.dropdownItem} onSelect={() => logout()}>
           <LogOutOutline />
           <Typography as={'div'} variant={'caption'}>
             Sign Out

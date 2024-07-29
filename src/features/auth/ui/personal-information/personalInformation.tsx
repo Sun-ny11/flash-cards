@@ -1,11 +1,19 @@
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
-import { Edit2Outline, LogOut } from '@/assets/components'
+import { Edit2Outline, ImageOutline, LogOut, Trash } from '@/assets/components'
 import { Button, Card, Typography } from '@/components/ui'
+import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
-import { FileUploader } from '@/components/ui/fileUploader'
 import { UserProps } from '@/features/header/ui/user-dropdown/user-dropdown'
+import { useLogout } from '@/hooks/useLogout'
+import { routes } from '@/router'
+import {
+  useDeleteMeMutation,
+  useResendVerificationMutation,
+  useUpdateUserDataMutation,
+} from '@/services/auth/authApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -13,41 +21,68 @@ import s from './personalInformation.module.scss'
 
 import defaultAvatar from './../../../../assets/images/defaultAvatar.webp'
 
-const changeNameSchema = z.object({
+const changeUserDataSchema = z.object({
+  avatar: z.any(),
   name: z.string(),
 })
 
-type FormValues = z.infer<typeof changeNameSchema>
+type FormValues = z.infer<typeof changeUserDataSchema>
 
-export const PersonalInformation = ({ avatar, email, name }: UserProps) => {
+export const PersonalInformation = ({ avatar, email, isVerificated, name, userId }: UserProps) => {
+  const navigate = useNavigate()
+  const [isEmailSent, setIsEmailSent] = useState(false)
+  const [updateData, { isLoading }] = useUpdateUserDataMutation()
+  const [resendVerification, { isLoading: isResendLoading }] = useResendVerificationMutation()
+  const [deleteMe, { isLoading: isDeletingLoading }] = useDeleteMeMutation()
+  const { logout } = useLogout()
   const [show, setShow] = useState(true)
 
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
+      avatar: null,
       name: '',
     },
-    resolver: zodResolver(changeNameSchema),
+    resolver: zodResolver(changeUserDataSchema),
   })
 
   const onSubmit = handleSubmit(data => {
-    setShow(true)
-    console.log('Запрос на смену имени ' + '' + data.name)
+    updateData(data).then(() => {
+      setShow(true)
+    })
   })
 
   const editNameHandler = () => {
     setShow(false)
   }
 
-  const logoutHandler = () => {
-    console.log('Запрос на логаут')
+  // const changeImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files) {
+  //     const formData = new FormData()
+  //
+  //     formData.append('avatar', e.target.files[0])
+  //     // отправить на сервер formData
+  //   }
+  // }
+
+  const avatarUpdateHandler = (data: { avatar: any }) => {
+    updateData(data)
   }
 
-  const changeImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const formData = new FormData()
+  const resendVerificationHandler = async () => {
+    try {
+      await resendVerification({ userId })
+      setIsEmailSent(true)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
-      formData.append('avatar', e.target.files[0])
-      // отправить на сервер formData
+  const deleteAccountHandler = async () => {
+    try {
+      await deleteMe()
+      navigate(routes.public.signIn)
+    } catch (e) {
+      console.log(e)
     }
   }
 
@@ -57,13 +92,19 @@ export const PersonalInformation = ({ avatar, email, name }: UserProps) => {
         Personal Information
       </Typography>
 
-      <div className={s.wrapper}>
+      <form className={s.wrapper} onSubmit={onSubmit}>
         <div className={s.avatar}>
-          <img alt={avatar?.alt} src={avatar?.src || defaultAvatar} />
           {show && (
-            <FileUploader accept={'image/*'} name={''} onChange={changeImageHandler}>
-              <Edit2Outline />
-            </FileUploader>
+            <ControlledFileUploader
+              accept={'image/*'}
+              control={control}
+              imgFromCard={avatar || defaultAvatar}
+              mode={'profile'}
+              name={'avatar'}
+              onUpdate={avatarUpdateHandler}
+            >
+              <ImageOutline />
+            </ControlledFileUploader>
           )}
         </div>
 
@@ -79,22 +120,59 @@ export const PersonalInformation = ({ avatar, email, name }: UserProps) => {
               {email}
             </Typography>
 
-            <Button onClick={logoutHandler} variant={'secondary'}>
+            {isVerificated ? (
+              <Typography as={'p'} className={s.email} variant={'body2'}>
+                Account verificated
+              </Typography>
+            ) : (
+              <>
+                <Typography as={'p'} className={s.email} variant={'body2'}>
+                  Account is not verificated
+                </Typography>
+                {isEmailSent ? (
+                  <Typography variant={'h4'}>Email verification sent</Typography>
+                ) : (
+                  <Button
+                    className={s.optionBtn}
+                    disabled={isResendLoading}
+                    onClick={resendVerificationHandler}
+                    variant={'primary'}
+                  >
+                    Send verification link
+                  </Button>
+                )}
+              </>
+            )}
+
+            <Button
+              className={s.optionBtn}
+              disabled={isDeletingLoading}
+              onClick={deleteAccountHandler}
+              variant={'secondary'}
+            >
+              <Trash />
+              Delete account
+            </Button>
+
+            <Button onClick={() => logout()} variant={'secondary'}>
               <LogOut />
               Logout
             </Button>
           </div>
         ) : (
-          <form onSubmit={onSubmit}>
-            <div className={s.changeName}>
-              <ControlledTextField control={control} label={'Nickname'} name={'name'} />
-              <Button fullWidth onClick={onSubmit}>
-                Save Changes
-              </Button>
-            </div>
-          </form>
+          <div className={s.changeName}>
+            <ControlledTextField
+              control={control}
+              defaultValue={name}
+              label={'Nickname'}
+              name={'name'}
+            />
+            <Button disabled={isLoading} fullWidth onClick={onSubmit}>
+              Save Changes
+            </Button>
+          </div>
         )}
-      </div>
+      </form>
     </Card>
   )
 }
