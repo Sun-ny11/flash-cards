@@ -10,6 +10,7 @@ import { Layout } from '@/components/ui/layout/layout'
 import { CheckEmail } from '@/features/auth/ui/check-email'
 import { CreateNewPassword } from '@/features/auth/ui/create-new-password'
 import { ForgotPassword } from '@/features/auth/ui/forgotPassword/forgotPassword'
+import Profile from '@/features/auth/ui/personal-information/profile'
 import { SignIn } from '@/features/auth/ui/sign-in'
 import { SignUp } from '@/features/auth/ui/sign-up'
 import { CardPage } from '@/features/tables/cards/ui/cardPage/cardPage'
@@ -23,6 +24,7 @@ export const routes = {
     deck: '/decks/:deckId',
     decks: '/decks',
     main: '/',
+    profile: '/profile',
   },
   public: {
     signIn: '/sign-in',
@@ -69,6 +71,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <CardPage />,
     path: routes.private.card,
+  },
+  {
+    element: <Profile />,
+    path: routes.private.profile,
   },
 ]
 

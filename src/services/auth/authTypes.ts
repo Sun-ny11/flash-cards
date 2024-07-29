@@ -26,7 +26,10 @@ export type CreateNewPassword = {
   password: string
   token: string
 }
-
+export type UpdateUserDataArgs = {
+  avatar?: string
+  name?: string
+}
 export type SignUpArgs = {
   email: string
   html?: string
