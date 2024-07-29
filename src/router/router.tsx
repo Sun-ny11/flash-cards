@@ -9,6 +9,7 @@ import {
 import { Layout } from '@/components/ui/layout/layout'
 import { CheckEmail } from '@/features/auth/ui/check-email'
 import { CreateNewPassword } from '@/features/auth/ui/create-new-password'
+import { EmailConfirmed } from '@/features/auth/ui/email-confirmed'
 import { ForgotPassword } from '@/features/auth/ui/forgotPassword/forgotPassword'
 import Profile from '@/features/auth/ui/personal-information/profile'
 import { SignIn } from '@/features/auth/ui/sign-in'
@@ -48,6 +49,10 @@ const publicRoutes: RouteObject[] = [
   {
     element: <CreateNewPassword />,
     path: '/create-new-password/:token',
+  },
+  {
+    element: <EmailConfirmed />,
+    path: '/confirm-email/:code',
   },
   {
     element: <CheckEmail />,

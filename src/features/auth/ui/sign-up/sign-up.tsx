@@ -47,6 +47,7 @@ export const SignUp = () => {
       await signUp({
         ...data,
         html: "<b>Hello, ##name##!</b><br/>Please confirm your email by clicking on the link below:<br/><a href=\"http://localhost:5173/confirm-email/##token##\">Confirm email</a>. If it doesn'''t work, copy and paste the following link in your browser:<br/>http://localhost:5173/confirm-email/##token##",
+        sendConfirmationEmail: true,
       }).unwrap()
       navigate(routes.public.signIn)
     } catch (error: any) {

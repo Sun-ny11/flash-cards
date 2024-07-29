@@ -6,7 +6,13 @@ const Profile = () => {
 
   return (
     <>
-      <PersonalInformation avatar={data?.avatar} email={data?.email} name={data?.name} />
+      <PersonalInformation
+        avatar={data?.avatar}
+        email={data?.email}
+        isVerificated={data?.isEmailVerified}
+        name={data?.name}
+        userId={data?.id}
+      />
     </>
   )
 }
