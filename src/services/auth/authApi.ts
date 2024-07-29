@@ -3,14 +3,24 @@ import {
   CreateNewPassword,
   LoginArgs,
   RecoverPassword,
+  ResendVerification,
   SignUpArgs,
   UpdateUserDataArgs,
   User,
+  confirmEmail,
 } from '@/services/auth/authTypes'
 import { flashcardsApi } from '@/services/flashCardsApi'
 
 const authApi = flashcardsApi.injectEndpoints({
   endpoints: builder => ({
+    confirmEmail: builder.mutation<void, confirmEmail>({
+      invalidatesTags: ['Me'],
+      query: ({ code }) => ({
+        body: { code },
+        method: 'POST',
+        url: '/v1/auth/verify-email',
+      }),
+    }),
     createNewPassword: builder.mutation<void, CreateNewPassword>({
       query: ({ password, token }) => {
         return {
@@ -19,6 +29,12 @@ const authApi = flashcardsApi.injectEndpoints({
           url: `/v1/auth/reset-password/${token}`,
         }
       },
+    }),
+    deleteMe: builder.mutation<User, void>({
+      query: () => ({
+        method: 'DELETE',
+        url: 'v1/auth/me',
+      }),
     }),
     login: builder.mutation<AuthResponse, LoginArgs>({
       // invalidatesTags: ['Me'],
@@ -46,6 +62,7 @@ const authApi = flashcardsApi.injectEndpoints({
       }),
     }),
     logout: builder.mutation<undefined, void>({
+      invalidatesTags: ['Me'],
       query: () => ({
         method: 'POST',
         url: `/v1/auth/logout`,
@@ -62,6 +79,17 @@ const authApi = flashcardsApi.injectEndpoints({
         body,
         method: 'POST',
         url: 'v1/auth/recover-password',
+      }),
+    }),
+    resendVerification: builder.mutation<void, ResendVerification>({
+      query: ({ userId }) => ({
+        body: {
+          html: "<b>Hello, ##name##!</b><br/>Please confirm your email by clicking on the link below:<br/><a href=\"http://localhost:5173/confirm-email/##token##\">Confirm email</a>. If it doesn'''t work, copy and paste the following link in your browser:<br/>http://localhost:5173/confirm-email/##token##",
+          subject: 'Email verification',
+          userId,
+        },
+        method: 'POST',
+        url: 'v1/auth/resend-verification-email',
       }),
     }),
     signUp: builder.mutation<User, SignUpArgs>({
@@ -95,11 +123,14 @@ const authApi = flashcardsApi.injectEndpoints({
 })
 
 export const {
+  useConfirmEmailMutation,
   useCreateNewPasswordMutation,
+  useDeleteMeMutation,
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
   useRecoverPasswordMutation,
+  useResendVerificationMutation,
   useSignUpMutation,
   useUpdateUserDataMutation,
 } = authApi

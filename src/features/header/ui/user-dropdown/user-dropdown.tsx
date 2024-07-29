@@ -12,7 +12,9 @@ import s from './user-dropdown.module.scss'
 export type UserProps = {
   avatar?: string | undefined
   email: string | undefined
+  isVerificated?: boolean
   name: string | undefined
+  userId: string | undefined
 }
 
 export const UserDropdown = ({ avatar, email, name }: UserProps) => {

@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 
 import { ForgotPasswordEmail } from '@/assets/components'
 import { Button, Card, Typography } from '@/components/ui'
+import { routes } from '@/router'
 
 import s from './checkEmail.module.scss'
 
@@ -23,7 +24,12 @@ export const CheckEmail = ({}: Props) => {
           {email}
         </Typography>
       </div>
-      <Button as={Link} className={s.linkForgotPassword} to={'/login'} variant={'primary'}>
+      <Button
+        as={Link}
+        className={s.linkForgotPassword}
+        to={routes.public.signIn}
+        variant={'primary'}
+      >
         Back to Sign In
       </Button>
     </Card>

@@ -22,9 +22,17 @@ export type RecoverPassword = {
   email: string
   html: string
 }
+export type ResendVerification = {
+  html?: string
+  subject?: string
+  userId?: string
+}
 export type CreateNewPassword = {
   password: string
   token: string
+}
+export type confirmEmail = {
+  code: string
 }
 export type UpdateUserDataArgs = {
   avatar?: string

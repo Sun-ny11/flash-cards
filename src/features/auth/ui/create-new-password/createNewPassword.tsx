@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { Button, Card, Typography } from '@/components/ui'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
+import { routes } from '@/router'
 import { useCreateNewPasswordMutation } from '@/services/auth/authApi'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -33,7 +34,7 @@ export const CreateNewPassword = ({}: Props) => {
   })
   const onSubmitHandler = (data: CreateNewPasswordValues) => {
     createNewPassword({ ...data, token }).then(() => {
-      navigate('/login')
+      navigate(routes.public.signIn)
     })
     //показать ошибку если есть
   }
