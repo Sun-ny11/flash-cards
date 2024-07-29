@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    avatar: { alt: 'aaa', src: '' },
+    avatar: '',
     email: 'aaqqqqqqqaa@aaa.aa',
     name: 'Naaaaaaaaame',
   },

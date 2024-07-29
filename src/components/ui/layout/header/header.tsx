@@ -9,10 +9,7 @@ import clsx from 'clsx'
 import s from './header.module.scss'
 
 type Props = {
-  avatar?: {
-    alt: string | undefined
-    src: string | undefined
-  }
+  avatar?: string | undefined
   email: string | undefined
   isAuth: boolean
   name: string | undefined
