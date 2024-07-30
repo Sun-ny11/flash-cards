@@ -112,7 +112,9 @@ export const CardPage = () => {
               <Button
                 disabled={saveCardGradeIsLoading}
                 fullWidth
-                onClick={() => {}}
+                onClick={() => {
+                  setAnswerIsShown(false)
+                }}
                 variant={'primary'}
               >
                 Next Question
