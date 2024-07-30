@@ -16,5 +16,6 @@ export const Default: Story = {
     avatar: '',
     email: 'aaqqqqqqqaa@aaa.aa',
     name: 'Naaaaaaaaame',
+    userId: '',
   },
 }

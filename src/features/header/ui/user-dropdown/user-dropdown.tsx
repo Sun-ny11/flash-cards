@@ -14,7 +14,6 @@ export type UserProps = {
   email: string | undefined
   isVerificated?: boolean
   name: string | undefined
-  userId: string | undefined
 }
 
 export const UserDropdown = ({ avatar, email, name }: UserProps) => {

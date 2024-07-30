@@ -76,11 +76,14 @@ const cardsApi = flashcardsApi.injectEndpoints({
         formData.append('answer', answer)
         formData.append('question', question)
 
-        if (answerImg) {
+        if (answerImg === 'delete') {
+          formData.append('answerImg', '')
+        } else if (answerImg) {
           formData.append('answerImg', answerImg)
         }
-
-        if (questionImg) {
+        if (questionImg === 'delete') {
+          formData.append('questionImg', '')
+        } else if (questionImg) {
           formData.append('questionImg', questionImg)
         }
 
