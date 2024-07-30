@@ -21,5 +21,18 @@ type Story = StoryObj<typeof meta> // Тип истории
 // История
 export const Primary: Story = {
   // args - пропсы
-  args: {},
+  args: {
+    deck: {
+      author: { id: '1', name: 'Author' },
+      cardsCount: 1,
+      cover: 'string123',
+      created: 'string',
+      id: 'string',
+      isFavorite: true,
+      isPrivate: true,
+      name: 'string',
+      updated: 'string',
+      userId: 'string',
+    },
+  },
 }

@@ -22,10 +22,7 @@ type Story = StoryObj<typeof meta> // Тип истории
 export const Primary: Story = {
   // args - пропсы
   args: {
-    avatar: {
-      alt: 'avatar',
-      src: 'public/img/avatar.png',
-    },
+    avatar: '',
     email: 'j&johnson@gmail.com',
     name: 'Ivan',
   },

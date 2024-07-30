@@ -27,8 +27,17 @@ const changeUserDataSchema = z.object({
 })
 
 type FormValues = z.infer<typeof changeUserDataSchema>
+export type UserWithIdProps = {
+  userId: string | undefined
+} & UserProps
 
-export const PersonalInformation = ({ avatar, email, isVerificated, name, userId }: UserProps) => {
+export const PersonalInformation = ({
+  avatar,
+  email,
+  isVerificated,
+  name,
+  userId,
+}: UserWithIdProps) => {
   const navigate = useNavigate()
   const [isEmailSent, setIsEmailSent] = useState(false)
   const [updateData, { isLoading }] = useUpdateUserDataMutation()

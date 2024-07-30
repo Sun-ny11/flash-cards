@@ -98,9 +98,9 @@
 }
 
 .label {
-  display: block;
-  color: var(--color-light-100);
   cursor: pointer;
+  display: block;
+  color: var(--color-dark-100);
 
   &.disabled {
     color: var(--color-dark-300);

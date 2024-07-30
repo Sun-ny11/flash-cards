@@ -45,7 +45,9 @@ const decksApi = flashcardsApi.injectEndpoints({
           formData.append('isPrivate', isPrivate.toString())
         }
 
-        if (cover) {
+        if (cover === 'delete') {
+          formData.append('cover', '')
+        } else if (cover) {
           formData.append('cover', cover)
         }
 
@@ -120,7 +122,9 @@ const decksApi = flashcardsApi.injectEndpoints({
           formData.append('isPrivate', isPrivate.toString())
         }
 
-        if (cover) {
+        if (cover === 'delete') {
+          formData.append('cover', '')
+        } else if (cover) {
           formData.append('cover', cover)
         }
 
