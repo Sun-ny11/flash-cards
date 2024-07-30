@@ -1,6 +1,8 @@
 import { ChangeEvent, MouseEvent, ReactNode, useState } from 'react'
 import { Control, FieldValues, Path, useController } from 'react-hook-form'
 
+import clsx from 'clsx'
+
 import s from './controlled-fileUploader.module.scss'
 
 import defaultImage from '../../../../assets/images/defaultCard.webp'
@@ -9,6 +11,7 @@ import { FileUploader } from '../../fileUploader'
 export type ControlledFileUploaderProps<T extends FieldValues> = {
   accept: string
   children: ReactNode
+  className?: string
   control: Control<T>
   imgFromCard?: null | string
   mode?: string
@@ -19,6 +22,7 @@ export type ControlledFileUploaderProps<T extends FieldValues> = {
 export const ControlledFileUploader = <T extends FieldValues>({
   accept,
   children,
+  className,
   control,
   imgFromCard,
   mode = 'default',
@@ -60,7 +64,11 @@ export const ControlledFileUploader = <T extends FieldValues>({
 
   return (
     <>
-      <img alt={'img'} className={s.image} src={fileURL || imgFromCard || defaultImage} />
+      <img
+        alt={'img'}
+        className={clsx(className, s.image)}
+        src={fileURL || imgFromCard || defaultImage}
+      />
 
       <div className={s.buttons}>
         {fileURL && mode !== 'profile' ? (

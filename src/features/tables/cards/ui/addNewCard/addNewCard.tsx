@@ -96,9 +96,12 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
       <Modal onOpenChange={() => setOpen(false)} open={open} title={nameTitle}>
         <Card className={s.card}>
           <form onSubmit={onSubmit}>
-            <Typography variant={'subtitle2'}>Question:</Typography>
+            <Typography as={'h2'} className={s.subtitle} variant={'subtitle2'}>
+              Question:
+            </Typography>
 
             <ControlledTextField
+              className={s.input}
               control={control}
               error={errors.question?.message}
               label={'Question?'}
@@ -106,29 +109,35 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
             />
             <ControlledFileUploader
               accept={'image/*'}
+              className={s.image}
               control={control}
               imgFromCard={card?.questionImg}
               name={'questionImg'}
             >
               <ImageOutline /> Upload Image
             </ControlledFileUploader>
+            <div className={s.answer}>
+              <Typography as={'h2'} className={s.subtitle} variant={'subtitle2'}>
+                Answer:
+              </Typography>
 
-            <Typography variant={'subtitle2'}>Answer:</Typography>
-
-            <ControlledTextField
-              control={control}
-              error={errors.answer?.message}
-              label={'Answer'}
-              name={'answer'}
-            />
-            <ControlledFileUploader
-              accept={'image/*'}
-              control={control}
-              imgFromCard={card?.answerImg}
-              name={'answerImg'}
-            >
-              <ImageOutline /> Upload Image
-            </ControlledFileUploader>
+              <ControlledTextField
+                className={s.input}
+                control={control}
+                error={errors.answer?.message}
+                label={'Question?'}
+                name={'answer'}
+              />
+              <ControlledFileUploader
+                accept={'image/*'}
+                className={s.image}
+                control={control}
+                imgFromCard={card?.answerImg}
+                name={'answerImg'}
+              >
+                <ImageOutline /> Upload Image
+              </ControlledFileUploader>
+            </div>
             <div className={s.button}>
               <Button onClick={cancelHandler} variant={'secondary'}>
                 Cancel

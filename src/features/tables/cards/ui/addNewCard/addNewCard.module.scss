@@ -1,10 +1,23 @@
 .card {
   width: 542px;
   background-color: inherit;
-}
+  border: none;
 
-.button {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 36px;
+  .button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+  }
+
+  .image {
+    margin: 15px 0 20px;
+  }
+
+  .answer {
+    margin-top: 24px;
+  }
+
+  .subtitle {
+    margin-bottom: 12px;
+  }
 }
