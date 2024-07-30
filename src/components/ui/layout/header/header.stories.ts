@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>
 
 export const HeaderStory: Story = {
   args: {
-    avatar: { alt: 'photo', src: ava },
+    avatar: ava,
     email: 'test@test.com',
     isAuth: true,
     name: 'ivan',
@@ -24,7 +24,7 @@ export const HeaderStory: Story = {
 }
 export const HeaderIsNotAuth: Story = {
   args: {
-    avatar: { alt: 'photo', src: ava },
+    avatar: ava,
     email: 'test@test.com',
     isAuth: false,
     name: 'ivan',

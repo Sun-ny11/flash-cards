@@ -53,9 +53,6 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
 
   const onSubmit = handleSubmit((data: FormValues) => {
     setOpen(false)
-    // удалять свойства с пустой строкой при отправке на сервер,
-    // чтобы при редактировании, если не было загружено изображение,
-    // старое изображение не перезаписывалось пустой строкой
 
     if (deckId) {
       const dataToSend = {

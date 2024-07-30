@@ -37,29 +37,27 @@ export const ControlledFileUploader = <T extends FieldValues>({
   })
 
   const [fileURL, setFileURL] = useState<string>()
-  // const formData = new FormData()
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0]
-
-      // formData.append('cover', file)
 
       onChange(file)
 
       setFileURL(URL.createObjectURL(file))
 
       if (onUpdate) {
-        console.log('onUpdate')
         onUpdate({ avatar: file })
       }
+      // Сброс значения input, чтобы можно было выбрать тот же файл снова
+      e.target.value = ''
     }
   }
 
   const deleteImageHandler = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    onChange('')
-    setFileURL('')
+    onChange('delete')
+    setFileURL(defaultImage)
   }
 
   return (
@@ -71,7 +69,7 @@ export const ControlledFileUploader = <T extends FieldValues>({
       />
 
       <div className={s.buttons}>
-        {fileURL && mode !== 'profile' ? (
+        {mode !== 'profile' && (fileURL || imgFromCard) && fileURL !== defaultImage ? (
           <Button fullWidth onClick={deleteImageHandler} variant={'secondary'}>
             Delete Image
           </Button>
