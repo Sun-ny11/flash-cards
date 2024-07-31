@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { NavLink, useParams } from 'react-router-dom'
 
@@ -31,6 +31,7 @@ export const CardPage = () => {
     id: deckId || '',
   })
   const [saveCardGrade, { isLoading: saveCardGradeIsLoading }] = useSaveCardGradeMutation()
+
   const { control, handleSubmit } = useForm<RadioGroupType>({
     defaultValues: {
       grade: '1',
@@ -46,6 +47,10 @@ export const CardPage = () => {
       grade: parseInt(data.grade, 10),
     })
   })
+
+  useEffect(() => {
+    setAnswerIsShown(false)
+  }, [randomCardData])
 
   if (deckDataIsLoading || randomCardIsLoading) {
     return <h2>Loading...</h2>
@@ -112,9 +117,7 @@ export const CardPage = () => {
               <Button
                 disabled={saveCardGradeIsLoading}
                 fullWidth
-                onClick={() => {
-                  setAnswerIsShown(false)
-                }}
+                onClick={() => {}}
                 variant={'primary'}
               >
                 Next Question
