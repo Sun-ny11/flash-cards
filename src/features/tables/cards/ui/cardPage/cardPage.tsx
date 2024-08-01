@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { NavLink, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/components'
+import { Loading } from '@/assets/components/Loading'
 import { Button, Card, Typography } from '@/components/ui'
 import { ControlledRadioGroup } from '@/components/ui/controlled/controlledRadioGroup'
 import { useGetRandomCardQuery, useSaveCardGradeMutation } from '@/services/cards/cardsApi'
@@ -53,7 +54,7 @@ export const CardPage = () => {
   }, [randomCardData])
 
   if (deckDataIsLoading || randomCardIsLoading) {
-    return <h2>Loading...</h2>
+    return <Loading />
   }
 
   return (
