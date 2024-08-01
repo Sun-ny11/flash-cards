@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
+import { Loading } from '@/assets/components/Loading'
 import { useMeQuery } from '@/services/auth/authApi'
 import clsx from 'clsx'
 
@@ -12,7 +13,7 @@ export const Layout = () => {
   const isAuth = !isError && !isLoading
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <Loading />
   }
 
   return (

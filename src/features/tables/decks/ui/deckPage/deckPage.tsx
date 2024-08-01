@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/components'
+import { Loading } from '@/assets/components/Loading'
 import defaultCard from '@/assets/images/defaultCard.webp'
 import { Button, Input, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
@@ -38,7 +39,7 @@ export const DeckPage = () => {
   }, [searchValue])
 
   if (deckDataIsLoading || cardsDataIsLoading) {
-    return <h2>Loading...</h2>
+    return <Loading />
   }
 
   return (
