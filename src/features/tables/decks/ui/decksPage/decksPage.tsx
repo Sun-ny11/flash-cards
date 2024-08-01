@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { Loading } from '@/assets/components/Loading'
 import { Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { useDecksSearchParams } from '@/features/tables/decks/lib/useDecksSearchParams'
@@ -56,7 +57,7 @@ const DecksPage = () => {
   }, [minMaxCardsData])
 
   if (minMaxCardsDataIsLoading || decksAreLoading) {
-    return <h2>Loading...</h2>
+    return <Loading />
   }
 
   return (
