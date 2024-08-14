@@ -13,6 +13,7 @@ type Props = {
   isDisabled?: boolean
   name?: string
   onDeleteCallback: () => void
+  variant?: 'link' | 'primary' | 'secondary' | 'withSVG'
 }
 
 export const DeleteCell = ({
@@ -21,6 +22,7 @@ export const DeleteCell = ({
   isDisabled,
   name,
   onDeleteCallback,
+  variant,
 }: Props) => {
   const [open, setOpen] = useState(false)
 
@@ -29,7 +31,7 @@ export const DeleteCell = ({
       <Button
         className={clsx(s.openModal, className)}
         onClick={() => setOpen(true)}
-        variant={'withSVG'}
+        variant={variant || 'withSVG'}
       >
         <TrashOutline />
       </Button>

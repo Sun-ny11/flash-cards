@@ -4,6 +4,8 @@ import { TableHeader } from '@/features/tables/tableHeader/tableHeader'
 import { deckTableName } from '@/features/tables/tableHeaderName'
 import { Deck } from '@/services/decks/decks.types'
 
+import s from './decksList.module.scss'
+
 type Props = {
   items: Deck[] | undefined
   sortingStatus: (status: null | string) => void
@@ -15,7 +17,7 @@ export const DecksList = ({ items, sortingStatus }: Props) => {
   }
 
   return (
-    <Table.Root>
+    <Table.Root className={s.tableRoot}>
       <TableHeader item={deckTableName} sortingStatus={sortingStatus} />
       <Table.Body>
         {items.map(el => (

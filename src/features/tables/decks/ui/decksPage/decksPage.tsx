@@ -12,6 +12,8 @@ import { useGetDecksQuery, useGetMinMaxCardsQuery } from '@/services/decks/decks
 
 import s from './decksPage.module.scss'
 
+import { DecksMobile } from './decksMobile/decksMobile'
+
 const DecksPage = () => {
   const [sortingStatus, setSortingStatus] = useState<null | string>()
   const { data } = useMeQuery()
@@ -79,7 +81,8 @@ const DecksPage = () => {
         setCardsRange={setCardsRange}
         setSearchValue={onSearchValueChange}
       />
-      <DecksList items={decksData?.items} sortingStatus={setSortingStatus} />
+      {/* <DecksList items={decksData?.items} sortingStatus={setSortingStatus} /> */}
+      <DecksMobile items={decksData?.items} />
       {decksData && (
         <Pagination
           className={s.pagination}

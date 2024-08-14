@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  margin-bottom: 24px;
+
+  border: 1px solid var(--color-dark-500);
+  border-radius: 4px;
+
+  .cardWrapper {
+    padding: 16px 16px 0;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+  }
+
+  .buttonsWrapper {
+    display: flex;
+    border-top: 1px solid var(--color-dark-500);
+
+    .button {
+      background-color: inherit;
+      border-right: 1px solid var(--color-dark-500);
+
+      &:last-child {
+        width: 100%;
+        text-align: center;
+        border: none;
+      }
+    }
+  }
+}

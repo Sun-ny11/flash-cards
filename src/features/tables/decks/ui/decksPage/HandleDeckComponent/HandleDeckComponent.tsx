@@ -26,16 +26,20 @@ type Props = {
   className?: string
   deckId?: string
   defaultValues?: FormValues
+  fullWidth?: boolean
   isEditMode?: boolean
   label?: string
+  variant?: 'link' | 'primary' | 'secondary' | 'withSVG'
 }
 
 export const HandleDeckComponent = ({
   className,
   deckId,
   defaultValues = { cover: '', isPrivate: false, name: '' },
+  fullWidth,
   isEditMode,
   label,
+  variant,
 }: Props) => {
   const [open, setOpen] = useState(false)
   const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
@@ -83,8 +87,9 @@ export const HandleDeckComponent = ({
         <Button
           as={'button'}
           className={clsx(className, label && s.editButton)}
+          fullWidth={fullWidth}
           onClick={() => setOpen(true)}
-          variant={'withSVG'}
+          variant={variant || 'withSVG'}
         >
           <Edit2Outline />
           {label && (
