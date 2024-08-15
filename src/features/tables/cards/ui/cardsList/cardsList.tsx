@@ -5,11 +5,12 @@ import { cardTableName } from '@/features/tables/tableHeaderName'
 import { Card } from '@/services/cards/cards.types'
 
 type Props = {
+  className: string
   isMy: boolean
   items: Card[] | undefined
   sortingStatus: (status: null | string) => void
 }
-export const CardsList = ({ isMy, items, sortingStatus }: Props) => {
+export const CardsList = ({ className, isMy, items, sortingStatus }: Props) => {
   if (!items) {
     return <Table.Empty>There is no any cards</Table.Empty>
   }
@@ -17,7 +18,7 @@ export const CardsList = ({ isMy, items, sortingStatus }: Props) => {
   const filteredCardTableName = isMy ? cardTableName : cardTableName.filter(el => el.flag !== false)
 
   return (
-    <Table.Root>
+    <Table.Root className={className}>
       <TableHeader item={filteredCardTableName} sortingStatus={sortingStatus} />
 
       <Table.Body>

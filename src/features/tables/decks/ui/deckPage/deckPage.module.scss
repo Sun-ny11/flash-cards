@@ -9,20 +9,21 @@
 }
 
 .back {
-  text-decoration: none;
   display: flex;
-  align-items: center;
   gap: 6px;
+  align-items: center;
+  text-decoration: none;
+
   div {
-    margin: 0 0 33px 0;
+    margin: 0 0 33px;
   }
 }
 
 .image {
   width: 170px;
   height: 107px;
-  object-fit: contain;
   margin-bottom: 25px;
+  object-fit: contain;
 }
 
 .pagination {
@@ -35,6 +36,20 @@
 
 .cardInfoContainer {
   display: flex;
-  align-items: center;
   gap: 10px;
+  align-items: center;
+}
+
+.cardsMobile {
+  display: none;
+
+  @media screen and (width <=580px) {
+    display: block;
+  }
+}
+
+.cardsList {
+  @media screen and (width <=580px) {
+    display: none;
+  }
 }

@@ -8,6 +8,7 @@ import { Button, Input, Typography } from '@/components/ui'
 import { Pagination } from '@/components/ui/pagination'
 import { CardDropdown } from '@/features/card/ui/card-dropdown/card-dropdown'
 import { AddNewCard } from '@/features/tables/cards/ui/addNewCard/addNewCard'
+import { CardsMobile } from '@/features/tables/cards/ui/cardMobile/cardMobile'
 import { CardsList } from '@/features/tables/cards/ui/cardsList/cardsList'
 import { useMeQuery } from '@/services/auth/authApi'
 import { useGetCardsQuery } from '@/services/cards/cardsApi'
@@ -31,6 +32,8 @@ export const DeckPage = () => {
   })
   const isMyDeck = userData?.id === deckData?.userId
   let filteredCards = cardsData?.items
+
+  console.log(filteredCards)
 
   useEffect(() => {
     filteredCards = cardsData?.items.filter(card => {
@@ -76,7 +79,15 @@ export const DeckPage = () => {
         />
       </div>
       {filteredCards ? (
-        <CardsList isMy={isMyDeck} items={filteredCards} sortingStatus={setSortingStatus} />
+        <>
+          <CardsList
+            className={s.cardsList}
+            isMy={isMyDeck}
+            items={filteredCards}
+            sortingStatus={setSortingStatus}
+          />
+          <CardsMobile className={s.cardsMobile} isMy={isMyDeck} items={filteredCards} />
+        </>
       ) : (
         <Typography>There is no cards in this deck!</Typography>
       )}
