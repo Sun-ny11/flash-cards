@@ -33,8 +33,6 @@ export const DeckPage = () => {
   const isMyDeck = userData?.id === deckData?.userId
   let filteredCards = cardsData?.items
 
-  console.log(filteredCards)
-
   useEffect(() => {
     filteredCards = cardsData?.items.filter(card => {
       return card.question.toLowerCase().includes(searchValue.toLowerCase())
