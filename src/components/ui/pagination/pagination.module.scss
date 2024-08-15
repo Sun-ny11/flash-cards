@@ -1,6 +1,10 @@
 .wrapContainer {
   display: flex;
   gap: 10px;
+
+  @media screen and (width <=580px) {
+    gap: 0;
+  }
 }
 
 .paginationContainer {
@@ -61,6 +65,10 @@
       }
     }
   }
+
+  @media screen and (width <=580px) {
+    max-width: 100%;
+  }
 }
 
 .selectContainer {
@@ -89,5 +97,9 @@
   &:focus-visible {
     border-radius: 2px;
     outline: 2px solid var(--color-info-900);
+  }
+
+  @media screen and (width <=580px) {
+    display: none;
   }
 }

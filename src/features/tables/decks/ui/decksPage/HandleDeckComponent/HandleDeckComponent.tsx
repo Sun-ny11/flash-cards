@@ -2,7 +2,7 @@ import { MouseEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Edit2Outline, ImageOutline } from '@/assets/components'
-import { Button, ControlledCheckbox, Typography } from '@/components/ui'
+import { Button, ButtonProps, ControlledCheckbox, Typography } from '@/components/ui'
 import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
@@ -23,14 +23,11 @@ const newDeckSchema = z.object({
 type FormValues = z.infer<typeof newDeckSchema>
 
 type Props = {
-  className?: string
   deckId?: string
   defaultValues?: FormValues
-  fullWidth?: boolean
   isEditMode?: boolean
   label?: string
-  variant?: 'link' | 'primary' | 'secondary' | 'withSVG'
-}
+} & ButtonProps
 
 export const HandleDeckComponent = ({
   className,

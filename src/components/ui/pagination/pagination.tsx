@@ -15,18 +15,16 @@ type Props = {
   siblingCount?: number // колличество отображаемых эллементов между точек с каждой стороны от выбранной страницы
   totalCount: number
 }
-export const Pagination = (props: Props) => {
-  let {
-    className,
-    currentPage,
-    onPageChange,
-    onPageSizeChange,
-    pageSize,
-    siblingCount = 1,
-    totalCount,
-    ...rest
-  } = props
-
+export const Pagination = ({
+  className,
+  currentPage,
+  onPageChange,
+  onPageSizeChange,
+  pageSize,
+  siblingCount = 1,
+  totalCount,
+  ...rest
+}: Props) => {
   const paginationRange = usePagination({
     currentPage,
     pageSize,

@@ -81,8 +81,12 @@ const DecksPage = () => {
         setCardsRange={setCardsRange}
         setSearchValue={onSearchValueChange}
       />
-      {/* <DecksList items={decksData?.items} sortingStatus={setSortingStatus} /> */}
-      <DecksMobile items={decksData?.items} />
+      <DecksList
+        className={s.decksList}
+        items={decksData?.items}
+        sortingStatus={setSortingStatus}
+      />
+      <DecksMobile className={s.decksMobile} items={decksData?.items} />
       {decksData && (
         <Pagination
           className={s.pagination}

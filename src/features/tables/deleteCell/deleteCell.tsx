@@ -1,20 +1,18 @@
 import { useState } from 'react'
 
 import { TrashOutline } from '@/assets/components'
-import { Button, Typography } from '@/components/ui'
+import { Button, ButtonProps, Typography } from '@/components/ui'
 import { Modal } from '@/components/ui/modal'
 import clsx from 'clsx'
 
 import s from './deleteCell.module.scss'
 
 type Props = {
-  className?: string
   deleteThat: 'card' | 'deck'
   isDisabled?: boolean
   name?: string
   onDeleteCallback: () => void
-  variant?: 'link' | 'primary' | 'secondary' | 'withSVG'
-}
+} & ButtonProps
 
 export const DeleteCell = ({
   className,
