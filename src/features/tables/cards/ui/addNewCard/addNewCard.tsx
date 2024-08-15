@@ -2,7 +2,7 @@ import { MouseEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Edit2Outline, ImageOutline } from '@/assets/components'
-import { Button, Card, Typography } from '@/components/ui'
+import { Button, ButtonProps, Card, Typography } from '@/components/ui'
 import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
@@ -17,8 +17,8 @@ type Props = {
   card?: CardType
   deckId: string | undefined
   isMy?: boolean
-}
-export const AddNewCard = ({ card, deckId, isMy }: Props) => {
+} & ButtonProps
+export const AddNewCard = ({ card, className, deckId, fullWidth, isMy, variant }: Props) => {
   const [open, setOpen] = useState(false)
   const [createCard, { isLoading }] = useCreateCardMutation()
   const [updateCard] = useUpdateCardMutation()
@@ -86,7 +86,12 @@ export const AddNewCard = ({ card, deckId, isMy }: Props) => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)} variant={isMy ? 'withSVG' : 'primary'}>
+      <Button
+        className={className}
+        fullWidth={fullWidth}
+        onClick={() => setOpen(true)}
+        variant={variant ? variant : isMy ? 'withSVG' : 'primary'}
+      >
         {isMy ? <Edit2Outline /> : 'Add New Card'}
       </Button>
 

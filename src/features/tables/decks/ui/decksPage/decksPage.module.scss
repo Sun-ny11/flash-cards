@@ -4,6 +4,21 @@
   justify-content: space-between;
   margin-bottom: 7px;
 }
+
 .pagination {
   margin-top: 24px;
+}
+
+.decksMobile {
+  display: none;
+
+  @media screen and (width <=580px) {
+    display: block;
+  }
+}
+
+.decksList {
+  @media screen and (width <=580px) {
+    display: none;
+  }
 }
