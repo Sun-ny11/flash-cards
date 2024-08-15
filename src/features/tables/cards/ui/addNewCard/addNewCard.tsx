@@ -9,7 +9,6 @@ import { Modal } from '@/components/ui/modal'
 import { Card as CardType } from '@/services/cards/cards.types'
 import { useCreateCardMutation, useUpdateCardMutation } from '@/services/cards/cardsApi'
 import { zodResolver } from '@hookform/resolvers/zod'
-import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './addNewCard.module.scss'
