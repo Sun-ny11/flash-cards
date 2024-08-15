@@ -20,4 +20,22 @@
   .subtitle {
     margin-bottom: 12px;
   }
+
+  @media screen and (width <=580px) {
+    width: 100%;
+    min-width: 300px;
+
+    img {
+      display: none;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+
+    .button {
+      flex-direction: column;
+      margin-top: 23px;
+    }
+  }
 }

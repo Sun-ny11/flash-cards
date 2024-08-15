@@ -1,19 +1,18 @@
 import { useState } from 'react'
 
 import { TrashOutline } from '@/assets/components'
-import { Button, Typography } from '@/components/ui'
+import { Button, ButtonProps, Typography } from '@/components/ui'
 import { Modal } from '@/components/ui/modal'
 import clsx from 'clsx'
 
 import s from './deleteCell.module.scss'
 
 type Props = {
-  className?: string
   deleteThat: 'card' | 'deck'
   isDisabled?: boolean
   name?: string
   onDeleteCallback: () => void
-}
+} & ButtonProps
 
 export const DeleteCell = ({
   className,
@@ -21,6 +20,7 @@ export const DeleteCell = ({
   isDisabled,
   name,
   onDeleteCallback,
+  variant,
 }: Props) => {
   const [open, setOpen] = useState(false)
 
@@ -29,7 +29,7 @@ export const DeleteCell = ({
       <Button
         className={clsx(s.openModal, className)}
         onClick={() => setOpen(true)}
-        variant={'withSVG'}
+        variant={variant || 'withSVG'}
       >
         <TrashOutline />
       </Button>

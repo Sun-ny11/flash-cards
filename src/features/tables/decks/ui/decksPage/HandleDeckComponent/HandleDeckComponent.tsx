@@ -2,7 +2,7 @@ import { MouseEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Edit2Outline, ImageOutline } from '@/assets/components'
-import { Button, ControlledCheckbox, Typography } from '@/components/ui'
+import { Button, ButtonProps, ControlledCheckbox, Typography } from '@/components/ui'
 import { ControlledFileUploader } from '@/components/ui/controlled/controlled-fileUploader/controlled-fileUploader'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field'
 import { Modal } from '@/components/ui/modal'
@@ -23,19 +23,20 @@ const newDeckSchema = z.object({
 type FormValues = z.infer<typeof newDeckSchema>
 
 type Props = {
-  className?: string
   deckId?: string
   defaultValues?: FormValues
   isEditMode?: boolean
   label?: string
-}
+} & ButtonProps
 
 export const HandleDeckComponent = ({
   className,
   deckId,
   defaultValues = { cover: '', isPrivate: false, name: '' },
+  fullWidth,
   isEditMode,
   label,
+  variant,
 }: Props) => {
   const [open, setOpen] = useState(false)
   const [createDeck, { isLoading: createDeckIsLoading }] = useCreateDeckMutation()
@@ -83,8 +84,9 @@ export const HandleDeckComponent = ({
         <Button
           as={'button'}
           className={clsx(className, label && s.editButton)}
+          fullWidth={fullWidth}
           onClick={() => setOpen(true)}
-          variant={'withSVG'}
+          variant={variant || 'withSVG'}
         >
           <Edit2Outline />
           {label && (
